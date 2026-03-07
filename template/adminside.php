@@ -681,7 +681,22 @@ ul { list-style:none }
             <thead>
               <tr><th>Name</th><th>Email</th><th>Role</th><th>Orders</th><th>Total Spent</th><th>Joined</th><th>Status</th><th>Actions</th></tr>
             </thead>
-            <tbody id="users-tbody"></tbody>
+            <tbody id="users-tbody">
+              <tr>
+                <td></td>
+                <td class="text-gray"></td>
+                <td><span style="font-size:0.78rem;color:var(--blue)"></span></td>
+                <td></td>
+                <td class="text-gold"></td>
+                <td class="text-gray"></td>
+                <td><span class="badge ' + sc + '"></span></td>
+                <td><div class="action-btns">
+                <button class="action-btn btn-edit">edit</button>
+                <button class="action-btn btn-del">delete</button>
+                </div>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -1134,7 +1149,7 @@ function renderOrders() {
 /* ═══════════════════════════════════════
    RENDER USERS TABLE
 ═══════════════════════════════════════ */
-function renderUsers() {
+/*function renderUsers() {
   document.getElementById('user-count-label').textContent = users.length + ' registered users';
   document.getElementById('users-tbody').innerHTML = users.map(function(u){
     var sc = u.status === 'Active' ? 'badge-active' : 'badge-inactive';
@@ -1152,7 +1167,7 @@ function renderUsers() {
       '</div></td>' +
     '</tr>';
   }).join('');
-}
+}*/
 
 /* ═══════════════════════════════════════
    CHARTS
