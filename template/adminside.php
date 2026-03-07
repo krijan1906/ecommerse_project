@@ -1,3 +1,26 @@
+<?php
+// ✅ Put ALL PHP logic at the very top — before <!DOCTYPE html>
+include '../configuration/database_connection.php';
+
+
+$users_result = mysqli_query($conn, "SELECT * FROM user_authentication");
+$products_result=mysqli_query($conn,"SELECT * FROM product_detail");
+$users_data   = [];
+$products_data = [];
+
+if ($users_result && mysqli_num_rows($users_result) > 0) {
+    while ($row = mysqli_fetch_assoc($users_result)) {
+        $users_data[] = $row;
+    }
+}
+
+if ($products_result && mysqli_num_rows($products_result) > 0) {
+    while ($row = mysqli_fetch_assoc($products_result)) {
+        $products_data[] = $row;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -681,22 +704,33 @@ ul { list-style:none }
             <thead>
               <tr><th>Name</th><th>Email</th><th>Role</th><th>Orders</th><th>Total Spent</th><th>Joined</th><th>Status</th><th>Actions</th></tr>
             </thead>
-            <tbody id="users-tbody">
-              <tr>
-                <td></td>
-                <td class="text-gray"></td>
-                <td><span style="font-size:0.78rem;color:var(--blue)"></span></td>
-                <td></td>
-                <td class="text-gold"></td>
-                <td class="text-gray"></td>
-                <td><span class="badge ' + sc + '"></span></td>
-                <td><div class="action-btns">
-                <button class="action-btn btn-edit">edit</button>
-                <button class="action-btn btn-del">delete</button>
-                </div>
-                </td>
-              </tr>
-            </tbody>
+            <tbody>
+              <?php if (!empty($users_data)): ?>
+                  <?php foreach ($users_data as $row): ?>
+                  <tr>
+                      <td><?php echo $row['fullname']; ?></td>
+                      <td class='text-gray'><?php echo $row['email']; ?></td>
+                      <td><span style='font-size:0.78rem;color:var(--blue)'>Customer</span></td>
+                      <td>0</td>
+                      <td class='text-gold'>$0</td>
+                      <td class='text-gray'>2025</td>
+                      <td><span class='badge badge-active'>Active</span></td>
+                      <td>
+                          <div class='action-btns'>
+                              <button class='action-btn btn-edit'>Edit</button>
+                              <button class='action-btn btn-del'>Delete</button>
+                          </div>
+                      </td>
+                  </tr>
+                  <?php endforeach; ?>
+              <?php else: ?>
+                  <tr>
+                      <td colspan='8' style='text-align:center;color:gray;padding:2rem'>
+                          No users found
+                      </td>
+                  </tr>
+              <?php endif; ?>
+          </tbody>
           </table>
         </div>
       </div>
@@ -868,16 +902,16 @@ ul { list-style:none }
       <h3>Add New Product</h3>
       <button class="modal-close" onclick="closeModal('modal-add-product')">✕</button>
     </div>
-    <form onsubmit="handleAddProduct(event)">
+    <form action="../backend/add_product.php" method="POST">
       <div class="form-grid" style="gap:1rem">
         <div class="form-group full">
           <label>Product Name *</label>
-          <input type="text" id="ap-name" placeholder="e.g. Premium Gold Watch"/>
+          <input type="text" id="ap-name" placeholder="e.g. Premium Gold Watch" name="product_name"/>
           <span class="err">Name is required</span>
         </div>
         <div class="form-group">
           <label>Price ($) *</label>
-          <input type="number" id="ap-price" placeholder="299.00" step="0.01"/>
+          <input type="number" id="ap-price" placeholder="299.00" step="0.01" name="price"/>
           <span class="err">Valid price required</span>
         </div>
         <div class="form-group">
@@ -886,7 +920,7 @@ ul { list-style:none }
         </div>
         <div class="form-group">
           <label>Category *</label>
-          <select id="ap-cat">
+          <select id="ap-cat" name="category">
             <option value="">Select...</option>
             <option>Electronics</option><option>Fashion</option>
             <option>Watches</option><option>Jewelry</option>
@@ -900,7 +934,7 @@ ul { list-style:none }
         </div>
         <div class="form-group full">
           <label>Description</label>
-          <textarea id="ap-desc" placeholder="Describe this product..."></textarea>
+          <textarea id="ap-desc" placeholder="Describe this product..." name="description"></textarea>
         </div>
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:0.75rem;justify-content:flex-end">
