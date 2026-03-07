@@ -3,97 +3,47 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LUXE — Premium Admin Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<title>LUXE — Admin Panel</title>
 <style>
 /* ════════════════════════════════════
    CSS VARIABLES & RESET
 ════════════════════════════════════ */
 :root {
   --black:  #0a0a0a;
-  --dark:   #0f1117;
-  --dark2:  #16181f;
-  --card:   #1a1d26;
-  --card-hover: #1e212b;
-  --border: #252831;
-  --border-light: #2d3039;
-  --gold:   #d4af37;
-  --gold2:  #f4d03f;
-  --gold-dark: #b8941f;
-  --white:  #f8f9fa;
-  --gray:   #8b8e98;
-  --gray-light: #a8abb5;
-  --light:  #e0e2e7;
-  --red:    #ef4444;
-  --red-light: #f87171;
-  --green:  #10b981;
-  --green-light: #34d399;
-  --blue:   #3b82f6;
-  --blue-light: #60a5fa;
-  --purple: #8b5cf6;
-  --orange: #f59e0b;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 10px 40px rgba(0,0,0,0.4);
-  --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
-  --trans:  all 0.35s cubic-bezier(0.4,0,0.2,1);
-  --trans-fast: all 0.2s cubic-bezier(0.4,0,0.2,1);
+  --dark:   #111318;
+  --dark2:  #1a1d24;
+  --card:   #1e2128;
+  --border: #2a2d36;
+  --gold:   #c9a84c;
+  --gold2:  #e8c96a;
+  --white:  #f5f3ee;
+  --gray:   #8a8d96;
+  --light:  #d0cec9;
+  --red:    #e05252;
+  --green:  #4caf7d;
+  --blue:   #64b5f6;
+  --radius: 12px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --trans:  all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
-
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
-html { scroll-behavior:smooth; font-size: 16px }
-body { 
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-  background: var(--dark); 
-  color: var(--white); 
-  line-height: 1.6; 
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+html { scroll-behavior:smooth }
+body { font-family:'Georgia',serif; background:var(--dark); color:var(--white); line-height:1.6; overflow-x:hidden }
 a { text-decoration:none; color:inherit }
 button { cursor:pointer; border:none; outline:none; font-family:inherit }
 input,select,textarea { font-family:inherit; outline:none }
 ul { list-style:none }
-h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 }
 
-::-webkit-scrollbar { width:8px; height: 8px }
+::-webkit-scrollbar { width:6px }
 ::-webkit-scrollbar-track { background:var(--dark) }
-::-webkit-scrollbar-thumb { background:linear-gradient(to bottom, var(--gold), var(--gold-dark)); border-radius:4px }
-::-webkit-scrollbar-thumb:hover { background:var(--gold2) }
-
-/* ════════════════════════════════════
-   ANIMATIONS
-════════════════════════════════════ */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px) }
-  to { opacity: 1; transform: translateY(0) }
-}
-@keyframes fadeIn {
-  from { opacity: 0 }
-  to { opacity: 1 }
-}
-@keyframes slideInRight {
-  from { transform: translateX(100%); opacity: 0 }
-  to { transform: translateX(0); opacity: 1 }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1 }
-  50% { opacity: 0.6 }
-}
-@keyframes shimmer {
-  0% { background-position: -1000px 0 }
-  100% { background-position: 1000px 0 }
-}
+::-webkit-scrollbar-thumb { background:var(--gold); border-radius:3px }
 
 /* ════════════════════════════════════
    LAYOUT
 ════════════════════════════════════ */
 .admin-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 240px 1fr;
   min-height: 100vh;
 }
 
@@ -101,7 +51,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
    SIDEBAR
 ════════════════════════════════════ */
 .sidebar {
-  background: linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
+  background: var(--black);
   border-right: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -109,153 +59,71 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 0 24px rgba(0,0,0,0.3);
-  z-index: 100;
 }
 
 .sidebar-logo {
-  padding: 2rem 1.75rem;
+  padding: 1.5rem;
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0) 100%);
 }
 .sidebar-logo .brand {
-  font-size: 1.75rem;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 0.2em;
-  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  font-weight: 700;
   text-transform: uppercase;
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 0.25rem;
 }
 .sidebar-logo .sub {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--gray);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 500;
+  margin-top: 0.2rem;
 }
 
-.sidebar-nav { 
-  padding: 1.5rem 0; 
-  flex: 1;
-  animation: fadeIn 0.5s ease;
-}
+.sidebar-nav { padding: 1rem 0; flex: 1 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.75rem;
-  font-size: 0.9rem;
+  gap: 0.85rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.85rem;
   color: var(--gray);
   cursor: pointer;
   transition: var(--trans);
   border-left: 3px solid transparent;
   user-select: none;
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
 }
-.nav-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(212,175,55,0.1) 0%, transparent 100%);
-  transition: var(--trans);
-}
-.nav-item:hover::before { width: 100% }
-.nav-item:hover  { 
-  color: var(--white); 
-  background: rgba(255,255,255,0.03);
-  transform: translateX(4px);
-}
-.nav-item.active { 
-  color: var(--gold);  
-  background: linear-gradient(90deg, rgba(212,175,55,0.12) 0%, transparent 100%);
-  border-left-color: var(--gold);
-  font-weight: 600;
-}
-.nav-item.active .nav-icon {
-  filter: drop-shadow(0 0 8px rgba(212,175,55,0.6));
-}
-.nav-icon { 
-  font-size: 1.25rem; 
-  width: 28px; 
-  text-align: center; 
-  flex-shrink: 0;
-  transition: var(--trans);
-}
-.nav-item:hover .nav-icon {
-  transform: scale(1.1);
-}
+.nav-item:hover  { color: var(--white); background: rgba(255,255,255,0.04) }
+.nav-item.active { color: var(--gold);  background: rgba(201,168,76,0.08); border-left-color: var(--gold) }
+.nav-icon { font-size: 1.1rem; width: 22px; text-align: center; flex-shrink: 0 }
 
 .sidebar-footer {
-  padding: 1.5rem 1.75rem;
+  padding: 1.5rem;
   border-top: 1px solid var(--border);
-  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
 }
 .admin-user {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem;
-  border-radius: var(--radius-sm);
-  transition: var(--trans-fast);
-  cursor: pointer;
-}
-.admin-user:hover {
-  background: rgba(255,255,255,0.05);
+  gap: 0.75rem;
 }
 .admin-avatar {
-  width: 44px; 
-  height: 44px;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  width: 36px; height: 36px;
+  background: var(--gold);
   border-radius: 50%;
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  font-size: 1.1rem; 
-  color: var(--black); 
-  font-weight: 800;
-  box-shadow: 0 4px 12px rgba(212,175,55,0.4);
-  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--black); font-weight: 700;
 }
-.admin-avatar::after {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: var(--green);
-  border: 3px solid var(--card);
-  border-radius: 50%;
-  bottom: -2px;
-  right: -2px;
-}
-.admin-user-info .name  { 
-  font-size: 0.9rem; 
-  font-weight: 600;
-  margin-bottom: 0.1rem;
-}
-.admin-user-info .role  { 
-  font-size: 0.75rem; 
-  color: var(--gold);
-  font-weight: 500;
-}
+.admin-user-info .name  { font-size: 0.85rem; font-weight: 600 }
+.admin-user-info .role  { font-size: 0.72rem; color: var(--gold) }
 
 /* ════════════════════════════════════
    MAIN CONTENT
 ════════════════════════════════════ */
 .main-content {
   background: var(--dark);
-  padding: 2.5rem 3rem;
+  padding: 2rem 2.5rem;
   overflow: auto;
-  animation: fadeIn 0.4s ease;
 }
 
 /* Top bar */
@@ -263,76 +131,40 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2.5rem;
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1rem;
 }
-.topbar h1 { 
-  font-size: 2rem;
-  background: linear-gradient(135deg, var(--white) 0%, var(--gray-light) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.02em;
-}
-.topbar-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap }
+.topbar h1 { font-size: 1.4rem }
+.topbar-right { display: flex; align-items: center; gap: 1rem }
 .topbar-search {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0.65rem 1.25rem;
-  transition: var(--trans-fast);
-  min-width: 220px;
-}
-.topbar-search:focus-within {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
-}
-.topbar-search span {
-  font-size: 1.1rem;
-  opacity: 0.6;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
 }
 .topbar-search input {
-  background: none; 
-  border: none;
-  color: var(--white); 
-  font-size: 0.9rem; 
-  flex: 1;
-  font-weight: 500;
+  background: none; border: none;
+  color: var(--white); font-size: 0.85rem; width: 180px;
 }
-.topbar-search input::placeholder { color: var(--gray); font-weight: 400 }
+.topbar-search input::placeholder { color: var(--gray) }
 .back-btn {
-  display: inline-flex; 
-  align-items: center; 
-  gap: 0.5rem;
-  background: var(--card); 
-  border: 1px solid var(--border);
-  color: var(--light); 
-  padding: 0.65rem 1.25rem;
-  border-radius: var(--radius-sm); 
-  font-size: 0.85rem;
-  text-transform: uppercase; 
-  letter-spacing: 0.08em;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--light); padding: 0.5rem 1rem;
+  border-radius: 8px; font-size: 0.82rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
   transition: var(--trans);
-  font-weight: 600;
 }
-.back-btn:hover { 
-  border-color: var(--gold); 
-  color: var(--gold);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(212,175,55,0.2);
-}
+.back-btn:hover { border-color: var(--gold); color: var(--gold) }
 
 /* Tabs */
-.tab { 
-  display: none;
-  animation: fadeInUp 0.5s ease;
-}
+.tab { display: none }
 .tab.active { display: block }
 
 /* ════════════════════════════════════
@@ -340,87 +172,33 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
 ════════════════════════════════════ */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.75rem;
-  margin-bottom: 2.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 .stat-card {
-  background: linear-gradient(135deg, var(--card) 0%, var(--dark2) 100%);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2rem;
+  padding: 1.5rem;
   transition: var(--trans);
   position: relative;
   overflow: hidden;
-  cursor: pointer;
-}
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 120px; height: 120px;
-  background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  transform: translate(30%, -30%);
 }
 .stat-card::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(212,175,55,0.03) 100%);
-  opacity: 0;
-  transition: var(--trans);
+  top: -20px; right: -20px;
+  width: 80px; height: 80px;
+  background: rgba(201,168,76,0.05);
+  border-radius: 50%;
 }
-.stat-card:hover {
-  border-color: var(--gold);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-}
-.stat-card:hover::after { opacity: 1 }
-.stat-icon { 
-  font-size: 2.25rem; 
-  margin-bottom: 1rem;
-  display: inline-block;
-  filter: grayscale(0.3);
-  transition: var(--trans);
-}
-.stat-card:hover .stat-icon {
-  filter: grayscale(0);
-  transform: scale(1.1);
-}
-.stat-value { 
-  font-size: 2.5rem; 
-  font-weight: 800; 
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.2;
-  margin-bottom: 0.25rem;
-}
-.stat-label { 
-  color: var(--gray); 
-  font-size: 0.8rem; 
-  text-transform: uppercase; 
-  letter-spacing: 0.1em; 
-  font-weight: 600;
-}
-.stat-change { 
-  font-size: 0.8rem; 
-  color: var(--green); 
-  margin-top: 0.75rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.75rem;
-  background: rgba(16,185,129,0.1);
-  border-radius: 20px;
-}
-.stat-change.down { 
-  color: var(--red);
-  background: rgba(239,68,68,0.1);
-}
+.stat-card:hover { border-color: var(--gold); transform: translateY(-2px) }
+.stat-icon { font-size: 1.8rem; margin-bottom: 0.75rem }
+.stat-value { font-size: 2rem; font-weight: 700; color: var(--gold) }
+.stat-label { color: var(--gray); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem }
+.stat-change { font-size: 0.78rem; color: var(--green); margin-top: 0.5rem }
+.stat-change.down { color: var(--red) }
 
 /* ════════════════════════════════════
    SECTION BOXES
@@ -430,28 +208,18 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  transition: var(--trans);
-}
-.section-box:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  margin-bottom: 1.5rem;
 }
 .section-head {
-  padding: 1.5rem 2rem;
+  padding: 1.1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
-  gap: 1rem;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+  gap: 0.75rem;
 }
-.section-head h3 { 
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
+.section-head h3 { font-size: 0.95rem }
 
 /* ════════════════════════════════════
    DATA TABLE
@@ -459,192 +227,100 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
 .table-wrap { overflow-x: auto }
 .data-table { width: 100%; border-collapse: collapse }
 .data-table th {
-  padding: 1.25rem 1.75rem;
+  padding: 0.85rem 1.25rem;
   text-align: left;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gray);
   background: var(--dark2);
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
-  font-weight: 700;
 }
 .data-table td {
-  padding: 1.5rem 1.75rem;
-  font-size: 0.9rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.88rem;
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
-  font-weight: 500;
 }
 .data-table tr:last-child td { border-bottom: none }
-.data-table tbody tr {
-  transition: var(--trans-fast);
-}
-.data-table tbody tr:hover {
-  background: var(--card-hover);
-  transform: scale(1.001);
-}
-.text-gold { 
-  color: var(--gold);
-  font-weight: 600;
-}
+.data-table tr:hover td { background: rgba(255,255,255,0.025) }
+.text-gold { color: var(--gold) }
 .text-gray { color: var(--gray) }
 
 /* Status badges */
 .badge {
   display: inline-block;
-  padding: 0.35rem 0.9rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 50px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: var(--trans-fast);
-}
-.badge:hover {
-  transform: scale(1.05);
-}
-.badge-pending    { background: linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.1) 100%); color: var(--orange); border: 1px solid rgba(245,158,11,0.3) }
-.badge-processing { background: linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(59,130,246,0.1) 100%); color: var(--blue); border: 1px solid rgba(59,130,246,0.3) }
-.badge-shipped    { background: linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(139,92,246,0.1) 100%); color: var(--purple); border: 1px solid rgba(139,92,246,0.3) }
-.badge-delivered  { background: linear-gradient(135deg, rgba(16,185,129,0.2) 0%, rgba(16,185,129,0.1) 100%); color: var(--green); border: 1px solid rgba(16,185,129,0.3) }
-.badge-cancelled  { background: linear-gradient(135deg, rgba(239,68,68,0.2) 0%, rgba(239,68,68,0.1) 100%); color: var(--red); border: 1px solid rgba(239,68,68,0.3) }
-.badge-active     { background: linear-gradient(135deg, rgba(16,185,129,0.2) 0%, rgba(16,185,129,0.1) 100%); color: var(--green); border: 1px solid rgba(16,185,129,0.3) }
-.badge-inactive   { background: linear-gradient(135deg, rgba(139,148,158,0.2) 0%, rgba(139,148,158,0.1) 100%); color: var(--gray); border: 1px solid rgba(139,148,158,0.3) }
-
-/* Action buttons */
-.action-btns { display: flex; gap: 0.6rem; flex-wrap: wrap }
-.action-btn {
-  padding: 0.45rem 1rem;
-  border-radius: 8px;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+.badge-pending    { background: rgba(255,165,0,0.15); color: orange }
+.badge-processing { background: rgba(100,181,246,0.15); color: var(--blue) }
+.badge-shipped    { background: rgba(76,175,77,0.15);  color: var(--green) }
+.badge-delivered  { background: rgba(201,168,76,0.15); color: var(--gold) }
+.badge-cancelled  { background: rgba(224,82,82,0.15);  color: var(--red) }
+.badge-active     { background: rgba(76,175,77,0.15);  color: var(--green) }
+.badge-inactive   { background: rgba(224,82,82,0.15);  color: var(--red) }
+
+/* Action buttons */
+.action-btns { display: flex; gap: 0.5rem }
+.action-btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   transition: var(--trans);
-  border: 1px solid transparent;
+  border: none; cursor: pointer;
 }
-.btn-view { 
-  background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.08) 100%); 
-  color: var(--blue);
-  border-color: rgba(59,130,246,0.2);
-}
-.btn-view:hover { 
-  background: rgba(59,130,246,0.25);
-  border-color: var(--blue);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59,130,246,0.3);
-}
-.btn-edit { 
-  background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.08) 100%); 
-  color: var(--gold);
-  border-color: rgba(212,175,55,0.2);
-}
-.btn-edit:hover { 
-  background: rgba(212,175,55,0.25);
-  border-color: var(--gold);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(212,175,55,0.3);
-}
-.btn-del { 
-  background: linear-gradient(135deg, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.08) 100%); 
-  color: var(--red);
-  border-color: rgba(239,68,68,0.2);
-}
-.btn-del:hover { 
-  background: rgba(239,68,68,0.25);
-  border-color: var(--red);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(239,68,68,0.3);
-}
+.btn-view { background: rgba(100,181,246,0.15); color: var(--blue) }
+.btn-view:hover { background: rgba(100,181,246,0.3) }
+.btn-edit { background: rgba(201,168,76,0.15); color: var(--gold) }
+.btn-edit:hover { background: rgba(201,168,76,0.3) }
+.btn-del  { background: rgba(224,82,82,0.15);  color: var(--red) }
+.btn-del:hover  { background: rgba(224,82,82,0.3) }
 
 /* ════════════════════════════════════
    BUTTONS
 ════════════════════════════════════ */
 .btn {
-  display: inline-flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 0.5rem;
-  padding: 0.8rem 1.75rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 600;
   transition: var(--trans);
   font-family: inherit;
   cursor: pointer;
-  border: 1px solid transparent;
-  position: relative;
-  overflow: hidden;
 }
-.btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-  opacity: 0;
-  transition: var(--trans);
-}
-.btn:hover::before { opacity: 1 }
-.btn-gold { 
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); 
-  color: var(--black);
-  box-shadow: 0 4px 12px rgba(212,175,55,0.3);
-}
-.btn-gold:hover { 
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212,175,55,0.4);
-}
-.btn-outline { 
-  background: transparent; 
-  color: var(--white); 
-  border: 1px solid var(--border);
-}
-.btn-outline:hover { 
-  border-color: var(--gold); 
-  color: var(--gold);
-  background: rgba(212,175,55,0.05);
-}
-.btn-dark { 
-  background: var(--dark2); 
-  color: var(--white); 
-  border: 1px solid var(--border);
-}
-.btn-dark:hover {
-  background: var(--card);
-  border-color: var(--border-light);
-}
-.btn-sm { 
-  padding: 0.5rem 1.25rem; 
-  font-size: 0.78rem;
-}
+.btn-gold    { background: var(--gold); color: var(--black) }
+.btn-gold:hover { background: var(--gold2); transform: translateY(-1px) }
+.btn-outline { background: transparent; color: var(--white); border: 1px solid var(--border) }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold) }
+.btn-dark    { background: var(--dark2); color: var(--white); border: 1px solid var(--border) }
+.btn-sm { padding: 0.45rem 1rem; font-size: 0.75rem }
 
 /* ════════════════════════════════════
    FORM ELEMENTS
 ════════════════════════════════════ */
-.form-grid { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 1.5rem;
-}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem }
 .form-grid.cols-1 { grid-template-columns: 1fr }
 .form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr }
 .full { grid-column: 1 / -1 }
 
-.form-group { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 0.6rem;
-}
+.form-group { display: flex; flex-direction: column; gap: 0.4rem }
 .form-group label {
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--gray-light);
-  font-weight: 600;
+  color: var(--gray);
 }
 .form-group input,
 .form-group select,
@@ -652,337 +328,150 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
   background: var(--dark2);
   border: 1px solid var(--border);
   color: var(--white);
-  padding: 0.9rem 1.25rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  transition: var(--trans-fast);
-  font-weight: 500;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  transition: var(--trans);
 }
 .form-group input:focus,
 .form-group select:focus,
-.form-group textarea:focus { 
-  border-color: var(--gold);
-  background: var(--card);
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
-}
-.form-group select option { 
-  background: var(--dark2);
-  padding: 0.5rem;
-}
-.form-group textarea { 
-  resize: vertical; 
-  min-height: 100px;
-  font-family: inherit;
-}
-.form-group .err { 
-  color: var(--red); 
-  font-size: 0.78rem; 
-  display: none;
-  font-weight: 600;
-}
+.form-group textarea:focus { border-color: var(--gold) }
+.form-group select option { background: var(--dark2) }
+.form-group textarea { resize: vertical; min-height: 80px }
+.form-group .err { color: var(--red); font-size: 0.76rem; display: none }
 .form-group.invalid input,
-.form-group.invalid select { 
-  border-color: var(--red);
-  background: rgba(239,68,68,0.05);
-}
+.form-group.invalid select { border-color: var(--red) }
 .form-group.invalid .err { display: block }
 
 /* ════════════════════════════════════
-   CHART BARS
+   CHART BARS (pure CSS)
 ════════════════════════════════════ */
-.chart-section { padding: 2rem }
+.chart-section { padding: 1.5rem }
 .chart-bars {
   display: flex;
   align-items: flex-end;
-  gap: 1rem;
-  height: 180px;
-  margin-bottom: 1rem;
+  gap: 0.75rem;
+  height: 160px;
+  margin-bottom: 0.5rem;
 }
-.bar-col { 
-  flex: 1; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 0.6rem;
-}
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.4rem }
 .bar {
   width: 100%;
-  background: linear-gradient(to top, var(--gold-dark), var(--gold), var(--gold2));
-  border-radius: 8px 8px 0 0;
+  background: linear-gradient(to top, var(--gold), var(--gold2));
+  border-radius: 4px 4px 0 0;
   transition: var(--trans);
   min-height: 4px;
   position: relative;
-  cursor: pointer;
-  box-shadow: 0 -4px 12px rgba(212,175,55,0.3);
 }
-.bar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, transparent, rgba(255,255,255,0.2));
-  border-radius: 8px 8px 0 0;
-  opacity: 0;
-  transition: var(--trans);
-}
-.bar:hover::before { opacity: 1 }
-.bar:hover { 
-  transform: scaleY(1.05); 
-  transform-origin: bottom;
-  filter: brightness(1.2);
-}
-.bar-val { 
-  font-size: 0.75rem; 
-  color: var(--gold); 
-  font-weight: 700;
-}
-.bar-label { 
-  font-size: 0.72rem; 
-  color: var(--gray); 
-  text-align: center;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
+.bar:hover { opacity: 0.8; transform: scaleY(1.02); transform-origin: bottom }
+.bar-val { font-size: 0.7rem; color: var(--gold); font-weight: 600 }
+.bar-label { font-size: 0.68rem; color: var(--gray); text-align: center }
 .chart-alt {
-  display: flex; 
-  flex-direction: column; 
-  gap: 1.25rem; 
-  padding: 2rem;
+  display: flex; flex-direction: column; gap: 0.75rem; padding: 1.5rem;
 }
-.chart-row { 
-  display: flex; 
-  align-items: center; 
-  gap: 1.25rem;
-}
-.chart-row-label { 
-  width: 120px; 
-  font-size: 0.85rem; 
-  color: var(--gray-light); 
-  flex-shrink: 0;
-  font-weight: 600;
-}
-.chart-row-bar-wrap { 
-  flex: 1; 
-  background: var(--dark2); 
-  border-radius: 50px; 
-  height: 12px; 
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-.chart-row-bar { 
-  height: 100%; 
-  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold2));
-  border-radius: 50px; 
-  transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);
-  position: relative;
-}
-.chart-row-bar::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  animation: shimmer 2s infinite;
-}
-.chart-row-val { 
-  width: 70px; 
-  text-align: right; 
-  font-size: 0.85rem; 
-  color: var(--gold); 
-  font-weight: 700;
-}
+.chart-row { display: flex; align-items: center; gap: 1rem }
+.chart-row-label { width: 90px; font-size: 0.8rem; color: var(--gray); flex-shrink: 0 }
+.chart-row-bar-wrap { flex: 1; background: var(--dark2); border-radius: 4px; height: 10px; overflow: hidden }
+.chart-row-bar { height: 100%; background: var(--gold); border-radius: 4px; transition: width 0.8s ease }
+.chart-row-val { width: 60px; text-align: right; font-size: 0.8rem; color: var(--gold); font-weight: 600 }
 
 /* ════════════════════════════════════
    MODAL
 ════════════════════════════════════ */
 .modal-overlay {
-  position: fixed; 
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(8px);
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.8);
   z-index: 2000;
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   padding: 2rem;
-  opacity: 0; 
-  pointer-events: none;
+  opacity: 0; pointer-events: none;
   transition: var(--trans);
 }
-.modal-overlay.open { 
-  opacity: 1; 
-  pointer-events: all;
-}
+.modal-overlay.open { opacity: 1; pointer-events: all }
 .modal {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.5rem;
-  width: 100%; 
-  max-width: 580px;
-  box-shadow: var(--shadow-lg);
-  transform: scale(0.9) translateY(20px);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%; max-width: 520px;
+  box-shadow: var(--shadow);
+  transform: scale(0.9);
   transition: var(--trans);
   max-height: 90vh;
   overflow-y: auto;
 }
-.modal-overlay.open .modal { 
-  transform: scale(1) translateY(0);
-}
+.modal-overlay.open .modal { transform: scale(1) }
 .modal-head {
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
 }
-.modal-head h3 { 
-  font-size: 1.35rem;
-  letter-spacing: -0.01em;
-}
+.modal-head h3 { font-size: 1rem }
 .modal-close {
-  background: var(--dark2); 
-  color: var(--gray); 
-  font-size: 1.5rem;
-  transition: var(--trans-fast); 
-  width: 36px; 
-  height: 36px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
+  background: none; color: var(--gray); font-size: 1.3rem;
+  transition: var(--trans); width: 30px; height: 30px;
+  border-radius: 6px;
 }
-.modal-close:hover { 
-  color: var(--white); 
-  background: var(--border);
-  border-color: var(--border-light);
-  transform: rotate(90deg);
-}
+.modal-close:hover { color: var(--white); background: var(--border) }
 
 /* ════════════════════════════════════
    TOAST
 ════════════════════════════════════ */
 .toast-wrap {
-  position: fixed; 
-  bottom: 2rem; 
-  right: 2rem;
+  position: fixed; bottom: 2rem; right: 2rem;
   z-index: 9999;
-  display: flex; 
-  flex-direction: column; 
-  gap: 1rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
 }
 .toast {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 1.1rem 1.75rem;
-  display: flex; 
-  align-items: center; 
-  gap: 1rem;
-  min-width: 300px;
+  border-radius: 10px;
+  padding: 0.9rem 1.4rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  min-width: 270px;
   box-shadow: var(--shadow);
-  animation: slideInRight 0.4s cubic-bezier(0.4,0,0.2,1);
-  backdrop-filter: blur(12px);
+  animation: slideIn 0.3s ease;
 }
-.toast.success { 
-  border-left: 4px solid var(--green);
-  background: linear-gradient(90deg, rgba(16,185,129,0.1) 0%, var(--card) 100%);
-}
-.toast.error { 
-  border-left: 4px solid var(--red);
-  background: linear-gradient(90deg, rgba(239,68,68,0.1) 0%, var(--card) 100%);
-}
-.toast.info { 
-  border-left: 4px solid var(--gold);
-  background: linear-gradient(90deg, rgba(212,175,55,0.1) 0%, var(--card) 100%);
-}
-.toast span:first-child {
-  font-size: 1.25rem;
-}
-.toast span:last-child {
-  font-weight: 600;
-  font-size: 0.9rem;
+.toast.success { border-left: 3px solid var(--green) }
+.toast.error   { border-left: 3px solid var(--red) }
+.toast.info    { border-left: 3px solid var(--gold) }
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0 }
+  to   { transform: translateX(0);   opacity: 1 }
 }
 
 /* ════════════════════════════════════
    MISC
 ════════════════════════════════════ */
-.divider { 
-  height: 1px; 
-  background: linear-gradient(90deg, transparent, var(--border), transparent); 
-  margin: 2rem 0;
-}
+.divider { height: 1px; background: var(--border); margin: 1.5rem 0 }
 .product-thumb {
-  width: 52px; 
-  height: 52px;
-  background: linear-gradient(135deg, var(--dark2) 0%, var(--black) 100%);
+  width: 44px; height: 44px;
+  background: var(--dark2);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  font-size: 1.5rem;
-  transition: var(--trans-fast);
-  cursor: pointer;
-}
-.product-thumb:hover {
-  transform: scale(1.1);
-  border-color: var(--gold);
-  box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
 }
 .empty-state {
-  text-align: center; 
-  padding: 4rem 2rem;
-  color: var(--gray);
+  text-align: center; padding: 3rem;
+  color: var(--gray); font-size: 0.9rem;
 }
-.empty-state .icon { 
-  font-size: 3.5rem; 
-  margin-bottom: 1.25rem;
-  opacity: 0.5;
-}
-.empty-state p {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-/* Loading skeleton */
-.skeleton {
-  background: linear-gradient(90deg, var(--dark2) 25%, var(--card) 50%, var(--dark2) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 8px;
-}
+.empty-state .icon { font-size: 2.5rem; margin-bottom: 0.75rem }
 
 /* ════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════ */
-@media (max-width: 1200px) {
-  .stats-grid { grid-template-columns: repeat(2, 1fr) }
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: 1fr 1fr }
 }
 @media (max-width: 768px) {
   .admin-layout { grid-template-columns: 1fr }
-  .sidebar { 
-    display: none;
-    position: fixed;
-    z-index: 999;
-    width: 280px;
-  }
-  .sidebar.mobile-open { display: flex }
+  .sidebar { display: none }
+  .sidebar.mobile-open { display: flex; position: fixed; z-index: 999; width: 240px }
   .stats-grid { grid-template-columns: 1fr }
   .form-grid { grid-template-columns: 1fr }
-  .main-content { padding: 1.5rem 1.25rem }
-  .topbar h1 { font-size: 1.5rem }
-  .section-head { padding: 1.25rem 1.5rem }
-  .data-table th,
-  .data-table td { padding: 1rem 1.25rem }
-  .modal { padding: 1.75rem }
-}
-@media (max-width: 480px) {
-  .topbar-search { min-width: 100% }
-  .toast { min-width: auto; width: calc(100vw - 4rem) }
+  .main-content { padding: 1.5rem }
 }
 </style>
 </head>
@@ -996,7 +485,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <div class="brand">LUXE</div>
-      <div class="sub">Premium Dashboard</div>
+      <div class="sub">Admin Panel</div>
     </div>
 
     <nav class="sidebar-nav">
@@ -1042,7 +531,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
       <div class="topbar-right">
         <div class="topbar-search">
           <span>🔍</span>
-          <input type="text" placeholder="Search anything..." id="global-search"/>
+          <input type="text" placeholder="Search..." id="global-search"/>
         </div>
         <a href="ecommerce.html" class="back-btn">🏠 Back to Store</a>
       </div>
@@ -1080,14 +569,11 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
       </div>
 
       <!-- Charts Row -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
 
         <!-- Monthly Revenue Bar Chart -->
         <div class="section-box">
-          <div class="section-head">
-            <h3>Monthly Revenue</h3>
-            <span class="text-gray" style="font-size:0.8rem;font-weight:600">2025</span>
-          </div>
+          <div class="section-head"><h3>Monthly Revenue</h3><span class="text-gray" style="font-size:0.8rem">2025</span></div>
           <div class="chart-section">
             <div class="chart-bars" id="revenue-chart"></div>
           </div>
@@ -1115,10 +601,10 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
               </tr>
             </thead>
             <tbody>
-              <tr><td><span class="text-gold">#ORD-001</span></td><td>John Doe</td><td class="text-gold">$299.00</td><td><span class="badge badge-delivered">Delivered</span></td><td>Mar 05</td><td><button class="action-btn btn-view">View</button></td></tr>
-              <tr><td><span class="text-gold">#ORD-002</span></td><td>Jane Smith</td><td class="text-gold">$799.00</td><td><span class="badge badge-shipped">Shipped</span></td><td>Mar 04</td><td><button class="action-btn btn-view">View</button></td></tr>
-              <tr><td><span class="text-gold">#ORD-003</span></td><td>Mike Johnson</td><td class="text-gold">$149.00</td><td><span class="badge badge-processing">Processing</span></td><td>Mar 04</td><td><button class="action-btn btn-view">View</button></td></tr>
-              <tr><td><span class="text-gold">#ORD-004</span></td><td>Sara Lee</td><td class="text-gold">$1,299.00</td><td><span class="badge badge-pending">Pending</span></td><td>Mar 03</td><td><button class="action-btn btn-view">View</button></td></tr>
+              <tr><td>#ORD-001</td><td>John Doe</td><td class="text-gold">$299.00</td><td><span class="badge badge-delivered">Delivered</span></td><td>Mar 05</td><td><button class="action-btn btn-view">View</button></td></tr>
+              <tr><td>#ORD-002</td><td>Jane Smith</td><td class="text-gold">$799.00</td><td><span class="badge badge-shipped">Shipped</span></td><td>Mar 04</td><td><button class="action-btn btn-view">View</button></td></tr>
+              <tr><td>#ORD-003</td><td>Mike Johnson</td><td class="text-gold">$149.00</td><td><span class="badge badge-processing">Processing</span></td><td>Mar 04</td><td><button class="action-btn btn-view">View</button></td></tr>
+              <tr><td>#ORD-004</td><td>Sara Lee</td><td class="text-gold">$1,299.00</td><td><span class="badge badge-pending">Pending</span></td><td>Mar 03</td><td><button class="action-btn btn-view">View</button></td></tr>
             </tbody>
           </table>
         </div>
@@ -1128,13 +614,13 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
 
     <!-- ══════════════════ PRODUCTS TAB ══════════════════ -->
     <div class="tab" id="tab-products">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1.5rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem">
         <div>
-          <h2 style="font-size:1.25rem;margin-bottom:0.5rem;letter-spacing:-0.01em">Product Management</h2>
-          <p class="text-gray" style="font-size:0.9rem;font-weight:500" id="product-count-label">Loading...</p>
+          <h2 style="font-size:1rem;margin-bottom:0.25rem">Product Management</h2>
+          <p class="text-gray" style="font-size:0.85rem" id="product-count-label">Loading...</p>
         </div>
-        <div style="display:flex;gap:1rem;flex-wrap:wrap">
-          <select id="product-filter-cat" style="background:var(--card);border:1px solid var(--border);color:var(--white);padding:0.65rem 1.25rem;border-radius:var(--radius-sm);font-size:0.85rem;font-weight:600;cursor:pointer">
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+          <select id="product-filter-cat" class="form-group" style="background:var(--card);border:1px solid var(--border);color:var(--white);padding:0.55rem 1rem;border-radius:8px;font-size:0.85rem">
             <option value="">All Categories</option>
             <option>Electronics</option><option>Fashion</option>
             <option>Watches</option><option>Jewelry</option>
@@ -1157,12 +643,12 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
 
     <!-- ══════════════════ ORDERS TAB ══════════════════ -->
     <div class="tab" id="tab-orders">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1.5rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem">
         <div>
-          <h2 style="font-size:1.25rem;margin-bottom:0.5rem;letter-spacing:-0.01em">Order Management</h2>
-          <p class="text-gray" style="font-size:0.9rem;font-weight:500">Manage all customer orders</p>
+          <h2 style="font-size:1rem;margin-bottom:0.25rem">Order Management</h2>
+          <p class="text-gray" style="font-size:0.85rem">Manage all customer orders</p>
         </div>
-        <select id="order-status-filter" style="background:var(--card);border:1px solid var(--border);color:var(--white);padding:0.65rem 1.25rem;border-radius:var(--radius-sm);font-size:0.85rem;font-weight:600;cursor:pointer">
+        <select id="order-status-filter" style="background:var(--card);border:1px solid var(--border);color:var(--white);padding:0.55rem 1rem;border-radius:8px;font-size:0.85rem">
           <option value="">All Statuses</option>
           <option>Pending</option><option>Processing</option>
           <option>Shipped</option><option>Delivered</option><option>Cancelled</option>
@@ -1182,10 +668,10 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
 
     <!-- ══════════════════ USERS TAB ══════════════════ -->
     <div class="tab" id="tab-users">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1.5rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem">
         <div>
-          <h2 style="font-size:1.25rem;margin-bottom:0.5rem;letter-spacing:-0.01em">User Management</h2>
-          <p class="text-gray" style="font-size:0.9rem;font-weight:500" id="user-count-label">Loading...</p>
+          <h2 style="font-size:1rem;margin-bottom:0.25rem">User Management</h2>
+          <p class="text-gray" style="font-size:0.85rem" id="user-count-label">Loading...</p>
         </div>
         <button class="btn btn-gold" onclick="openModal('modal-add-user')">+ Add User</button>
       </div>
@@ -1203,12 +689,12 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
 
     <!-- ══════════════════ ANALYTICS TAB ══════════════════ -->
     <div class="tab" id="tab-analytics">
-      <div style="margin-bottom:2rem">
-        <h2 style="font-size:1.25rem;margin-bottom:0.5rem;letter-spacing:-0.01em">Analytics & Reports</h2>
-        <p class="text-gray" style="font-size:0.9rem;font-weight:500">Sales performance overview</p>
+      <div style="margin-bottom:1.5rem">
+        <h2 style="font-size:1rem;margin-bottom:0.25rem">Analytics & Reports</h2>
+        <p class="text-gray" style="font-size:0.85rem">Sales performance overview</p>
       </div>
 
-      <div class="stats-grid" style="margin-bottom:2rem">
+      <div class="stats-grid" style="margin-bottom:1.5rem">
         <div class="stat-card">
           <div class="stat-icon">📊</div>
           <div class="stat-value">$84K</div>
@@ -1235,7 +721,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
         <div class="section-box">
           <div class="section-head"><h3>Weekly Sales</h3></div>
           <div class="chart-section">
@@ -1251,17 +737,17 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
 
     <!-- ══════════════════ SETTINGS TAB ══════════════════ -->
     <div class="tab" id="tab-settings">
-      <div style="margin-bottom:2rem">
-        <h2 style="font-size:1.25rem;margin-bottom:0.5rem;letter-spacing:-0.01em">Store Settings</h2>
-        <p class="text-gray" style="font-size:0.9rem;font-weight:500">Manage your store configuration</p>
+      <div style="margin-bottom:1.5rem">
+        <h2 style="font-size:1rem;margin-bottom:0.25rem">Store Settings</h2>
+        <p class="text-gray" style="font-size:0.85rem">Manage your store configuration</p>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
         <!-- General Settings -->
         <div class="section-box">
           <div class="section-head"><h3>General Settings</h3></div>
-          <div style="padding:2rem">
-            <div class="form-grid cols-1" style="gap:1.5rem">
+          <div style="padding:1.5rem">
+            <div class="form-grid cols-1" style="gap:1.2rem">
               <div class="form-group">
                 <label>Store Name</label>
                 <input type="text" value="LUXE Premium Store"/>
@@ -1278,7 +764,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
                 <label>Currency</label>
                 <select><option>USD — US Dollar</option><option>EUR — Euro</option><option>GBP — British Pound</option></select>
               </div>
-              <button class="btn btn-gold" onclick="showToast('Settings saved successfully!','success')">Save Changes</button>
+              <button class="btn btn-gold" onclick="showToast('Settings saved!','success')">Save Changes</button>
             </div>
           </div>
         </div>
@@ -1286,8 +772,8 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
         <!-- Admin Account -->
         <div class="section-box">
           <div class="section-head"><h3>Admin Account</h3></div>
-          <div style="padding:2rem">
-            <div class="form-grid cols-1" style="gap:1.5rem">
+          <div style="padding:1.5rem">
+            <div class="form-grid cols-1" style="gap:1.2rem">
               <div class="form-group">
                 <label>Full Name</label>
                 <input type="text" value="Admin User"/>
@@ -1304,7 +790,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
                 <label>Confirm Password</label>
                 <input type="password" placeholder="Confirm new password"/>
               </div>
-              <button class="btn btn-gold" onclick="showToast('Account updated successfully!','success')">Update Account</button>
+              <button class="btn btn-gold" onclick="showToast('Account updated!','success')">Update Account</button>
             </div>
           </div>
         </div>
@@ -1312,8 +798,8 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
         <!-- Shipping -->
         <div class="section-box">
           <div class="section-head"><h3>Shipping Settings</h3></div>
-          <div style="padding:2rem">
-            <div class="form-grid cols-1" style="gap:1.5rem">
+          <div style="padding:1.5rem">
+            <div class="form-grid cols-1" style="gap:1.2rem">
               <div class="form-group">
                 <label>Free Shipping Threshold ($)</label>
                 <input type="number" value="100"/>
@@ -1334,8 +820,8 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
         <!-- Tax Settings -->
         <div class="section-box">
           <div class="section-head"><h3>Tax Settings</h3></div>
-          <div style="padding:2rem">
-            <div class="form-grid cols-1" style="gap:1.5rem">
+          <div style="padding:1.5rem">
+            <div class="form-grid cols-1" style="gap:1.2rem">
               <div class="form-group">
                 <label>Tax Rate (%)</label>
                 <input type="number" value="8" step="0.1"/>
@@ -1368,7 +854,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
       <button class="modal-close" onclick="closeModal('modal-add-product')">✕</button>
     </div>
     <form onsubmit="handleAddProduct(event)">
-      <div class="form-grid" style="gap:1.5rem">
+      <div class="form-grid" style="gap:1rem">
         <div class="form-group full">
           <label>Product Name *</label>
           <input type="text" id="ap-name" placeholder="e.g. Premium Gold Watch"/>
@@ -1402,7 +888,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
           <textarea id="ap-desc" placeholder="Describe this product..."></textarea>
         </div>
       </div>
-      <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:flex-end">
+      <div style="margin-top:1.5rem;display:flex;gap:0.75rem;justify-content:flex-end">
         <button type="button" class="btn btn-outline" onclick="closeModal('modal-add-product')">Cancel</button>
         <button type="submit" class="btn btn-gold">Add Product</button>
       </div>
@@ -1421,7 +907,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
     </div>
     <form onsubmit="handleEditProduct(event)">
       <input type="hidden" id="ep-id"/>
-      <div class="form-grid" style="gap:1.5rem">
+      <div class="form-grid" style="gap:1rem">
         <div class="form-group full">
           <label>Product Name *</label>
           <input type="text" id="ep-name"/>
@@ -1451,7 +937,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
           <textarea id="ep-desc"></textarea>
         </div>
       </div>
-      <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:flex-end">
+      <div style="margin-top:1.5rem;display:flex;gap:0.75rem;justify-content:flex-end">
         <button type="button" class="btn btn-outline" onclick="closeModal('modal-edit-product')">Cancel</button>
         <button type="submit" class="btn btn-gold">Save Changes</button>
       </div>
@@ -1469,7 +955,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
       <button class="modal-close" onclick="closeModal('modal-add-user')">✕</button>
     </div>
     <form onsubmit="handleAddUser(event)">
-      <div class="form-grid" style="gap:1.5rem">
+      <div class="form-grid" style="gap:1rem">
         <div class="form-group">
           <label>First Name *</label>
           <input type="text" id="au-fname" placeholder="John"/>
@@ -1498,7 +984,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
           </select>
         </div>
       </div>
-      <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:flex-end">
+      <div style="margin-top:1.5rem;display:flex;gap:0.75rem;justify-content:flex-end">
         <button type="button" class="btn btn-outline" onclick="closeModal('modal-add-user')">Cancel</button>
         <button type="submit" class="btn btn-gold">Add User</button>
       </div>
@@ -1524,7 +1010,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700 
 
 <script>
 /* ═══════════════════════════════════════
-   DATA (SAME AS BEFORE - NO CHANGES)
+   DATA
 ═══════════════════════════════════════ */
 var products = [
   {id:1,  name:'Luminara Gold Watch',    cat:'Watches',     price:1299, old:1799, rating:4.9, reviews:284, icon:'⌚'},
@@ -1560,7 +1046,7 @@ var users = [
 ];
 
 /* ═══════════════════════════════════════
-   TAB SWITCHING (SAME)
+   TAB SWITCHING
 ═══════════════════════════════════════ */
 var tabTitles = {
   dashboard:'Dashboard Overview',
@@ -1572,16 +1058,21 @@ var tabTitles = {
 };
 
 function switchTab(name) {
+  // Hide all tabs
   document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active') });
+  // Show target
   var tab = document.getElementById('tab-' + name);
   if (tab) tab.classList.add('active');
 
+  // Update nav
   document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active') });
   var navItem = document.querySelector('.nav-item[data-tab="' + name + '"]');
   if (navItem) navItem.classList.add('active');
 
+  // Update title
   document.getElementById('page-title').textContent = tabTitles[name] || name;
 
+  // Render
   if (name === 'products') renderProducts();
   if (name === 'orders')   renderOrders();
   if (name === 'users')    renderUsers();
@@ -1589,7 +1080,7 @@ function switchTab(name) {
 }
 
 /* ═══════════════════════════════════════
-   RENDER PRODUCTS TABLE (SAME)
+   RENDER PRODUCTS TABLE
 ═══════════════════════════════════════ */
 function renderProducts() {
   var filterCat = document.getElementById('product-filter-cat') ? document.getElementById('product-filter-cat').value : '';
@@ -1616,7 +1107,7 @@ function renderProducts() {
 }
 
 /* ═══════════════════════════════════════
-   RENDER ORDERS TABLE (SAME)
+   RENDER ORDERS TABLE
 ═══════════════════════════════════════ */
 function renderOrders() {
   var filterStatus = document.getElementById('order-status-filter') ? document.getElementById('order-status-filter').value : '';
@@ -1625,7 +1116,7 @@ function renderOrders() {
   document.getElementById('orders-tbody').innerHTML = filtered.map(function(o){
     var cls = 'badge-' + o.status.toLowerCase();
     return '<tr>' +
-      '<td><span class="text-gold">' + o.id + '</span></td>' +
+      '<td style="color:var(--gold);font-weight:600">' + o.id + '</td>' +
       '<td>' + o.customer + '</td>' +
       '<td class="text-gray">' + o.email + '</td>' +
       '<td>' + o.items + ' item' + (o.items > 1 ? 's' : '') + '</td>' +
@@ -1641,7 +1132,7 @@ function renderOrders() {
 }
 
 /* ═══════════════════════════════════════
-   RENDER USERS TABLE (SAME)
+   RENDER USERS TABLE
 ═══════════════════════════════════════ */
 function renderUsers() {
   document.getElementById('user-count-label').textContent = users.length + ' registered users';
@@ -1664,9 +1155,10 @@ function renderUsers() {
 }
 
 /* ═══════════════════════════════════════
-   CHARTS (SAME)
+   CHARTS
 ═══════════════════════════════════════ */
 function renderDashboardCharts() {
+  // Monthly revenue bar chart
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
   var vals   = [42,58,71,63,89,74,95,84];
   var max    = Math.max.apply(null, vals);
@@ -1679,6 +1171,7 @@ function renderDashboardCharts() {
     '</div>';
   }).join('');
 
+  // Category sales
   var cats = [
     {name:'Electronics', val:35},
     {name:'Jewelry',     val:25},
@@ -1732,7 +1225,7 @@ function renderAnalyticsCharts() {
 }
 
 /* ═══════════════════════════════════════
-   PRODUCT CRUD (SAME)
+   PRODUCT CRUD
 ═══════════════════════════════════════ */
 function handleAddProduct(e) {
   e.preventDefault();
@@ -1758,6 +1251,7 @@ function handleAddProduct(e) {
   renderProducts();
   showToast(name + ' added successfully!', 'success');
 
+  // Clear form
   ['ap-name','ap-price','ap-old','ap-icon','ap-desc'].forEach(function(id){
     document.getElementById(id).value = '';
   });
@@ -1806,26 +1300,26 @@ function deleteProduct(id) {
 }
 
 /* ═══════════════════════════════════════
-   ORDER CRUD (SAME)
+   ORDER CRUD
 ═══════════════════════════════════════ */
 function viewOrder(id) {
   var o = orders.find(function(o){ return o.id === id });
   if (!o) return;
   var cls = 'badge-' + o.status.toLowerCase();
   document.getElementById('order-detail-content').innerHTML =
-    '<div style="display:grid;gap:1.5rem">' +
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">' +
-      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Order ID</div><div style="font-weight:700;color:var(--gold)">' + o.id + '</div></div>' +
-      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Status</div><div><span class="badge ' + cls + '">' + o.status + '</span></div></div>' +
-      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Customer</div><div>' + o.customer + '</div></div>' +
-      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Email</div><div class="text-gray">' + o.email + '</div></div>' +
-      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Items</div><div>' + o.items + ' item(s)</div></div>' +
-      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Total</div><div class="text-gold" style="font-size:1.25rem;font-weight:700">$' + o.amount.toLocaleString() + '</div></div>' +
-      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Date</div><div>' + o.date + '</div></div>' +
+    '<div style="display:grid;gap:1rem">' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">' +
+      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em">Order ID</div><div style="font-weight:700;color:var(--gold)">' + o.id + '</div></div>' +
+      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em">Status</div><div><span class="badge ' + cls + '">' + o.status + '</span></div></div>' +
+      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em">Customer</div><div>' + o.customer + '</div></div>' +
+      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em">Email</div><div class="text-gray">' + o.email + '</div></div>' +
+      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em">Items</div><div>' + o.items + ' item(s)</div></div>' +
+      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em">Total</div><div class="text-gold" style="font-size:1.1rem;font-weight:700">$' + o.amount.toLocaleString() + '</div></div>' +
+      '<div><div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em">Date</div><div>' + o.date + '</div></div>' +
     '</div>' +
     '<div style="margin-top:1rem">' +
-      '<div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem">Update Status</div>' +
-      '<div style="display:flex;gap:0.75rem;flex-wrap:wrap">' +
+      '<div class="text-gray" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Update Status</div>' +
+      '<div style="display:flex;gap:0.5rem;flex-wrap:wrap">' +
         ['Pending','Processing','Shipped','Delivered','Cancelled'].map(function(s){
           return '<button class="action-btn ' + (o.status===s?'btn-edit':'btn-view') + '" onclick="updateOrderStatus(\'' + o.id + '\',\'' + s + '\')">' + s + '</button>';
         }).join('') +
@@ -1855,7 +1349,7 @@ function deleteOrder(id) {
 }
 
 /* ═══════════════════════════════════════
-   USER CRUD (SAME)
+   USER CRUD
 ═══════════════════════════════════════ */
 function handleAddUser(e) {
   e.preventDefault();
@@ -1897,7 +1391,7 @@ function deleteUser(id) {
 }
 
 /* ═══════════════════════════════════════
-   MODAL HELPERS (SAME)
+   MODAL HELPERS
 ═══════════════════════════════════════ */
 function openModal(id) {
   document.getElementById(id).classList.add('open');
@@ -1912,7 +1406,7 @@ document.querySelectorAll('.modal-overlay').forEach(function(el){
 });
 
 /* ═══════════════════════════════════════
-   TOAST (SAME)
+   TOAST
 ═══════════════════════════════════════ */
 function showToast(msg, type) {
   type = type || 'info';
@@ -1920,31 +1414,34 @@ function showToast(msg, type) {
   var wrap  = document.getElementById('toast-wrap');
   var el    = document.createElement('div');
   el.className = 'toast ' + type;
-  el.innerHTML = '<span>' + icons[type] + '</span><span>' + msg + '</span>';
+  el.innerHTML = '<span>' + icons[type] + '</span><span style="font-size:0.86rem">' + msg + '</span>';
   wrap.appendChild(el);
   setTimeout(function(){
-    el.style.animation = 'slideInRight 0.3s ease reverse';
+    el.style.animation = 'slideIn 0.3s ease reverse';
     setTimeout(function(){ el.remove() }, 280);
-  }, 3500);
+  }, 3000);
 }
 
 /* ═══════════════════════════════════════
-   FILTER LISTENERS (SAME)
+   FILTER LISTENERS
 ═══════════════════════════════════════ */
 document.getElementById('product-filter-cat').addEventListener('change', renderProducts);
 document.getElementById('order-status-filter').addEventListener('change', renderOrders);
 
 /* ═══════════════════════════════════════
-   INIT (SAME)
+   INIT
 ═══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
+  // Wire sidebar nav
   document.querySelectorAll('.nav-item[data-tab]').forEach(function(el){
     el.addEventListener('click', function(){
       switchTab(this.getAttribute('data-tab'));
     });
   });
 
+  // Render default charts
   renderDashboardCharts();
+  // Small delay so bars animate in
   setTimeout(renderDashboardCharts, 100);
 });
 </script>
