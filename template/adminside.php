@@ -656,7 +656,7 @@ ul { list-style:none }
         <div class="table-wrap">
           <table class="data-table">
             <thead>
-              <tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Old Price</th><th>Rating</th><th>Reviews</th><th>Actions</th></tr>
+              <tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Old Price</th><th>Created At</th><th>description</th><th>Actions</th></tr>
             </thead>
            <tbody id="products-tbody">
                 <?php if (!empty($products_data)): ?>
@@ -666,9 +666,9 @@ ul { list-style:none }
                         <td><?php echo $row['product_name']; ?></td>
                         <td><span style='color:var(--gold);font-size:0.8rem'><?php echo $row['category']; ?></span></td>
                         <td class='text-gold'>$<?php echo $row['price']; ?></td>
-                        <td class='text-gray'>—</td>
-                        <td>—</td>
-                        <td>—</td>
+                        <td class='text-gray'>$<?php echo $row['old_price']; ?></td>
+                        <td><?php echo $row['created_at']; ?></td>
+                        <td><?php echo $row['description']; ?></td>
                         <td>
                             <div class='action-btns'>
                                 <button class='action-btn btn-edit'>Edit</button>
@@ -940,7 +940,7 @@ ul { list-style:none }
         </div>
         <div class="form-group">
           <label>Old Price ($)</label>
-          <input type="number" id="ap-old" placeholder="399.00" step="0.01"/>
+          <input type="number" id="ap-old" placeholder="399.00" step="0.01" name="old_price"/>
         </div>
         <div class="form-group">
           <label>Category *</label>
@@ -1161,29 +1161,7 @@ function renderProducts() {
     var label = document.getElementById('product-count-label');
     if (label) label.textContent = '<?php echo count($products_data); ?> products';
 }
-/*function renderProducts() {
-  var filterCat = document.getElementById('product-filter-cat') ? document.getElementById('product-filter-cat').value : '';
-  var filtered  = filterCat ? products.filter(function(p){ return p.cat === filterCat }) : products;
 
-  document.getElementById('product-count-label').textContent = filtered.length + ' of ' + products.length + ' products';
-  document.getElementById('stat-products').textContent = products.length;
-
-  document.getElementById('products-tbody').innerHTML = filtered.map(function(p){
-    return '<tr>' +
-      '<td><div class="product-thumb">' + p.icon + '</div></td>' +
-      '<td>' + p.name + '</td>' +
-      '<td><span style="color:var(--gold);font-size:0.8rem">' + p.cat + '</span></td>' +
-      '<td class="text-gold">$' + p.price.toLocaleString() + '</td>' +
-      '<td class="text-gray">' + (p.old ? '$' + p.old.toLocaleString() : '—') + '</td>' +
-      '<td>★ ' + p.rating + '</td>' +
-      '<td>' + p.reviews + '</td>' +
-      '<td><div class="action-btns">' +
-        '<button class="action-btn btn-edit" onclick="openEditProduct(' + p.id + ')">Edit</button>' +
-        '<button class="action-btn btn-del"  onclick="deleteProduct(' + p.id + ')">Delete</button>' +
-      '</div></td>' +
-    '</tr>';
-  }).join('');
-}*/
 
 /* ═══════════════════════════════════════
    RENDER ORDERS TABLE
@@ -1210,28 +1188,6 @@ function renderOrders() {
   }).join('');
 }
 
-/* ═══════════════════════════════════════
-   RENDER USERS TABLE
-═══════════════════════════════════════ */
-/*function renderUsers() {
-  document.getElementById('user-count-label').textContent = users.length + ' registered users';
-  document.getElementById('users-tbody').innerHTML = users.map(function(u){
-    var sc = u.status === 'Active' ? 'badge-active' : 'badge-inactive';
-    return '<tr>' +
-      '<td>' + u.name + '</td>' +
-      '<td class="text-gray">' + u.email + '</td>' +
-      '<td><span style="font-size:0.78rem;color:var(--blue)">' + u.role + '</span></td>' +
-      '<td>' + u.orders + '</td>' +
-      '<td class="text-gold">$' + u.spent.toLocaleString() + '</td>' +
-      '<td class="text-gray">' + u.joined + '</td>' +
-      '<td><span class="badge ' + sc + '">' + u.status + '</span></td>' +
-      '<td><div class="action-btns">' +
-        '<button class="action-btn btn-edit" onclick="showToast(\'Edit: ' + u.name + '\',\'info\')">Edit</button>' +
-        '<button class="action-btn btn-del"  onclick="deleteUser(' + u.id + ')">Delete</button>' +
-      '</div></td>' +
-    '</tr>';
-  }).join('');
-}*/
 
 /* ═══════════════════════════════════════
    CHARTS

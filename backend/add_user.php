@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $fullname = $_POST['fullname'];
     $email    = $_POST['email'];
     $password = $_POST['password'];
+    
 
     $sql = "INSERT INTO user_authentication (fullname, email, password)
             VALUES ('$fullname', '$email', '$password')";

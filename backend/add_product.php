@@ -10,9 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $price        = $_POST['price'];
     $category     = $_POST['category'];
     $description  = $_POST['description'];
+    $old_price = $_POST['old_price'];
 
-    $sql = "INSERT INTO product_detail (product_name, price, category, description)
-            VALUES ('$product_name', '$price', '$category', '$description')";
+    $sql = "INSERT INTO product_detail (product_name, price, category, description , old_price)
+            VALUES ('$product_name', '$price', '$category', '$description', '$old_price')";
 
     $result = mysqli_query($conn, $sql);
 
