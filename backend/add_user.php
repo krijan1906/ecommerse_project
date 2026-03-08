@@ -21,4 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit;
     }
 }
+//delete
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    mysqli_query($conn, "DELETE FROM user_authentication WHERE id='$id'");
+    header("Location: ../template/adminside.php");
+    exit; 
+}
 ?>

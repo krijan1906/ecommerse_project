@@ -24,4 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         die("DB Error: " . mysqli_error($conn));
     }
 }
-?>
+// DELETE
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    mysqli_query($conn, "DELETE FROM product_detail WHERE id='$id'");
+    header("Location: ../template/adminside.php");
+    exit; 
+}

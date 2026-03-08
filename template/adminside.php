@@ -672,7 +672,12 @@ ul { list-style:none }
                         <td>
                             <div class='action-btns'>
                                 <button class='action-btn btn-edit'>Edit</button>
-                                <button class='action-btn btn-del'>Delete</button>
+                                 
+                              <a href='../backend/add_product.php?delete=<?php echo $row['id']; ?>' 
+                              class='action-btn btn-del'
+                              onclick='return confirm("Are you sure you want to delete this product?")'>
+                              Delete
+                              </a>
                             </div>
                         </td>
                     </tr>
@@ -742,7 +747,11 @@ ul { list-style:none }
                       <td>
                           <div class='action-btns'>
                               <button class='action-btn btn-edit'>Edit</button>
-                              <button class='action-btn btn-del'>Delete</button>
+                              <a href='../backend/add_user.php?delete=<?php echo $row['id']; ?>' 
+                              class='action-btn btn-del'
+                              onclick='return confirm("Are you sure you want to delete this user?")'>
+                              Delete
+                              </a>
                           </div>
                       </td>
                   </tr>
