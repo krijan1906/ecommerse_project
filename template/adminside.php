@@ -658,7 +658,31 @@ ul { list-style:none }
             <thead>
               <tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Old Price</th><th>Rating</th><th>Reviews</th><th>Actions</th></tr>
             </thead>
-            <tbody id="products-tbody"></tbody>
+           <tbody id="products-tbody">
+                <?php if (!empty($products_data)): ?>
+                    <?php foreach ($products_data as $row): ?>
+                    <tr>
+                        <td><div class="product-thumb">📦</div></td>
+                        <td><?php echo $row['product_name']; ?></td>
+                        <td><span style='color:var(--gold);font-size:0.8rem'><?php echo $row['category']; ?></span></td>
+                        <td class='text-gold'>$<?php echo $row['price']; ?></td>
+                        <td class='text-gray'>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>
+                            <div class='action-btns'>
+                                <button class='action-btn btn-edit'>Edit</button>
+                                <button class='action-btn btn-del'>Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan='8' style='text-align:center;color:gray;padding:2rem'>No products found</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
           </table>
         </div>
       </div>
@@ -1130,8 +1154,14 @@ function switchTab(name) {
 
 /* ═══════════════════════════════════════
    RENDER PRODUCTS TABLE
+
 ═══════════════════════════════════════ */
 function renderProducts() {
+    // Products are rendered by PHP — nothing to do here
+    var label = document.getElementById('product-count-label');
+    if (label) label.textContent = '<?php echo count($products_data); ?> products';
+}
+/*function renderProducts() {
   var filterCat = document.getElementById('product-filter-cat') ? document.getElementById('product-filter-cat').value : '';
   var filtered  = filterCat ? products.filter(function(p){ return p.cat === filterCat }) : products;
 
@@ -1153,7 +1183,7 @@ function renderProducts() {
       '</div></td>' +
     '</tr>';
   }).join('');
-}
+}*/
 
 /* ═══════════════════════════════════════
    RENDER ORDERS TABLE
