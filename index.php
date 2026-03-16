@@ -158,10 +158,9 @@ input,select,textarea{font-family:inherit;outline:none}
 }
 .hero-card-img{
   width:100%;height:260px;object-fit:cover;border-radius:12px;
-  background:linear-gradient(135deg,#2a2d36,#1a1d24);
-  display:flex;align-items:center;justify-content:center;
-  font-size:5rem;
+  overflow:hidden;
 }
+.hero-card-img img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
 .hero-card-info{padding-top:1.2rem}
 .hero-card-info h3{font-size:1.1rem;margin-bottom:0.3rem}
 .hero-card-info .price{color:var(--gold);font-size:1.3rem;font-weight:700}
@@ -205,11 +204,14 @@ input,select,textarea{font-family:inherit;outline:none}
 .product-img{
   width:100%;height:220px;
   background:linear-gradient(135deg,var(--dark2),var(--border));
-  display:flex;align-items:center;justify-content:center;
-  font-size:4rem;transition:var(--transition);
-  overflow:hidden;position:relative;
+  overflow:hidden;position:relative;transition:var(--transition);
 }
-.product-card:hover .product-img{transform:scale(1.03)}
+.product-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  display:block;
+}
+.product-card:hover .product-img img{transform:scale(1.07)}
 .product-actions{
   position:absolute;inset:0;
   background:rgba(0,0,0,0.5);
@@ -282,8 +284,11 @@ input,select,textarea{font-family:inherit;outline:none}
 .promo-features{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem}
 .promo-feature{display:flex;align-items:center;gap:0.75rem;color:var(--light);font-size:0.9rem}
 .promo-feature::before{content:'✓';color:var(--gold);font-weight:700}
-.promo-visual{text-align:center;font-size:8rem;animation:float2 3s ease-in-out infinite}
-@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.promo-visual{
+  border-radius:16px;overflow:hidden;height:320px;
+  box-shadow:var(--shadow);
+}
+.promo-visual img{width:100%;height:100%;object-fit:cover;}
 
 /* ════════════════════════════════════════
    STATS BAR
@@ -387,18 +392,23 @@ footer{
 .product-detail{padding:3rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:4rem}
 .detail-gallery .main-img{
   width:100%;height:450px;
-  background:linear-gradient(135deg,var(--dark2),var(--border));
+  background:var(--dark2);
   border-radius:var(--radius);
-  display:flex;align-items:center;justify-content:center;
-  font-size:8rem;border:1px solid var(--border);margin-bottom:1rem;
+  overflow:hidden;
+  border:1px solid var(--border);margin-bottom:1rem;
+}
+.detail-gallery .main-img img{
+  width:100%;height:100%;object-fit:cover;border-radius:var(--radius);
+  transition:var(--transition);
 }
 .thumbs{display:flex;gap:1rem}
 .thumb{
   width:80px;height:80px;
   background:var(--card);border:1px solid var(--border);
-  border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;transition:var(--transition);
+  border-radius:8px;cursor:pointer;overflow:hidden;
+  transition:var(--transition);
 }
+.thumb img{width:100%;height:100%;object-fit:cover;}
 .thumb.active,.thumb:hover{border-color:var(--gold)}
 .detail-info{padding-top:1rem}
 .detail-cat{font-size:0.75rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
@@ -463,9 +473,10 @@ footer{
 .cart-product{display:flex;align-items:center;gap:1rem}
 .cart-img{
   width:70px;height:70px;background:var(--dark2);
-  border-radius:8px;display:flex;align-items:center;justify-content:center;
-  font-size:1.8rem;flex-shrink:0;border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+  flex-shrink:0;border:1px solid var(--border);
 }
+.cart-img img{width:100%;height:100%;object-fit:cover;}
 .cart-product-name{font-size:0.9rem;margin-bottom:0.25rem}
 .cart-product-cat{font-size:0.75rem;color:var(--gray)}
 .cart-price{color:var(--gold);font-weight:600}
@@ -534,7 +545,8 @@ footer{
 .payment-label{font-size:0.88rem}
 .order-items{margin-bottom:1rem}
 .order-item{display:flex;align-items:center;gap:1rem;padding:0.75rem 0;border-bottom:1px solid var(--border)}
-.order-item-img{width:50px;height:50px;background:var(--dark2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.order-item-img{width:50px;height:50px;background:var(--dark2);border-radius:8px;overflow:hidden;flex-shrink:0}
+.order-item-img img{width:100%;height:100%;object-fit:cover;}
 .order-item-info{flex:1;font-size:0.85rem}
 .order-item-info p{color:var(--gray);font-size:0.78rem}
 .order-item-price{color:var(--gold);font-weight:600;font-size:0.9rem}
@@ -628,6 +640,12 @@ footer{
 .action-edit:hover{background:rgba(33,150,243,0.3)}
 .action-del{background:rgba(224,82,82,0.15);color:var(--red)}
 .action-del:hover{background:rgba(224,82,82,0.3)}
+
+/* Admin product thumbnail */
+.admin-product-thumb{
+  width:44px;height:44px;border-radius:6px;object-fit:cover;
+  border:1px solid var(--border);
+}
 
 /* ════════════════════════════════════════
    TOAST
@@ -766,7 +784,9 @@ footer{
     </div>
     <div class="hero-visual">
       <div class="hero-card">
-        <div class="hero-card-img">👑</div>
+        <div class="hero-card-img">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Premium Gold Watch"/>
+        </div>
         <div class="hero-card-info">
           <h3>Premium Gold Watch</h3>
           <div class="price">$1,299.00</div>
@@ -852,7 +872,9 @@ footer{
         </div>
         <button class="btn btn-gold" onclick="showPage('shop')">Shop the Sale</button>
       </div>
-      <div class="promo-visual">🎁</div>
+      <div class="promo-visual">
+        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80" alt="Premium Shopping"/>
+      </div>
     </div>
   </section>
 
@@ -961,7 +983,6 @@ footer{
     </div>
   </div>
 
-  <!-- Footer repeated -->
   <footer style="margin-top:4rem">
     <div class="footer-bottom">
       <p>© 2025 LUXE. All rights reserved.</p>
@@ -983,7 +1004,9 @@ footer{
   </div>
   <div class="product-detail">
     <div class="detail-gallery">
-      <div class="main-img" id="detail-main-img">👑</div>
+      <div class="main-img" id="detail-main-img">
+        <img id="detail-main-img-el" src="" alt="Product"/>
+      </div>
       <div class="thumbs" id="detail-thumbs"></div>
     </div>
     <div class="detail-info">
@@ -1190,6 +1213,7 @@ footer{
 
 <!-- ════════════════════════════════════════
      REGISTER PAGE
+     Backend handled via action="backend/add_user.php"
 ════════════════════════════════════════ -->
 <div class="page" id="page-register">
   <div class="auth-page">
@@ -1197,8 +1221,6 @@ footer{
       <div class="auth-logo">LUXE</div>
       <div class="auth-subtitle">Create your account today</div>
       <form class="auth-form" action="backend/add_user.php" method="POST">
-        
-         
         <div class="form-group" id="fg-reg-name">
           <label>Full Name</label>
           <input type="text" id="reg-name" placeholder="John Doe" name="fullname"/>
@@ -1235,7 +1257,6 @@ footer{
 ════════════════════════════════════════ -->
 <div class="page" id="page-admin">
   <div class="admin-layout">
-    <!-- Sidebar -->
     <aside class="admin-sidebar">
       <div class="admin-logo">LUXE Admin</div>
       <nav class="admin-nav">
@@ -1257,7 +1278,6 @@ footer{
       </nav>
     </aside>
 
-    <!-- Content -->
     <main class="admin-content">
       <!-- Dashboard Tab -->
       <div id="admin-dashboard">
@@ -1294,7 +1314,7 @@ footer{
         <div class="admin-section">
           <div class="admin-section-head"><h3>All Products</h3><span class="text-gray" style="font-size:0.85rem" id="admin-product-count"></span></div>
           <table class="data-table" id="admin-products-table">
-            <thead><tr><th>Icon</th><th>Name</th><th>Category</th><th>Price</th><th>Rating</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Rating</th><th>Actions</th></tr></thead>
             <tbody id="admin-products-body"></tbody>
           </table>
         </div>
@@ -1372,9 +1392,9 @@ footer{
           <label>Description</label>
           <textarea id="ap-desc" placeholder="Product description..."></textarea>
         </div>
-        <div class="form-group">
-          <label>Icon/Emoji</label>
-          <input type="text" id="ap-icon" placeholder="⌚" maxlength="4"/>
+        <div class="form-group full">
+          <label>Image URL</label>
+          <input type="text" id="ap-icon" placeholder="https://images.unsplash.com/..."/>
         </div>
         <div class="form-group">
           <label>Old Price (optional)</label>
@@ -1409,21 +1429,21 @@ footer{
 <!-- JAVASCRIPT -->
 <script>
 /* ────────────────────────────────────────
-   PRODUCT DATA
+   PRODUCT DATA  (image field replaces icon)
 ──────────────────────────────────────── */
 const products = [
-  {id:1, name:'Luminara Gold Watch',        cat:'Watches',     price:1299, oldPrice:1799, rating:4.9, reviews:284, icon:'⌚', badge:'Best Seller', desc:'Exquisite handcrafted timepiece featuring 18k gold-plated case, Swiss movement, and sapphire crystal glass. Water resistant to 50m.'},
-  {id:2, name:'AirPods Pro Max',             cat:'Electronics', price:549,  oldPrice:649,  rating:4.8, reviews:1203,icon:'🎧', badge:'Hot',         desc:'Industry-leading noise cancellation with Adaptive Audio, Personalized Spatial Audio, and stunning sound quality.'},
-  {id:3, name:'Diamond Solitaire Ring',      cat:'Jewelry',     price:2499, oldPrice:null, rating:5.0, reviews:89,  icon:'💍', badge:'Premium',     desc:'Elegant solitaire ring featuring a 1-carat certified diamond in a platinum six-prong setting.'},
-  {id:4, name:'Silk Evening Dress',          cat:'Fashion',     price:349,  oldPrice:499,  rating:4.7, reviews:156, icon:'👗', badge:'Sale',        desc:'Luxurious pure silk evening gown with hand-sewn embellishments. Available in multiple colors.'},
-  {id:5, name:'Smart Home Hub Pro',          cat:'Electronics', price:299,  oldPrice:399,  rating:4.6, reviews:412, icon:'🏠', badge:null,          desc:'Control all your smart devices from one elegant hub. Compatible with Alexa, Google Home, and HomeKit.'},
-  {id:6, name:'Rose Gold Necklace',          cat:'Jewelry',     price:799,  oldPrice:null, rating:4.8, reviews:203, icon:'📿', badge:'New',         desc:'18k rose gold chain featuring a hand-set diamond pendant. Comes in a luxury gift box.'},
-  {id:7, name:'Leather Tote Bag',            cat:'Fashion',     price:459,  oldPrice:599,  rating:4.5, reviews:318, icon:'👜', badge:'Sale',        desc:'Full-grain Italian leather tote with brass hardware. Fits 15" laptop. Hand-stitched by artisans.'},
-  {id:8, name:'Espresso Machine Deluxe',     cat:'Home',        price:699,  oldPrice:899,  rating:4.7, reviews:521, icon:'☕', badge:null,          desc:'Professional-grade espresso machine with 15-bar pressure, built-in grinder, and milk frother.'},
-  {id:9, name:'Vitamin C Serum Gold',        cat:'Beauty',      price:89,   oldPrice:119,  rating:4.8, reviews:944, icon:'✨', badge:'Bestseller',  desc:'Concentrated 20% Vitamin C formula with hyaluronic acid and ferulic acid for radiant, youthful skin.'},
-  {id:10,name:'Carbon Fiber Sunglasses',     cat:'Fashion',     price:289,  oldPrice:null, rating:4.6, reviews:167, icon:'🕶️', badge:'New',        desc:'Ultra-lightweight carbon fiber frames with polarized UV400 lenses and titanium hinges.'},
-  {id:11,name:'Smart Fitness Ring',          cat:'Electronics', price:349,  oldPrice:449,  rating:4.4, reviews:289, icon:'💪', badge:null,          desc:'24/7 health monitoring including sleep, heart rate, SpO2, and activity tracking in a slim ring form factor.'},
-  {id:12,name:'Cashmere Scarf',              cat:'Fashion',     price:199,  oldPrice:279,  rating:4.9, reviews:412, icon:'🧣', badge:'Sale',        desc:'Pure Scottish cashmere scarf, 100% ethically sourced. Exceptionally soft with timeless plaid pattern.'},
+  {id:1,  name:'Luminara Gold Watch',       cat:'Watches',     price:1299, oldPrice:1799, rating:4.9, reviews:284,  image:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80',  badge:'Best Seller', desc:'Exquisite handcrafted timepiece featuring 18k gold-plated case, Swiss movement, and sapphire crystal glass. Water resistant to 50m.'},
+  {id:2,  name:'AirPods Pro Max',            cat:'Electronics', price:549,  oldPrice:649,  rating:4.8, reviews:1203, image:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80',  badge:'Hot',         desc:'Industry-leading noise cancellation with Adaptive Audio, Personalized Spatial Audio, and stunning sound quality.'},
+  {id:3,  name:'Diamond Solitaire Ring',     cat:'Jewelry',     price:2499, oldPrice:null, rating:5.0, reviews:89,   image:'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&q=80',  badge:'Premium',     desc:'Elegant solitaire ring featuring a 1-carat certified diamond in a platinum six-prong setting.'},
+  {id:4,  name:'Silk Evening Dress',         cat:'Fashion',     price:349,  oldPrice:499,  rating:4.7, reviews:156,  image:'https://images.unsplash.com/photo-1566479179817-c0b3b8c5e12f?w=500&q=80',  badge:'Sale',        desc:'Luxurious pure silk evening gown with hand-sewn embellishments. Available in multiple colors.'},
+  {id:5,  name:'Smart Home Hub Pro',         cat:'Electronics', price:299,  oldPrice:399,  rating:4.6, reviews:412,  image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80',  badge:null,          desc:'Control all your smart devices from one elegant hub. Compatible with Alexa, Google Home, and HomeKit.'},
+  {id:6,  name:'Rose Gold Necklace',         cat:'Jewelry',     price:799,  oldPrice:null, rating:4.8, reviews:203,  image:'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500&q=80',  badge:'New',         desc:'18k rose gold chain featuring a hand-set diamond pendant. Comes in a luxury gift box.'},
+  {id:7,  name:'Leather Tote Bag',           cat:'Fashion',     price:459,  oldPrice:599,  rating:4.5, reviews:318,  image:'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80',  badge:'Sale',        desc:'Full-grain Italian leather tote with brass hardware. Fits 15" laptop. Hand-stitched by artisans.'},
+  {id:8,  name:'Espresso Machine Deluxe',    cat:'Home',        price:699,  oldPrice:899,  rating:4.7, reviews:521,  image:'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=500&q=80',  badge:null,          desc:'Professional-grade espresso machine with 15-bar pressure, built-in grinder, and milk frother.'},
+  {id:9,  name:'Vitamin C Serum Gold',       cat:'Beauty',      price:89,   oldPrice:119,  rating:4.8, reviews:944,  image:'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&q=80',  badge:'Bestseller',  desc:'Concentrated 20% Vitamin C formula with hyaluronic acid and ferulic acid for radiant, youthful skin.'},
+  {id:10, name:'Carbon Fiber Sunglasses',    cat:'Fashion',     price:289,  oldPrice:null, rating:4.6, reviews:167,  image:'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80',  badge:'New',         desc:'Ultra-lightweight carbon fiber frames with polarized UV400 lenses and titanium hinges.'},
+  {id:11, name:'Smart Fitness Ring',         cat:'Electronics', price:349,  oldPrice:449,  rating:4.4, reviews:289,  image:'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=500&q=80',  badge:null,          desc:'24/7 health monitoring including sleep, heart rate, SpO2, and activity tracking in a slim ring form factor.'},
+  {id:12, name:'Cashmere Scarf',             cat:'Fashion',     price:199,  oldPrice:279,  rating:4.9, reviews:412,  image:'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=500&q=80',  badge:'Sale',        desc:'Pure Scottish cashmere scarf, 100% ethically sourced. Exceptionally soft with timeless plaid pattern.'},
 ];
 
 const reviews = [
@@ -1437,7 +1457,6 @@ const reviews = [
 ──────────────────────────────────────── */
 let cart = [];
 let currentDetailProduct = null;
-let filteredProducts = [...products];
 let selectedCategoryFilter = null;
 
 /* ────────────────────────────────────────
@@ -1448,20 +1467,12 @@ window.showPage = function(id) {
   document.getElementById('page-' + id).classList.add('active');
   window.scrollTo({top:0, behavior:'smooth'});
 
-  // Render page-specific content
   if (id === 'home')     renderFeaturedProducts();
   if (id === 'shop')     renderShopProducts();
   if (id === 'cart')     renderCart();
   if (id === 'checkout') renderCheckoutSummary();
   if (id === 'admin')    renderAdminProducts();
   if (id === 'detail')   renderDetailPage();
-}
-
-/* ────────────────────────────────────────
-   HAMBURGER MENU
-──────────────────────────────────────── */
-window.toggleMenu = function() {
-  document.getElementById('mobile-menu').classList.toggle('open');
 }
 
 /* ────────────────────────────────────────
@@ -1491,7 +1502,6 @@ window.renderCategoryFilters = function() {
     </div>
   `).join('');
 
-  // If category was pre-selected from home page
   if (selectedCategoryFilter) {
     const cb = document.getElementById('cat-' + selectedCategoryFilter);
     if (cb) cb.checked = true;
@@ -1521,7 +1531,6 @@ window.filterProducts = function() {
     return matchSearch && matchPrice && matchRating && matchCat;
   });
 
-  // Sort
   if (sort === 'price-low')  result.sort((a,b) => a.price - b.price);
   if (sort === 'price-high') result.sort((a,b) => b.price - a.price);
   if (sort === 'rating')     result.sort((a,b) => b.rating - a.rating);
@@ -1542,7 +1551,7 @@ window.productCardHTML = function(p) {
     <div class="product-card">
       ${p.badge ? `<div class="product-badge ${p.badge==='Sale'?'sale':''}">${p.badge}</div>` : ''}
       <div class="product-img">
-        <span>${p.icon}</span>
+        <img src="${p.image}" alt="${p.name}" loading="lazy"/>
         <div class="product-actions">
           <button class="product-action-btn" onclick="openDetail(${p.id})">View Details</button>
           <button class="product-action-btn" onclick="addToCart(${p.id})">Add to Cart</button>
@@ -1584,7 +1593,8 @@ window.renderDetailPage = function() {
   document.getElementById('detail-name').textContent = p.name;
   document.getElementById('detail-price').textContent = '$' + p.price.toLocaleString();
   document.getElementById('detail-desc').textContent = p.desc;
-  document.getElementById('detail-main-img').textContent = p.icon;
+  document.getElementById('detail-main-img-el').src = p.image;
+  document.getElementById('detail-main-img-el').alt = p.name;
   document.getElementById('detail-stars').textContent = '★'.repeat(Math.floor(p.rating));
   document.getElementById('detail-reviews').textContent = `(${p.reviews} reviews)`;
   document.getElementById('detail-qty').value = 1;
@@ -1592,10 +1602,17 @@ window.renderDetailPage = function() {
   const old = document.getElementById('detail-old-price');
   old.textContent = p.oldPrice ? '$' + p.oldPrice.toLocaleString() : '';
 
-  // Thumbs
-  const thumbs = [p.icon, '🔍', '📷', '🖼️'];
-  document.getElementById('detail-thumbs').innerHTML = thumbs.map((t,i) => `
-    <div class="thumb ${i===0?'active':''}" onclick="setThumb(this,'${t}')">${t}</div>
+  // Thumbs — show same image in 4 slots with slightly different sizes
+  const thumbUrls = [
+    p.image,
+    p.image.replace('w=500','w=400'),
+    p.image.replace('w=500','w=300'),
+    p.image.replace('w=500','w=450'),
+  ];
+  document.getElementById('detail-thumbs').innerHTML = thumbUrls.map((url,i) => `
+    <div class="thumb ${i===0?'active':''}" onclick="setDetailThumb(this,'${url}')">
+      <img src="${url}" alt="View ${i+1}"/>
+    </div>
   `).join('');
 
   // Reviews
@@ -1613,10 +1630,10 @@ window.renderDetailPage = function() {
   `).join('');
 }
 
-window.setThumb = function(el, icon) {
+window.setDetailThumb = function(el, url) {
   document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('detail-main-img').textContent = icon;
+  document.getElementById('detail-main-img-el').src = url;
 }
 
 window.changeDetailQty = function(delta) {
@@ -1628,9 +1645,6 @@ window.changeDetailQty = function(delta) {
 window.addDetailToCart = function() {
   const qty = parseInt(document.getElementById('detail-qty').value);
   for (let i = 0; i < qty; i++) addToCart(currentDetailProduct.id);
-  if (qty > 1) {
-    // already called multiple times
-  }
   showToast(`${currentDetailProduct.name} added to cart!`, 'success');
 }
 
@@ -1723,7 +1737,9 @@ window.renderCart = function() {
         ${cart.map(item => `
           <div class="cart-row">
             <div class="cart-product">
-              <div class="cart-img">${item.icon}</div>
+              <div class="cart-img">
+                <img src="${item.image}" alt="${item.name}" loading="lazy"/>
+              </div>
               <div>
                 <div class="cart-product-name">${item.name}</div>
                 <div class="cart-product-cat">${item.cat}</div>
@@ -1781,7 +1797,9 @@ window.renderCheckoutSummary = function() {
     ? '<p style="color:var(--gray);font-size:0.88rem">No items in cart</p>'
     : cart.map(item => `
         <div class="order-item">
-          <div class="order-item-img">${item.icon}</div>
+          <div class="order-item-img">
+            <img src="${item.image}" alt="${item.name}" loading="lazy"/>
+          </div>
           <div class="order-item-info">
             <div>${item.name}</div>
             <p>Qty: ${item.qty} × $${item.price.toLocaleString()}</p>
@@ -1832,7 +1850,6 @@ window.placeOrder = function() {
     openModal('order-success-modal');
   } else {
     showToast('Please fill in all required fields', 'error');
-    // Scroll to first error
     const firstInvalid = document.querySelector('.form-group.invalid');
     if (firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
   }
@@ -1848,7 +1865,7 @@ window.selectPayment = function(el) {
 }
 
 /* ────────────────────────────────────────
-   AUTH FORMS VALIDATION
+   LOGIN FORM
 ──────────────────────────────────────── */
 window.handleLogin = function(e) {
   e.preventDefault();
@@ -1856,18 +1873,6 @@ window.handleLogin = function(e) {
   const passOk  = validateField('login-pass',  v => v.length >= 6);
   if (emailOk && passOk) {
     showToast('Welcome back! Logged in successfully.', 'success');
-    showPage('home');
-  }
-}
-
-window.handleRegister = function(e) {
-  e.preventDefault();
-  const nameOk    = validateField('reg-name',    v => v.trim().length >= 2);
-  const emailOk   = validateField('reg-email',   v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
-  const passOk    = validateField('reg-pass',    v => v.length >= 6);
-  const confirmOk = validateField('reg-confirm', v => v === document.getElementById('reg-pass').value && v.length > 0);
-  if (nameOk && emailOk && passOk && confirmOk) {
-    showToast('Account created! Welcome to LUXE.', 'success');
     showPage('home');
   }
 }
@@ -1893,7 +1898,7 @@ window.renderAdminProducts = function() {
   document.getElementById('admin-total-products').textContent = products.length;
   tbody.innerHTML = products.map(p => `
     <tr>
-      <td style="font-size:1.5rem">${p.icon}</td>
+      <td><img class="admin-product-thumb" src="${p.image}" alt="${p.name}" loading="lazy"/></td>
       <td>${p.name}</td>
       <td><span style="color:var(--gold);font-size:0.8rem">${p.cat}</span></td>
       <td class="text-gold">$${p.price.toLocaleString()}</td>
@@ -1928,7 +1933,7 @@ window.handleAddProduct = function(e) {
   const price = parseFloat(document.getElementById('ap-price').value);
   const cat   = document.getElementById('ap-category').value;
   const desc  = document.getElementById('ap-desc').value;
-  const icon  = document.getElementById('ap-icon').value || '📦';
+  const image = document.getElementById('ap-icon').value.trim() || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80';
   const old   = parseFloat(document.getElementById('ap-old-price').value) || null;
 
   if (!name || !price) { showToast('Please fill in required fields', 'error'); return; }
@@ -1936,14 +1941,13 @@ window.handleAddProduct = function(e) {
   const newProduct = {
     id: products.length + 100,
     name, cat, price, oldPrice: old, rating: 0,
-    reviews: 0, icon, badge: 'New', desc
+    reviews: 0, image, badge: 'New', desc
   };
   products.push(newProduct);
   closeModal('add-product-modal');
   renderAdminProducts();
   showToast(name + ' added successfully!', 'success');
 
-  // Reset form
   ['ap-name','ap-price','ap-desc','ap-icon','ap-old-price'].forEach(id => {
     document.getElementById(id).value = '';
   });
@@ -1960,7 +1964,6 @@ window.closeModal = function(id) {
   document.getElementById(id).classList.remove('open');
 }
 
-// Close modal on overlay click
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
   overlay.addEventListener('click', function(e) {
     if (e.target === this) this.classList.remove('open');
@@ -1986,11 +1989,7 @@ window.showToast = function(msg, type = 'info') {
 /* ────────────────────────────────────────
    INIT
 ──────────────────────────────────────── */
-/* ────────────────────────────────────────
-   INIT — wire all navigation safely
-──────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
-  // Wire nav buttons via data-page attribute
   document.querySelectorAll('[data-page]').forEach(function(el) {
     el.style.cursor = 'pointer';
     el.addEventListener('click', function() {
@@ -2000,7 +1999,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Hamburger
   var ham = document.getElementById('hamburger-btn');
   if (ham) {
     ham.addEventListener('click', function() {
