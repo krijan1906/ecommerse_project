@@ -31,3 +31,5 @@ if (isset($_GET['delete'])) {
     header("Location: ../template/adminside.php");
     exit; 
 }
+
+// EDIT

@@ -290,7 +290,7 @@ ul { list-style:none }
 .badge-inactive   { background: rgba(224,82,82,0.15);  color: var(--red) }
 
 /* Action buttons */
-.action-btns { display: flex; gap: 0.5rem }
+.action-btns { display: flex; gap: 0.5rem; align-items: center }
 .action-btn {
   padding: 0.35rem 0.75rem;
   border-radius: 5px;
@@ -300,6 +300,7 @@ ul { list-style:none }
   text-transform: uppercase;
   transition: var(--trans);
   border: none; cursor: pointer;
+  display: inline-flex; align-items: center;
 }
 .btn-view { background: rgba(100,181,246,0.15); color: var(--blue) }
 .btn-view:hover { background: rgba(100,181,246,0.3) }
@@ -656,37 +657,43 @@ ul { list-style:none }
         <div class="table-wrap">
           <table class="data-table">
             <thead>
-              <tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Old Price</th><th>Created At</th><th>description</th><th>Actions</th></tr>
+              <tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Old Price</th><th>Created At</th><th>Description</th><th>Actions</th></tr>
             </thead>
-           <tbody id="products-tbody">
-                <?php if (!empty($products_data)): ?>
-                    <?php foreach ($products_data as $row): ?>
-                    <tr>
-                        <td><div class="product-thumb">📦</div></td>
-                        <td><?php echo $row['product_name']; ?></td>
-                        <td><span style='color:var(--gold);font-size:0.8rem'><?php echo $row['category']; ?></span></td>
-                        <td class='text-gold'>$<?php echo $row['price']; ?></td>
-                        <td class='text-gray'>$<?php echo $row['old_price']; ?></td>
-                        <td><?php echo $row['created_at']; ?></td>
-                        <td><?php echo $row['description']; ?></td>
-                        <td>
-                            <div class='action-btns'>
-                                <button class='action-btn btn-edit'>Edit</button>
-                                 
-                              <a href='../backend/add_product.php?delete=<?php echo $row['id']; ?>' 
-                              class='action-btn btn-del'
-                              onclick='return confirm("Are you sure you want to delete this product?")'>
-                              Delete
-                              </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan='8' style='text-align:center;color:gray;padding:2rem'>No products found</td>
-                    </tr>
-                <?php endif; ?>
+            <tbody id="products-tbody">
+              <?php if (!empty($products_data)): ?>
+                <?php foreach ($products_data as $row): ?>
+                <tr
+                  data-id="<?php echo htmlspecialchars($row['id']); ?>"
+                  data-name="<?php echo htmlspecialchars($row['product_name']); ?>"
+                  data-cat="<?php echo htmlspecialchars($row['category']); ?>"
+                  data-price="<?php echo htmlspecialchars($row['price']); ?>"
+                  data-oldprice="<?php echo htmlspecialchars($row['old_price']); ?>"
+                  data-desc="<?php echo htmlspecialchars($row['description']); ?>"
+                >
+                  <td><div class="product-thumb">📦</div></td>
+                  <td><?php echo htmlspecialchars($row['product_name']); ?></td>
+                  <td><span style='color:var(--gold);font-size:0.8rem'><?php echo htmlspecialchars($row['category']); ?></span></td>
+                  <td class='text-gold'>$<?php echo htmlspecialchars($row['price']); ?></td>
+                  <td class='text-gray'>$<?php echo htmlspecialchars($row['old_price']); ?></td>
+                  <td><?php echo htmlspecialchars($row['created_at']); ?></td>
+                  <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis"><?php echo htmlspecialchars($row['description']); ?></td>
+                  <td>
+                    <div class='action-btns'>
+                      <button class='action-btn btn-edit' onclick='openEditProductFromRow(this)'>Edit</button>
+                      <a href='../backend/add_product.php?delete=<?php echo $row['id']; ?>'
+                        class='action-btn btn-del'
+                        onclick='return confirm("Are you sure you want to delete this product?")'>
+                        Delete
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <tr>
+                  <td colspan='8' style='text-align:center;color:gray;padding:2rem'>No products found</td>
+                </tr>
+              <?php endif; ?>
             </tbody>
           </table>
         </div>
@@ -735,35 +742,37 @@ ul { list-style:none }
             </thead>
             <tbody>
               <?php if (!empty($users_data)): ?>
-                  <?php foreach ($users_data as $row): ?>
-                  <tr>
-                      <td><?php echo $row['fullname']; ?></td>
-                      <td class='text-gray'><?php echo $row['email']; ?></td>
-                      <td><span style='font-size:0.78rem;color:var(--blue)'>Customer</span></td>
-                      <td>0</td>
-                      <td class='text-gold'>$0</td>
-                      <td class='text-gray'>2025</td>
-                      <td><span class='badge badge-active'>Active</span></td>
-                      <td>
-                          <div class='action-btns'>
-                              <button class='action-btn btn-edit'>Edit</button>
-                              <a href='../backend/add_user.php?delete=<?php echo $row['id']; ?>' 
-                              class='action-btn btn-del'
-                              onclick='return confirm("Are you sure you want to delete this user?")'>
-                              Delete
-                              </a>
-                          </div>
-                      </td>
-                  </tr>
-                  <?php endforeach; ?>
+                <?php foreach ($users_data as $row): ?>
+                <tr
+                  data-id="<?php echo htmlspecialchars($row['id']); ?>"
+                  data-fullname="<?php echo htmlspecialchars($row['fullname']); ?>"
+                  data-email="<?php echo htmlspecialchars($row['email']); ?>"
+                >
+                  <td><?php echo htmlspecialchars($row['fullname']); ?></td>
+                  <td class='text-gray'><?php echo htmlspecialchars($row['email']); ?></td>
+                  <td><span style='font-size:0.78rem;color:var(--blue)'>Customer</span></td>
+                  <td>0</td>
+                  <td class='text-gold'>$0</td>
+                  <td class='text-gray'>2025</td>
+                  <td><span class='badge badge-active'>Active</span></td>
+                  <td>
+                    <div class='action-btns'>
+                      <button class='action-btn btn-edit' onclick='openEditUserFromRow(this)'>Edit</button>
+                      <a href='../backend/add_user.php?delete=<?php echo $row['id']; ?>'
+                        class='action-btn btn-del'
+                        onclick='return confirm("Are you sure you want to delete this user?")'>
+                        Delete
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                <?php endforeach; ?>
               <?php else: ?>
-                  <tr>
-                      <td colspan='8' style='text-align:center;color:gray;padding:2rem'>
-                          No users found
-                      </td>
-                  </tr>
+                <tr>
+                  <td colspan='8' style='text-align:center;color:gray;padding:2rem'>No users found</td>
+                </tr>
               <?php endif; ?>
-          </tbody>
+            </tbody>
           </table>
         </div>
       </div>
@@ -928,6 +937,7 @@ ul { list-style:none }
 
 <!-- ══════════════════════════════
      MODAL: ADD PRODUCT
+     ✅ Backend untouched
 ══════════════════════════════ -->
 <div class="modal-overlay" id="modal-add-product">
   <div class="modal">
@@ -980,48 +990,54 @@ ul { list-style:none }
 
 <!-- ══════════════════════════════
      MODAL: EDIT PRODUCT
+     Points to backend/edit_product.php
+     Reads data from PHP row via data-* attributes
 ══════════════════════════════ -->
 <div class="modal-overlay" id="modal-edit-product">
   <div class="modal">
     <div class="modal-head">
-      <h3>Edit Product</h3>
+      <h3>✏️ Edit Product</h3>
       <button class="modal-close" onclick="closeModal('modal-edit-product')">✕</button>
     </div>
-    <form onsubmit="handleEditProduct(event)">
-      <input type="hidden" id="ep-id"/>
+    <form action="../backend/edit_product.php" method="POST">
+      <!-- Hidden ID so backend knows which row to UPDATE -->
+      <input type="hidden" id="ep-id" name="id"/>
       <div class="form-grid" style="gap:1rem">
         <div class="form-group full">
           <label>Product Name *</label>
-          <input type="text" id="ep-name"/>
+          <input type="text" id="ep-name" name="product_name" placeholder="Product name"/>
+          <span class="err">Name is required</span>
         </div>
         <div class="form-group">
           <label>Price ($) *</label>
-          <input type="number" id="ep-price" step="0.01"/>
+          <input type="number" id="ep-price" name="price" step="0.01" placeholder="0.00"/>
+          <span class="err">Valid price required</span>
         </div>
         <div class="form-group">
           <label>Old Price ($)</label>
-          <input type="number" id="ep-old" step="0.01"/>
+          <input type="number" id="ep-oldprice" name="old_price" step="0.01" placeholder="0.00"/>
         </div>
-        <div class="form-group">
-          <label>Category</label>
-          <select id="ep-cat">
-            <option>Electronics</option><option>Fashion</option>
-            <option>Watches</option><option>Jewelry</option>
-            <option>Home</option><option>Beauty</option>
+        <div class="form-group full">
+          <label>Category *</label>
+          <select id="ep-cat" name="category">
+            <option value="">Select...</option>
+            <option>Electronics</option>
+            <option>Fashion</option>
+            <option>Watches</option>
+            <option>Jewelry</option>
+            <option>Home</option>
+            <option>Beauty</option>
           </select>
-        </div>
-        <div class="form-group">
-          <label>Icon / Emoji</label>
-          <input type="text" id="ep-icon" maxlength="4"/>
+          <span class="err">Category required</span>
         </div>
         <div class="form-group full">
           <label>Description</label>
-          <textarea id="ep-desc"></textarea>
+          <textarea id="ep-desc" name="description" placeholder="Product description..."></textarea>
         </div>
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:0.75rem;justify-content:flex-end">
         <button type="button" class="btn btn-outline" onclick="closeModal('modal-edit-product')">Cancel</button>
-        <button type="submit" class="btn btn-gold">Save Changes</button>
+        <button type="submit" class="btn btn-gold">💾 Save Changes</button>
       </div>
     </form>
   </div>
@@ -1075,6 +1091,44 @@ ul { list-style:none }
 </div>
 
 <!-- ══════════════════════════════
+     MODAL: EDIT USER
+     Points to backend/edit_user.php
+     Reads data from PHP row via data-* attributes
+══════════════════════════════ -->
+<div class="modal-overlay" id="modal-edit-user">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>✏️ Edit User</h3>
+      <button class="modal-close" onclick="closeModal('modal-edit-user')">✕</button>
+    </div>
+    <form action="../backend/edit_user.php" method="POST">
+      <!-- Hidden ID so backend knows which row to UPDATE -->
+      <input type="hidden" id="eu-id" name="id"/>
+      <div class="form-grid" style="gap:1rem">
+        <div class="form-group full">
+          <label>Full Name *</label>
+          <input type="text" id="eu-fullname" name="fullname" placeholder="Full name"/>
+          <span class="err">Name is required</span>
+        </div>
+        <div class="form-group full">
+          <label>Email Address *</label>
+          <input type="email" id="eu-email" name="email" placeholder="email@example.com"/>
+          <span class="err">Valid email required</span>
+        </div>
+        <div class="form-group full">
+          <label>New Password <span style="color:var(--gray);font-size:0.75rem;text-transform:none;letter-spacing:0">(leave blank to keep current)</span></label>
+          <input type="password" id="eu-password" name="password" placeholder="Enter new password to change"/>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem;display:flex;gap:0.75rem;justify-content:flex-end">
+        <button type="button" class="btn btn-outline" onclick="closeModal('modal-edit-user')">Cancel</button>
+        <button type="submit" class="btn btn-gold">💾 Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
      MODAL: VIEW ORDER
 ══════════════════════════════ -->
 <div class="modal-overlay" id="modal-view-order">
@@ -1092,40 +1146,46 @@ ul { list-style:none }
 
 <script>
 /* ═══════════════════════════════════════
-   DATA
+   EDIT PRODUCT — reads data-* from the
+   clicked button's parent <tr> (PHP row)
 ═══════════════════════════════════════ */
-var products = [
-  {id:1,  name:'Luminara Gold Watch',    cat:'Watches',     price:1299, old:1799, rating:4.9, reviews:284, icon:'⌚'},
-  {id:2,  name:'AirPods Pro Max',        cat:'Electronics', price:549,  old:649,  rating:4.8, reviews:1203,icon:'🎧'},
-  {id:3,  name:'Diamond Solitaire Ring', cat:'Jewelry',     price:2499, old:null, rating:5.0, reviews:89,  icon:'💍'},
-  {id:4,  name:'Silk Evening Dress',     cat:'Fashion',     price:349,  old:499,  rating:4.7, reviews:156, icon:'👗'},
-  {id:5,  name:'Smart Home Hub Pro',     cat:'Electronics', price:299,  old:399,  rating:4.6, reviews:412, icon:'🏠'},
-  {id:6,  name:'Rose Gold Necklace',     cat:'Jewelry',     price:799,  old:null, rating:4.8, reviews:203, icon:'📿'},
-  {id:7,  name:'Leather Tote Bag',       cat:'Fashion',     price:459,  old:599,  rating:4.5, reviews:318, icon:'👜'},
-  {id:8,  name:'Espresso Machine',       cat:'Home',        price:699,  old:899,  rating:4.7, reviews:521, icon:'☕'},
-  {id:9,  name:'Vitamin C Serum',        cat:'Beauty',      price:89,   old:119,  rating:4.8, reviews:944, icon:'✨'},
-  {id:10, name:'Carbon Fiber Sunglasses',cat:'Fashion',     price:289,  old:null, rating:4.6, reviews:167, icon:'🕶️'},
-  {id:11, name:'Smart Fitness Ring',     cat:'Electronics', price:349,  old:449,  rating:4.4, reviews:289, icon:'💪'},
-  {id:12, name:'Cashmere Scarf',         cat:'Fashion',     price:199,  old:279,  rating:4.9, reviews:412, icon:'🧣'},
-];
+function openEditProductFromRow(btn) {
+  // Walk up to the <tr> that has all the data attributes
+  var row = btn.closest('tr');
 
-var orders = [
-  {id:'#ORD-001', customer:'John Doe',      email:'john@email.com',  items:3, amount:299,  status:'Delivered', date:'Mar 05, 2025'},
-  {id:'#ORD-002', customer:'Jane Smith',    email:'jane@email.com',  items:1, amount:799,  status:'Shipped',   date:'Mar 04, 2025'},
-  {id:'#ORD-003', customer:'Mike Johnson',  email:'mike@email.com',  items:2, amount:149,  status:'Processing',date:'Mar 04, 2025'},
-  {id:'#ORD-004', customer:'Sara Lee',      email:'sara@email.com',  items:1, amount:1299, status:'Pending',   date:'Mar 03, 2025'},
-  {id:'#ORD-005', customer:'Tom Brown',     email:'tom@email.com',   items:4, amount:450,  status:'Cancelled', date:'Mar 02, 2025'},
-  {id:'#ORD-006', customer:'Alice Wang',    email:'alice@email.com', items:2, amount:888,  status:'Delivered', date:'Mar 01, 2025'},
-  {id:'#ORD-007', customer:'Bob Martinez',  email:'bob@email.com',   items:1, amount:349,  status:'Shipped',   date:'Feb 28, 2025'},
-];
+  document.getElementById('ep-id').value       = row.getAttribute('data-id')       || '';
+  document.getElementById('ep-name').value     = row.getAttribute('data-name')     || '';
+  document.getElementById('ep-price').value    = row.getAttribute('data-price')    || '';
+  document.getElementById('ep-oldprice').value = row.getAttribute('data-oldprice') || '';
+  document.getElementById('ep-desc').value     = row.getAttribute('data-desc')     || '';
 
-var users = [
-  {id:1, name:'John Doe',     email:'john@email.com',  role:'Customer', orders:12, spent:2450, joined:'Jan 2025', status:'Active'},
-  {id:2, name:'Jane Smith',   email:'jane@email.com',  role:'Customer', orders:7,  spent:1299, joined:'Feb 2025', status:'Active'},
-  {id:3, name:'Mike Johnson', email:'mike@email.com',  role:'Customer', orders:3,  spent:588,  joined:'Feb 2025', status:'Active'},
-  {id:4, name:'Sara Lee',     email:'sara@email.com',  role:'Editor',   orders:1,  spent:1299, joined:'Mar 2025', status:'Active'},
-  {id:5, name:'Tom Brown',    email:'tom@email.com',   role:'Customer', orders:5,  spent:890,  joined:'Jan 2025', status:'Inactive'},
-];
+  // Set the select to the right category
+  var cat = row.getAttribute('data-cat') || '';
+  var sel = document.getElementById('ep-cat');
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value === cat) {
+      sel.selectedIndex = i;
+      break;
+    }
+  }
+
+  openModal('modal-edit-product');
+}
+
+/* ═══════════════════════════════════════
+   EDIT USER — reads data-* from the
+   clicked button's parent <tr> (PHP row)
+═══════════════════════════════════════ */
+function openEditUserFromRow(btn) {
+  var row = btn.closest('tr');
+
+  document.getElementById('eu-id').value       = row.getAttribute('data-id')       || '';
+  document.getElementById('eu-fullname').value = row.getAttribute('data-fullname') || '';
+  document.getElementById('eu-email').value    = row.getAttribute('data-email')    || '';
+  document.getElementById('eu-password').value = ''; // always blank on open
+
+  openModal('modal-edit-user');
+}
 
 /* ═══════════════════════════════════════
    TAB SWITCHING
@@ -1140,41 +1200,41 @@ var tabTitles = {
 };
 
 function switchTab(name) {
-  // Hide all tabs
   document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active') });
-  // Show target
   var tab = document.getElementById('tab-' + name);
   if (tab) tab.classList.add('active');
 
-  // Update nav
   document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active') });
   var navItem = document.querySelector('.nav-item[data-tab="' + name + '"]');
   if (navItem) navItem.classList.add('active');
 
-  // Update title
   document.getElementById('page-title').textContent = tabTitles[name] || name;
 
-  // Render
-  if (name === 'products') renderProducts();
   if (name === 'orders')   renderOrders();
-  if (name === 'users')    renderUsers();
   if (name === 'analytics') renderAnalyticsCharts();
-}
-
-/* ═══════════════════════════════════════
-   RENDER PRODUCTS TABLE
-
-═══════════════════════════════════════ */
-function renderProducts() {
-    // Products are rendered by PHP — nothing to do here
+  if (name === 'products') {
     var label = document.getElementById('product-count-label');
     if (label) label.textContent = '<?php echo count($products_data); ?> products';
+  }
+  if (name === 'users') {
+    var label = document.getElementById('user-count-label');
+    if (label) label.textContent = '<?php echo count($users_data); ?> users';
+  }
 }
 
-
 /* ═══════════════════════════════════════
-   RENDER ORDERS TABLE
+   ORDERS (JS data — no backend yet)
 ═══════════════════════════════════════ */
+var orders = [
+  {id:'#ORD-001', customer:'John Doe',     email:'john@email.com',  items:3, amount:299,  status:'Delivered', date:'Mar 05, 2025'},
+  {id:'#ORD-002', customer:'Jane Smith',   email:'jane@email.com',  items:1, amount:799,  status:'Shipped',   date:'Mar 04, 2025'},
+  {id:'#ORD-003', customer:'Mike Johnson', email:'mike@email.com',  items:2, amount:149,  status:'Processing',date:'Mar 04, 2025'},
+  {id:'#ORD-004', customer:'Sara Lee',     email:'sara@email.com',  items:1, amount:1299, status:'Pending',   date:'Mar 03, 2025'},
+  {id:'#ORD-005', customer:'Tom Brown',    email:'tom@email.com',   items:4, amount:450,  status:'Cancelled', date:'Mar 02, 2025'},
+  {id:'#ORD-006', customer:'Alice Wang',   email:'alice@email.com', items:2, amount:888,  status:'Delivered', date:'Mar 01, 2025'},
+  {id:'#ORD-007', customer:'Bob Martinez', email:'bob@email.com',   items:1, amount:349,  status:'Shipped',   date:'Feb 28, 2025'},
+];
+
 function renderOrders() {
   var filterStatus = document.getElementById('order-status-filter') ? document.getElementById('order-status-filter').value : '';
   var filtered = filterStatus ? orders.filter(function(o){ return o.status === filterStatus }) : orders;
@@ -1197,155 +1257,6 @@ function renderOrders() {
   }).join('');
 }
 
-
-/* ═══════════════════════════════════════
-   CHARTS
-═══════════════════════════════════════ */
-function renderDashboardCharts() {
-  // Monthly revenue bar chart
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
-  var vals   = [42,58,71,63,89,74,95,84];
-  var max    = Math.max.apply(null, vals);
-  document.getElementById('revenue-chart').innerHTML = months.map(function(m,i){
-    var h = Math.round((vals[i] / max) * 140);
-    return '<div class="bar-col">' +
-      '<div class="bar-val">$' + vals[i] + 'K</div>' +
-      '<div class="bar" style="height:' + h + 'px"></div>' +
-      '<div class="bar-label">' + m + '</div>' +
-    '</div>';
-  }).join('');
-
-  // Category sales
-  var cats = [
-    {name:'Electronics', val:35},
-    {name:'Jewelry',     val:25},
-    {name:'Fashion',     val:20},
-    {name:'Watches',     val:12},
-    {name:'Home',        val:5},
-    {name:'Beauty',      val:3},
-  ];
-  document.getElementById('category-chart').innerHTML = cats.map(function(c){
-    return '<div class="chart-row">' +
-      '<div class="chart-row-label">' + c.name + '</div>' +
-      '<div class="chart-row-bar-wrap"><div class="chart-row-bar" style="width:' + c.val + '%"></div></div>' +
-      '<div class="chart-row-val">' + c.val + '%</div>' +
-    '</div>';
-  }).join('');
-}
-
-function renderAnalyticsCharts() {
-  var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  var vals = [18,24,15,32,28,41,35];
-  var max  = Math.max.apply(null, vals);
-  var el   = document.getElementById('weekly-chart');
-  if (el) {
-    el.innerHTML = days.map(function(d,i){
-      var h = Math.round((vals[i] / max) * 130);
-      return '<div class="bar-col">' +
-        '<div class="bar-val">$' + vals[i] + 'K</div>' +
-        '<div class="bar" style="height:' + h + 'px"></div>' +
-        '<div class="bar-label">' + d + '</div>' +
-      '</div>';
-    }).join('');
-  }
-
-  var top = [
-    {name:'Gold Watch',  pct:28},
-    {name:'AirPods Max', pct:22},
-    {name:'Diamond Ring',pct:18},
-    {name:'Tote Bag',    pct:14},
-    {name:'Espresso',    pct:10},
-  ];
-  var tp = document.getElementById('top-products-chart');
-  if (tp) {
-    tp.innerHTML = top.map(function(p){
-      return '<div class="chart-row">' +
-        '<div class="chart-row-label">' + p.name + '</div>' +
-        '<div class="chart-row-bar-wrap"><div class="chart-row-bar" style="width:' + p.pct + '%"></div></div>' +
-        '<div class="chart-row-val">' + p.pct + '%</div>' +
-      '</div>';
-    }).join('');
-  }
-}
-
-/* ═══════════════════════════════════════
-   PRODUCT CRUD
-═══════════════════════════════════════ */
-function handleAddProduct(e) {
-  e.preventDefault();
-  var name  = document.getElementById('ap-name').value.trim();
-  var price = parseFloat(document.getElementById('ap-price').value);
-  var cat   = document.getElementById('ap-cat').value;
-  var old   = parseFloat(document.getElementById('ap-old').value) || null;
-  var icon  = document.getElementById('ap-icon').value || '📦';
-  var desc  = document.getElementById('ap-desc').value;
-
-  if (!name || !price || !cat) {
-    showToast('Please fill in required fields', 'error');
-    return;
-  }
-
-  products.push({
-    id: Date.now(), name: name, cat: cat,
-    price: price, old: old,
-    rating: 0, reviews: 0, icon: icon, desc: desc
-  });
-
-  closeModal('modal-add-product');
-  renderProducts();
-  showToast(name + ' added successfully!', 'success');
-
-  // Clear form
-  ['ap-name','ap-price','ap-old','ap-icon','ap-desc'].forEach(function(id){
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('ap-cat').value = '';
-}
-
-function openEditProduct(id) {
-  var p = products.find(function(p){ return p.id === id });
-  if (!p) return;
-  document.getElementById('ep-id').value    = p.id;
-  document.getElementById('ep-name').value  = p.name;
-  document.getElementById('ep-price').value = p.price;
-  document.getElementById('ep-old').value   = p.old || '';
-  document.getElementById('ep-cat').value   = p.cat;
-  document.getElementById('ep-icon').value  = p.icon;
-  document.getElementById('ep-desc').value  = p.desc || '';
-  openModal('modal-edit-product');
-}
-
-function handleEditProduct(e) {
-  e.preventDefault();
-  var id = parseInt(document.getElementById('ep-id').value);
-  var p  = products.find(function(p){ return p.id === id });
-  if (!p) return;
-
-  p.name  = document.getElementById('ep-name').value.trim();
-  p.price = parseFloat(document.getElementById('ep-price').value);
-  p.old   = parseFloat(document.getElementById('ep-old').value) || null;
-  p.cat   = document.getElementById('ep-cat').value;
-  p.icon  = document.getElementById('ep-icon').value || p.icon;
-  p.desc  = document.getElementById('ep-desc').value;
-
-  closeModal('modal-edit-product');
-  renderProducts();
-  showToast(p.name + ' updated!', 'success');
-}
-
-function deleteProduct(id) {
-  var idx = products.findIndex(function(p){ return p.id === id });
-  if (idx > -1) {
-    var name = products[idx].name;
-    products.splice(idx, 1);
-    renderProducts();
-    showToast(name + ' deleted', 'error');
-  }
-}
-
-/* ═══════════════════════════════════════
-   ORDER CRUD
-═══════════════════════════════════════ */
 function viewOrder(id) {
   var o = orders.find(function(o){ return o.id === id });
   if (!o) return;
@@ -1393,44 +1304,88 @@ function deleteOrder(id) {
 }
 
 /* ═══════════════════════════════════════
-   USER CRUD
+   ADD USER (JS only — no backend yet)
 ═══════════════════════════════════════ */
 function handleAddUser(e) {
   e.preventDefault();
   var fname  = document.getElementById('au-fname').value.trim();
   var lname  = document.getElementById('au-lname').value.trim();
   var email  = document.getElementById('au-email').value.trim();
-  var role   = document.getElementById('au-role').value;
-  var status = document.getElementById('au-status').value;
-
   if (!fname || !lname || !email) {
     showToast('Please fill in all required fields', 'error');
     return;
   }
-
-  users.push({
-    id: Date.now(), name: fname + ' ' + lname,
-    email: email, role: role,
-    orders: 0, spent: 0,
-    joined: 'Mar 2025', status: status
-  });
-
   closeModal('modal-add-user');
-  renderUsers();
   showToast(fname + ' ' + lname + ' added!', 'success');
-
   ['au-fname','au-lname','au-email'].forEach(function(id){
     document.getElementById(id).value = '';
   });
 }
 
-function deleteUser(id) {
-  var idx = users.findIndex(function(u){ return u.id === id });
-  if (idx > -1) {
-    var name = users[idx].name;
-    users.splice(idx, 1);
-    renderUsers();
-    showToast(name + ' deleted', 'error');
+/* ═══════════════════════════════════════
+   CHARTS
+═══════════════════════════════════════ */
+function renderDashboardCharts() {
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
+  var vals   = [42,58,71,63,89,74,95,84];
+  var max    = Math.max.apply(null, vals);
+  document.getElementById('revenue-chart').innerHTML = months.map(function(m,i){
+    var h = Math.round((vals[i] / max) * 140);
+    return '<div class="bar-col">' +
+      '<div class="bar-val">$' + vals[i] + 'K</div>' +
+      '<div class="bar" style="height:' + h + 'px"></div>' +
+      '<div class="bar-label">' + m + '</div>' +
+    '</div>';
+  }).join('');
+
+  var cats = [
+    {name:'Electronics', val:35},
+    {name:'Jewelry',     val:25},
+    {name:'Fashion',     val:20},
+    {name:'Watches',     val:12},
+    {name:'Home',        val:5},
+    {name:'Beauty',      val:3},
+  ];
+  document.getElementById('category-chart').innerHTML = cats.map(function(c){
+    return '<div class="chart-row">' +
+      '<div class="chart-row-label">' + c.name + '</div>' +
+      '<div class="chart-row-bar-wrap"><div class="chart-row-bar" style="width:' + c.val + '%"></div></div>' +
+      '<div class="chart-row-val">' + c.val + '%</div>' +
+    '</div>';
+  }).join('');
+}
+
+function renderAnalyticsCharts() {
+  var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  var vals = [18,24,15,32,28,41,35];
+  var max  = Math.max.apply(null, vals);
+  var el   = document.getElementById('weekly-chart');
+  if (el) {
+    el.innerHTML = days.map(function(d,i){
+      var h = Math.round((vals[i] / max) * 130);
+      return '<div class="bar-col">' +
+        '<div class="bar-val">$' + vals[i] + 'K</div>' +
+        '<div class="bar" style="height:' + h + 'px"></div>' +
+        '<div class="bar-label">' + d + '</div>' +
+      '</div>';
+    }).join('');
+  }
+  var top = [
+    {name:'Gold Watch',  pct:28},
+    {name:'AirPods Max', pct:22},
+    {name:'Diamond Ring',pct:18},
+    {name:'Tote Bag',    pct:14},
+    {name:'Espresso',    pct:10},
+  ];
+  var tp = document.getElementById('top-products-chart');
+  if (tp) {
+    tp.innerHTML = top.map(function(p){
+      return '<div class="chart-row">' +
+        '<div class="chart-row-label">' + p.name + '</div>' +
+        '<div class="chart-row-bar-wrap"><div class="chart-row-bar" style="width:' + p.pct + '%"></div></div>' +
+        '<div class="chart-row-val">' + p.pct + '%</div>' +
+      '</div>';
+    }).join('');
   }
 }
 
@@ -1469,23 +1424,19 @@ function showToast(msg, type) {
 /* ═══════════════════════════════════════
    FILTER LISTENERS
 ═══════════════════════════════════════ */
-document.getElementById('product-filter-cat').addEventListener('change', renderProducts);
 document.getElementById('order-status-filter').addEventListener('change', renderOrders);
 
 /* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
-  // Wire sidebar nav
   document.querySelectorAll('.nav-item[data-tab]').forEach(function(el){
     el.addEventListener('click', function(){
       switchTab(this.getAttribute('data-tab'));
     });
   });
 
-  // Render default charts
   renderDashboardCharts();
-  // Small delay so bars animate in
   setTimeout(renderDashboardCharts, 100);
 });
 </script>
