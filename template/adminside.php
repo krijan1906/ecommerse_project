@@ -119,7 +119,27 @@ ul { list-style:none }
 }
 .nav-item:hover  { color: var(--white); background: rgba(255,255,255,0.04) }
 .nav-item.active { color: var(--gold);  background: rgba(201,168,76,0.08); border-left-color: var(--gold) }
-.nav-icon { font-size: 1.1rem; width: 22px; text-align: center; flex-shrink: 0 }
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  opacity: 0.6;
+  filter: brightness(0) invert(1);
+  transition: var(--trans);
+}
+.nav-item.active .nav-icon img,
+.nav-item:hover .nav-icon img {
+  opacity: 1;
+  filter: brightness(0) saturate(100%) invert(73%) sepia(46%) saturate(450%) hue-rotate(5deg) brightness(95%);
+}
 
 .sidebar-footer {
   padding: 1.5rem;
@@ -136,6 +156,12 @@ ul { list-style:none }
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 1rem; color: var(--black); font-weight: 700;
+  overflow: hidden;
+}
+.admin-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .admin-user-info .name  { font-size: 0.85rem; font-weight: 600 }
 .admin-user-info .role  { font-size: 0.72rem; color: var(--gold) }
@@ -171,6 +197,12 @@ ul { list-style:none }
   border-radius: 8px;
   padding: 0.5rem 1rem;
 }
+.topbar-search .search-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.5;
+  filter: brightness(0) invert(1);
+}
 .topbar-search input {
   background: none; border: none;
   color: var(--white); font-size: 0.85rem; width: 180px;
@@ -185,6 +217,12 @@ ul { list-style:none }
   transition: var(--trans);
 }
 .back-btn:hover { border-color: var(--gold); color: var(--gold) }
+.back-btn img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+}
 
 /* Tabs */
 .tab { display: none }
@@ -217,7 +255,22 @@ ul { list-style:none }
   border-radius: 50%;
 }
 .stat-card:hover { border-color: var(--gold); transform: translateY(-2px) }
-.stat-icon { font-size: 1.8rem; margin-bottom: 0.75rem }
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201,168,76,0.1);
+  border-radius: 10px;
+}
+.stat-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(73%) sepia(46%) saturate(450%) hue-rotate(5deg) brightness(95%);
+}
 .stat-value { font-size: 2rem; font-weight: 700; color: var(--gold) }
 .stat-label { color: var(--gray); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem }
 .stat-change { font-size: 0.78rem; color: var(--green); margin-top: 0.5rem }
@@ -300,7 +353,7 @@ ul { list-style:none }
   text-transform: uppercase;
   transition: var(--trans);
   border: none; cursor: pointer;
-  display: inline-flex; align-items: center;
+  display: inline-flex; align-items: center; gap: 0.35rem;
 }
 .btn-view { background: rgba(100,181,246,0.15); color: var(--blue) }
 .btn-view:hover { background: rgba(100,181,246,0.3) }
@@ -308,6 +361,14 @@ ul { list-style:none }
 .btn-edit:hover { background: rgba(201,168,76,0.3) }
 .btn-del  { background: rgba(224,82,82,0.15);  color: var(--red) }
 .btn-del:hover  { background: rgba(224,82,82,0.3) }
+.action-btn img {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+}
+.btn-view img  { filter: brightness(0) saturate(100%) invert(67%) sepia(70%) saturate(400%) hue-rotate(185deg) brightness(105%); }
+.btn-edit img  { filter: brightness(0) saturate(100%) invert(73%) sepia(46%) saturate(450%) hue-rotate(5deg) brightness(95%); }
+.btn-del  img  { filter: brightness(0) saturate(100%) invert(45%) sepia(80%) saturate(600%) hue-rotate(330deg) brightness(105%); }
 
 /* ════════════════════════════════════
    BUTTONS
@@ -400,6 +461,24 @@ ul { list-style:none }
 .chart-row-val { width: 60px; text-align: right; font-size: 0.8rem; color: var(--gold); font-weight: 600 }
 
 /* ════════════════════════════════════
+   PRODUCT THUMBNAIL
+════════════════════════════════════ */
+.product-thumb {
+  width: 44px; height: 44px;
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+/* ════════════════════════════════════
    MODAL
 ════════════════════════════════════ */
 .modal-overlay {
@@ -460,6 +539,11 @@ ul { list-style:none }
 .toast.success { border-left: 3px solid var(--green) }
 .toast.error   { border-left: 3px solid var(--red) }
 .toast.info    { border-left: 3px solid var(--gold) }
+.toast img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
 @keyframes slideIn {
   from { transform: translateX(120%); opacity: 0 }
   to   { transform: translateX(0);   opacity: 1 }
@@ -469,19 +553,11 @@ ul { list-style:none }
    MISC
 ════════════════════════════════════ */
 .divider { height: 1px; background: var(--border); margin: 1.5rem 0 }
-.product-thumb {
-  width: 44px; height: 44px;
-  background: var(--dark2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem;
-}
 .empty-state {
   text-align: center; padding: 3rem;
   color: var(--gray); font-size: 0.9rem;
 }
-.empty-state .icon { font-size: 2.5rem; margin-bottom: 0.75rem }
+.empty-state img { width: 48px; height: 48px; opacity: 0.4; margin-bottom: 0.75rem; filter: brightness(0) invert(1); }
 
 /* ════════════════════════════════════
    RESPONSIVE
@@ -496,6 +572,39 @@ ul { list-style:none }
   .stats-grid { grid-template-columns: 1fr }
   .form-grid { grid-template-columns: 1fr }
   .main-content { padding: 1.5rem }
+}
+
+/* ════════════════════════════════════
+   IMAGE UPLOAD WIDGET
+════════════════════════════════════ */
+.img-upload-wrap {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  background: var(--dark2);
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--trans);
+  overflow: hidden;
+}
+.img-upload-wrap:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.04);
+}
+.img-upload-wrap.has-image {
+  border-style: solid;
+  border-color: var(--gold);
+}
+#ap-img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
 }
 </style>
 </head>
@@ -514,28 +623,30 @@ ul { list-style:none }
 
     <nav class="sidebar-nav">
       <div class="nav-item active" data-tab="dashboard">
-        <span class="nav-icon">📊</span> Dashboard
+        <span class="nav-icon"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/layout-dashboard.svg" alt="Dashboard"/></span> Dashboard
       </div>
       <div class="nav-item" data-tab="products">
-        <span class="nav-icon">📦</span> Products
+        <span class="nav-icon"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/package.svg" alt="Products"/></span> Products
       </div>
       <div class="nav-item" data-tab="orders">
-        <span class="nav-icon">🛒</span> Orders
+        <span class="nav-icon"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/shopping-cart.svg" alt="Orders"/></span> Orders
       </div>
       <div class="nav-item" data-tab="users">
-        <span class="nav-icon">👥</span> Users
+        <span class="nav-icon"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/users.svg" alt="Users"/></span> Users
       </div>
       <div class="nav-item" data-tab="analytics">
-        <span class="nav-icon">📈</span> Analytics
+        <span class="nav-icon"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/trending-up.svg" alt="Analytics"/></span> Analytics
       </div>
       <div class="nav-item" data-tab="settings">
-        <span class="nav-icon">⚙️</span> Settings
+        <span class="nav-icon"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/settings.svg" alt="Settings"/></span> Settings
       </div>
     </nav>
 
     <div class="sidebar-footer">
       <div class="admin-user">
-        <div class="admin-avatar">A</div>
+        <div class="admin-avatar">
+          <img src="https://ui-avatars.com/api/?name=Admin+User&background=c9a84c&color=0a0a0a&size=36&bold=true" alt="Admin"/>
+        </div>
         <div class="admin-user-info">
           <div class="name">Admin User</div>
           <div class="role">Super Admin</div>
@@ -554,10 +665,13 @@ ul { list-style:none }
       <h1 id="page-title">Dashboard Overview</h1>
       <div class="topbar-right">
         <div class="topbar-search">
-          <span>🔍</span>
+          <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/search.svg" alt="Search" class="search-icon"/>
           <input type="text" placeholder="Search..." id="global-search"/>
         </div>
-        <a href="ecommerce.html" class="back-btn">🏠 Back to Store</a>
+        <a href="ecommerce.html" class="back-btn">
+          <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/home.svg" alt="Home"/>
+          Back to Store
+        </a>
       </div>
     </div>
 
@@ -567,25 +681,33 @@ ul { list-style:none }
       <!-- Stats -->
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-icon">📦</div>
+          <div class="stat-icon">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/package.svg" alt="Products"/>
+          </div>
           <div class="stat-value" id="stat-products">12</div>
           <div class="stat-label">Total Products</div>
           <div class="stat-change">↑ 8% this month</div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">🛒</div>
+          <div class="stat-icon">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/shopping-cart.svg" alt="Orders"/>
+          </div>
           <div class="stat-value">48</div>
           <div class="stat-label">Total Orders</div>
           <div class="stat-change">↑ 15% this month</div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">👥</div>
+          <div class="stat-icon">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/users.svg" alt="Users"/>
+          </div>
           <div class="stat-value">1,284</div>
           <div class="stat-label">Total Users</div>
           <div class="stat-change">↑ 22% this month</div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">💰</div>
+          <div class="stat-icon">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/dollar-sign.svg" alt="Revenue"/>
+          </div>
           <div class="stat-value">$84K</div>
           <div class="stat-label">Revenue</div>
           <div class="stat-change">↑ 31% this month</div>
@@ -625,10 +747,10 @@ ul { list-style:none }
               </tr>
             </thead>
             <tbody>
-              <tr><td>#ORD-001</td><td>John Doe</td><td class="text-gold">$299.00</td><td><span class="badge badge-delivered">Delivered</span></td><td>Mar 05</td><td><button class="action-btn btn-view">View</button></td></tr>
-              <tr><td>#ORD-002</td><td>Jane Smith</td><td class="text-gold">$799.00</td><td><span class="badge badge-shipped">Shipped</span></td><td>Mar 04</td><td><button class="action-btn btn-view">View</button></td></tr>
-              <tr><td>#ORD-003</td><td>Mike Johnson</td><td class="text-gold">$149.00</td><td><span class="badge badge-processing">Processing</span></td><td>Mar 04</td><td><button class="action-btn btn-view">View</button></td></tr>
-              <tr><td>#ORD-004</td><td>Sara Lee</td><td class="text-gold">$1,299.00</td><td><span class="badge badge-pending">Pending</span></td><td>Mar 03</td><td><button class="action-btn btn-view">View</button></td></tr>
+              <tr><td>#ORD-001</td><td>John Doe</td><td class="text-gold">$299.00</td><td><span class="badge badge-delivered">Delivered</span></td><td>Mar 05</td><td><button class="action-btn btn-view"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button></td></tr>
+              <tr><td>#ORD-002</td><td>Jane Smith</td><td class="text-gold">$799.00</td><td><span class="badge badge-shipped">Shipped</span></td><td>Mar 04</td><td><button class="action-btn btn-view"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button></td></tr>
+              <tr><td>#ORD-003</td><td>Mike Johnson</td><td class="text-gold">$149.00</td><td><span class="badge badge-processing">Processing</span></td><td>Mar 04</td><td><button class="action-btn btn-view"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button></td></tr>
+              <tr><td>#ORD-004</td><td>Sara Lee</td><td class="text-gold">$1,299.00</td><td><span class="badge badge-pending">Pending</span></td><td>Mar 03</td><td><button class="action-btn btn-view"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button></td></tr>
             </tbody>
           </table>
         </div>
@@ -670,7 +792,12 @@ ul { list-style:none }
                   data-oldprice="<?php echo htmlspecialchars($row['old_price']); ?>"
                   data-desc="<?php echo htmlspecialchars($row['description']); ?>"
                 >
-                  <td><div class="product-thumb">📦</div></td>
+                  <td>
+                    <div class="product-thumb">
+                      <img src="<?php echo !empty($row['image']) ? htmlspecialchars($row['image']) : 'https://placehold.co/44x44/1a1d24/c9a84c?text=' . urlencode(mb_substr($row['product_name'], 0, 2)); ?>" alt="<?php echo htmlspecialchars($row['product_name']); ?>"/>
+                      
+                    </div>
+                  </td>
                   <td><?php echo htmlspecialchars($row['product_name']); ?></td>
                   <td><span style='color:var(--gold);font-size:0.8rem'><?php echo htmlspecialchars($row['category']); ?></span></td>
                   <td class='text-gold'>$<?php echo htmlspecialchars($row['price']); ?></td>
@@ -679,11 +806,13 @@ ul { list-style:none }
                   <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis"><?php echo htmlspecialchars($row['description']); ?></td>
                   <td>
                     <div class='action-btns'>
-                      <button class='action-btn btn-edit' onclick='openEditProductFromRow(this)'>Edit</button>
+                      <button class='action-btn btn-edit' onclick='openEditProductFromRow(this)'>
+                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/pencil.svg" alt=""/>Edit
+                      </button>
                       <a href='../backend/add_product.php?delete=<?php echo $row['id']; ?>'
                         class='action-btn btn-del'
                         onclick='return confirm("Are you sure you want to delete this product?")'>
-                        Delete
+                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/trash-2.svg" alt=""/>Delete
                       </a>
                     </div>
                   </td>
@@ -748,7 +877,14 @@ ul { list-style:none }
                   data-fullname="<?php echo htmlspecialchars($row['fullname']); ?>"
                   data-email="<?php echo htmlspecialchars($row['email']); ?>"
                 >
-                  <td><?php echo htmlspecialchars($row['fullname']); ?></td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:0.65rem">
+                      <div style="width:32px;height:32px;border-radius:50%;overflow:hidden;flex-shrink:0">
+                        <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($row['fullname']); ?>&background=1a1d24&color=c9a84c&size=32&bold=true" alt="<?php echo htmlspecialchars($row['fullname']); ?>" style="width:100%;height:100%;object-fit:cover"/>
+                      </div>
+                      <?php echo htmlspecialchars($row['fullname']); ?>
+                    </div>
+                  </td>
                   <td class='text-gray'><?php echo htmlspecialchars($row['email']); ?></td>
                   <td><span style='font-size:0.78rem;color:var(--blue)'>Customer</span></td>
                   <td>0</td>
@@ -757,11 +893,13 @@ ul { list-style:none }
                   <td><span class='badge badge-active'>Active</span></td>
                   <td>
                     <div class='action-btns'>
-                      <button class='action-btn btn-edit' onclick='openEditUserFromRow(this)'>Edit</button>
+                      <button class='action-btn btn-edit' onclick='openEditUserFromRow(this)'>
+                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/pencil.svg" alt=""/>Edit
+                      </button>
                       <a href='../backend/add_user.php?delete=<?php echo $row['id']; ?>'
                         class='action-btn btn-del'
                         onclick='return confirm("Are you sure you want to delete this user?")'>
-                        Delete
+                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/trash-2.svg" alt=""/>Delete
                       </a>
                     </div>
                   </td>
@@ -787,25 +925,33 @@ ul { list-style:none }
 
       <div class="stats-grid" style="margin-bottom:1.5rem">
         <div class="stat-card">
-          <div class="stat-icon">📊</div>
+          <div class="stat-icon">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/bar-chart-2.svg" alt="Revenue"/>
+          </div>
           <div class="stat-value">$84K</div>
           <div class="stat-label">Total Revenue</div>
           <div class="stat-change">↑ 31% vs last month</div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">🛍️</div>
+          <div class="stat-icon">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/shopping-bag.svg" alt="Avg Order"/>
+          </div>
           <div class="stat-value">$312</div>
           <div class="stat-label">Avg. Order Value</div>
           <div class="stat-change">↑ 5% vs last month</div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">🔄</div>
+          <div class="stat-icon">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/repeat.svg" alt="Return Rate"/>
+          </div>
           <div class="stat-value">68%</div>
           <div class="stat-label">Return Customer Rate</div>
           <div class="stat-change">↑ 12% vs last month</div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">🚚</div>
+          <div class="stat-icon">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/truck.svg" alt="Delivery"/>
+          </div>
           <div class="stat-value">2.4d</div>
           <div class="stat-label">Avg. Delivery Time</div>
           <div class="stat-change down">↓ Improved by 0.3d</div>
@@ -945,7 +1091,7 @@ ul { list-style:none }
       <h3>Add New Product</h3>
       <button class="modal-close" onclick="closeModal('modal-add-product')">✕</button>
     </div>
-    <form action="../backend/add_product.php" method="POST">
+    <form action="../backend/add_product.php" method="POST" enctype="multipart/form-data">
       <div class="form-grid" style="gap:1rem">
         <div class="form-group full">
           <label>Product Name *</label>
@@ -971,9 +1117,17 @@ ul { list-style:none }
           </select>
           <span class="err">Category required</span>
         </div>
-        <div class="form-group">
-          <label>Icon / Emoji</label>
-          <input type="text" id="ap-icon" placeholder="⌚" maxlength="4"/>
+        <div class="form-group full">
+          <label>Product Image</label>
+          <div class="img-upload-wrap" id="ap-img-wrap" onclick="document.getElementById('ap-image').click()">
+            <img id="ap-img-preview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:10px;position:absolute;inset:0"/>
+            <div id="ap-img-placeholder">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/image-plus.svg" alt="" style="width:32px;height:32px;opacity:0.4;filter:brightness(0) invert(1);margin-bottom:0.5rem"/>
+              <div style="font-size:0.82rem;color:var(--gray)">Click to upload image</div>
+              <div style="font-size:0.74rem;color:var(--border);margin-top:0.2rem">PNG, JPG, WEBP — max 5MB</div>
+            </div>
+          </div>
+          <input type="file" id="ap-image" name="image" accept="image/*" style="display:none" onchange="previewProductImage(this,'ap-img-preview','ap-img-placeholder','ap-img-wrap')"/>
         </div>
         <div class="form-group full">
           <label>Description</label>
@@ -996,7 +1150,7 @@ ul { list-style:none }
 <div class="modal-overlay" id="modal-edit-product">
   <div class="modal">
     <div class="modal-head">
-      <h3>✏️ Edit Product</h3>
+      <h3>Edit Product</h3>
       <button class="modal-close" onclick="closeModal('modal-edit-product')">✕</button>
     </div>
     <form action="../backend/edit_product.php" method="POST">
@@ -1037,7 +1191,7 @@ ul { list-style:none }
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:0.75rem;justify-content:flex-end">
         <button type="button" class="btn btn-outline" onclick="closeModal('modal-edit-product')">Cancel</button>
-        <button type="submit" class="btn btn-gold">💾 Save Changes</button>
+        <button type="submit" class="btn btn-gold">Save Changes</button>
       </div>
     </form>
   </div>
@@ -1098,7 +1252,7 @@ ul { list-style:none }
 <div class="modal-overlay" id="modal-edit-user">
   <div class="modal">
     <div class="modal-head">
-      <h3>✏️ Edit User</h3>
+      <h3>Edit User</h3>
       <button class="modal-close" onclick="closeModal('modal-edit-user')">✕</button>
     </div>
     <form action="../backend/edit_user.php" method="POST">
@@ -1122,7 +1276,7 @@ ul { list-style:none }
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:0.75rem;justify-content:flex-end">
         <button type="button" class="btn btn-outline" onclick="closeModal('modal-edit-user')">Cancel</button>
-        <button type="submit" class="btn btn-gold">💾 Save Changes</button>
+        <button type="submit" class="btn btn-gold">Save Changes</button>
       </div>
     </form>
   </div>
@@ -1150,25 +1304,17 @@ ul { list-style:none }
    clicked button's parent <tr> (PHP row)
 ═══════════════════════════════════════ */
 function openEditProductFromRow(btn) {
-  // Walk up to the <tr> that has all the data attributes
   var row = btn.closest('tr');
-
   document.getElementById('ep-id').value       = row.getAttribute('data-id')       || '';
   document.getElementById('ep-name').value     = row.getAttribute('data-name')     || '';
   document.getElementById('ep-price').value    = row.getAttribute('data-price')    || '';
   document.getElementById('ep-oldprice').value = row.getAttribute('data-oldprice') || '';
   document.getElementById('ep-desc').value     = row.getAttribute('data-desc')     || '';
-
-  // Set the select to the right category
   var cat = row.getAttribute('data-cat') || '';
   var sel = document.getElementById('ep-cat');
   for (var i = 0; i < sel.options.length; i++) {
-    if (sel.options[i].value === cat) {
-      sel.selectedIndex = i;
-      break;
-    }
+    if (sel.options[i].value === cat) { sel.selectedIndex = i; break; }
   }
-
   openModal('modal-edit-product');
 }
 
@@ -1178,12 +1324,10 @@ function openEditProductFromRow(btn) {
 ═══════════════════════════════════════ */
 function openEditUserFromRow(btn) {
   var row = btn.closest('tr');
-
   document.getElementById('eu-id').value       = row.getAttribute('data-id')       || '';
   document.getElementById('eu-fullname').value = row.getAttribute('data-fullname') || '';
   document.getElementById('eu-email').value    = row.getAttribute('data-email')    || '';
-  document.getElementById('eu-password').value = ''; // always blank on open
-
+  document.getElementById('eu-password').value = '';
   openModal('modal-edit-user');
 }
 
@@ -1241,17 +1385,18 @@ function renderOrders() {
 
   document.getElementById('orders-tbody').innerHTML = filtered.map(function(o){
     var cls = 'badge-' + o.status.toLowerCase();
+    var initials = o.customer.split(' ').map(function(n){ return n[0]; }).join('');
     return '<tr>' +
       '<td style="color:var(--gold);font-weight:600">' + o.id + '</td>' +
-      '<td>' + o.customer + '</td>' +
+      '<td><div style="display:flex;align-items:center;gap:0.65rem"><div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="https://ui-avatars.com/api/?name=' + encodeURIComponent(o.customer) + '&background=1a1d24&color=c9a84c&size=30&bold=true" alt="" style="width:100%;height:100%;object-fit:cover"/></div>' + o.customer + '</div></td>' +
       '<td class="text-gray">' + o.email + '</td>' +
       '<td>' + o.items + ' item' + (o.items > 1 ? 's' : '') + '</td>' +
       '<td class="text-gold">$' + o.amount.toLocaleString() + '</td>' +
       '<td><span class="badge ' + cls + '">' + o.status + '</span></td>' +
       '<td class="text-gray">' + o.date + '</td>' +
       '<td><div class="action-btns">' +
-        '<button class="action-btn btn-view" onclick="viewOrder(\'' + o.id + '\')">View</button>' +
-        '<button class="action-btn btn-del"  onclick="deleteOrder(\'' + o.id + '\')">Delete</button>' +
+        '<button class="action-btn btn-view" onclick="viewOrder(\'' + o.id + '\')"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button>' +
+        '<button class="action-btn btn-del"  onclick="deleteOrder(\'' + o.id + '\')"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/trash-2.svg" alt=""/>Delete</button>' +
       '</div></td>' +
     '</tr>';
   }).join('');
@@ -1409,11 +1554,15 @@ document.querySelectorAll('.modal-overlay').forEach(function(el){
 ═══════════════════════════════════════ */
 function showToast(msg, type) {
   type = type || 'info';
-  var icons = {success:'✅', error:'❌', info:'ℹ️'};
+  var icons = {
+    success: '<img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/check-circle.svg" alt="" style="filter:brightness(0) saturate(100%) invert(65%) sepia(40%) saturate(500%) hue-rotate(100deg) brightness(95%)"/>',
+    error:   '<img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/x-circle.svg" alt="" style="filter:brightness(0) saturate(100%) invert(45%) sepia(80%) saturate(600%) hue-rotate(330deg) brightness(105%)"/>',
+    info:    '<img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/info.svg" alt="" style="filter:brightness(0) saturate(100%) invert(73%) sepia(46%) saturate(450%) hue-rotate(5deg) brightness(95%)"/>'
+  };
   var wrap  = document.getElementById('toast-wrap');
   var el    = document.createElement('div');
   el.className = 'toast ' + type;
-  el.innerHTML = '<span>' + icons[type] + '</span><span style="font-size:0.86rem">' + msg + '</span>';
+  el.innerHTML = icons[type] + '<span style="font-size:0.86rem">' + msg + '</span>';
   wrap.appendChild(el);
   setTimeout(function(){
     el.style.animation = 'slideIn 0.3s ease reverse';
@@ -1439,6 +1588,30 @@ document.addEventListener('DOMContentLoaded', function() {
   renderDashboardCharts();
   setTimeout(renderDashboardCharts, 100);
 });
+
+/* ═══════════════════════════════════════
+   IMAGE UPLOAD PREVIEW
+═══════════════════════════════════════ */
+function previewProductImage(input, previewId, placeholderId, wrapId) {
+  var file = input.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('Image too large (max 5MB)', 'error');
+    input.value = '';
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var preview = document.getElementById(previewId);
+    var placeholder = document.getElementById(placeholderId);
+    var wrap = document.getElementById(wrapId);
+    preview.src = e.target.result;
+    preview.style.display = 'block';
+    placeholder.style.display = 'none';
+    wrap.classList.add('has-image');
+  };
+  reader.readAsDataURL(file);
+}
 </script>
 </body>
 </html>
