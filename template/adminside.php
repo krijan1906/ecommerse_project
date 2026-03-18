@@ -794,8 +794,10 @@ ul { list-style:none }
                 >
                   <td>
                     <div class="product-thumb">
-                      <img src="<?php echo !empty($row['image']) ? htmlspecialchars($row['image']) : 'https://placehold.co/44x44/1a1d24/c9a84c?text=' . urlencode(mb_substr($row['product_name'], 0, 2)); ?>" alt="<?php echo htmlspecialchars($row['product_name']); ?>"/>
-                      
+                      <img src="<?php echo !empty($row['image']) 
+                      ? '../backend/' . $row['image'] 
+                      : 'https://placehold.co/44x44/1a1d24/c9a84c?text=' . urlencode(mb_substr($row['product_name'], 0, 2)); ?>" 
+                      alt="<?php echo htmlspecialchars($row['product_name']); ?>"/>                   
                     </div>
                   </td>
                   <td><?php echo htmlspecialchars($row['product_name']); ?></td>
@@ -826,6 +828,7 @@ ul { list-style:none }
             </tbody>
           </table>
         </div>
+         
       </div>
     </div>
 
@@ -1281,6 +1284,7 @@ ul { list-style:none }
     </form>
   </div>
 </div>
+
 
 <!-- ══════════════════════════════
      MODAL: VIEW ORDER
