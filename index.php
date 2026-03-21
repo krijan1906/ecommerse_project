@@ -1,5 +1,14 @@
 <?php
-include '/configuration/database_connection.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+include 'configuration/database_connection.php';
+
+$result = mysqli_query($conn, "SELECT * FROM product_detail ORDER BY id ASC");
+
+if (!$result) {
+    die("Database error: " . mysqli_error($conn));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -775,258 +784,72 @@ footer{background:var(--bg);padding:5rem 5% 2.5rem;border-top:1px solid var(--bo
     </div>
     <div class="products-grid" id="productsGrid">
 
-      <!-- PRODUCT 1 -->
-      <article class="product-card" data-id="1" data-name="Luminara Gold Watch" data-category="Watches" data-price="1299" data-img="https://picsum.photos/seed/watch/500/400" data-desc="Exquisite handcrafted timepiece with 18k gold-plated case, Swiss movement, and sapphire crystal glass.">
-        <span class="product-badge badge-new">Bestseller</span>
+       <?php while($row = mysqli_fetch_assoc($result)): 
+          $id    = $row['id'];
+          $name  = htmlspecialchars($row['product_name']);
+          $cat   = htmlspecialchars($row['category']);
+          $price = (float)$row['price'];
+          $old   = (!empty($row['old_price']) && $row['old_price'] > 0) ? (float)$row['old_price'] : null;
+          $desc  = htmlspecialchars($row['description'] ?? '');
+      
+          // Fix image path
+          $raw = str_replace('\\', '/', $row['image']);
+          if (strpos($raw, 'uploads/') !== false) {
+              $raw = substr($raw, strpos($raw, 'uploads/'));
+          } else {
+              $raw = 'uploads/' . basename($raw);
+          }
+          $img = 'http://localhost/Ecommerse/' . $raw;
+      ?>
+      
+      <article class="product-card"
+        data-id="<?= $id ?>"
+        data-name="<?= $name ?>"
+        data-category="<?= $cat ?>"
+        data-price="<?= $price ?>"
+        data-img="<?= $img ?>"
+        data-desc="<?= $desc ?>">
+      
+        <?php if($old): ?>
+          <span class="product-badge badge-sale">Sale</span>
+        <?php else: ?>
+          <span class="product-badge badge-new">New</span>
+        <?php endif; ?>
+      
         <div class="product-img">
-          <img src="https://picsum.photos/seed/watch/500/400" alt="Luminara Gold Watch" loading="lazy"/>
+          <img src="<?= $img ?>" alt="<?= $name ?>" loading="lazy"
+               onerror="this.src='https://picsum.photos/seed/product/500/400'"/>
           <div class="product-overlay">
             <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
             <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
           </div>
         </div>
+      
         <div class="product-body">
-          <div class="product-cat">Watches</div>
-          <div class="product-name">Luminara Gold Watch</div>
-          <div class="product-stars"><span class="stars-row">★★★★★</span><span class="stars-count">(284)</span></div>
+          <div class="product-cat"><?= $cat ?></div>
+          <div class="product-name"><?= $name ?></div>
+          <div class="product-stars">
+            <span class="stars-row">★★★★★</span>
+            <span class="stars-count">(0)</span>
+          </div>
           <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$1,299</span><span class="price-was">$1,799</span></div>
+            <div class="product-price">
+              <span class="price-now">$<?= number_format($price, 2) ?></span>
+              <?php if($old): ?>
+                <span class="price-was">$<?= number_format($old, 2) ?></span>
+              <?php endif; ?>
+            </div>
             <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
           </div>
         </div>
       </article>
-
-      <!-- PRODUCT 2 -->
-      <article class="product-card" data-id="2" data-name="AirPods Pro Max" data-category="Electronics" data-price="549" data-img="https://picsum.photos/seed/headphones/500/400" data-desc="Industry-leading noise cancellation with Adaptive Audio, Personalized Spatial Audio, and stunning sound.">
-        <span class="product-badge badge-hot">Hot</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/headphones/500/400" alt="AirPods Pro Max" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Electronics</div>
-          <div class="product-name">AirPods Pro Max</div>
-          <div class="product-stars"><span class="stars-row">★★★★★</span><span class="stars-count">(1,203)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$549</span><span class="price-was">$649</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 3 -->
-      <article class="product-card" data-id="3" data-name="Diamond Solitaire Ring" data-category="Jewelry" data-price="2499" data-img="https://picsum.photos/seed/ring/500/400" data-desc="Elegant solitaire ring featuring a 1-carat certified diamond in a platinum six-prong setting.">
-        <span class="product-badge badge-limited">Limited</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/ring/500/400" alt="Diamond Solitaire Ring" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Jewelry</div>
-          <div class="product-name">Diamond Solitaire Ring</div>
-          <div class="product-stars"><span class="stars-row">★★★★★</span><span class="stars-count">(89)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$2,499</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 4 -->
-      <article class="product-card" data-id="4" data-name="Silk Evening Dress" data-category="Fashion" data-price="349" data-img="https://picsum.photos/seed/dress/500/400" data-desc="Luxurious pure silk evening gown with hand-sewn embellishments. Available in multiple colors.">
-        <span class="product-badge badge-sale">Sale</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/dress/500/400" alt="Silk Evening Dress" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Fashion</div>
-          <div class="product-name">Silk Evening Dress</div>
-          <div class="product-stars"><span class="stars-row">★★★★½</span><span class="stars-count">(156)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$349</span><span class="price-was">$499</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 5 -->
-      <article class="product-card" data-id="5" data-name="Rose Gold Necklace" data-category="Jewelry" data-price="799" data-img="https://picsum.photos/seed/necklace/500/400" data-desc="18k rose gold chain with a hand-set diamond pendant. Arrives in a luxury gift box.">
-        <span class="product-badge badge-new">New</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/necklace/500/400" alt="Rose Gold Necklace" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Jewelry</div>
-          <div class="product-name">Rose Gold Necklace</div>
-          <div class="product-stars"><span class="stars-row">★★★★★</span><span class="stars-count">(203)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$799</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 6 -->
-      <article class="product-card" data-id="6" data-name="Italian Leather Tote" data-category="Bags" data-price="459" data-img="https://picsum.photos/seed/bag/500/400" data-desc="Full-grain Italian leather tote with brass hardware. Fits 15-inch laptop. Hand-stitched by artisans.">
-        <span class="product-badge badge-sale">Sale</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/bag/500/400" alt="Italian Leather Tote" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Bags</div>
-          <div class="product-name">Italian Leather Tote</div>
-          <div class="product-stars"><span class="stars-row">★★★★½</span><span class="stars-count">(318)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$459</span><span class="price-was">$599</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 7 -->
-      <article class="product-card" data-id="7" data-name="Vitamin C Serum Gold" data-category="Beauty" data-price="89" data-img="https://picsum.photos/seed/serum/500/400" data-desc="Concentrated 20% Vitamin C formula with hyaluronic acid and ferulic acid for radiant skin.">
-        <span class="product-badge badge-new">Bestseller</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/serum/500/400" alt="Vitamin C Serum" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Beauty</div>
-          <div class="product-name">Vitamin C Serum Gold</div>
-          <div class="product-stars"><span class="stars-row">★★★★★</span><span class="stars-count">(944)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$89</span><span class="price-was">$119</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 8 -->
-      <article class="product-card" data-id="8" data-name="Carbon Fiber Sunglasses" data-category="Fashion" data-price="289" data-img="https://picsum.photos/seed/sunglass/500/400" data-desc="Ultra-lightweight carbon fiber frames with polarized UV400 lenses and titanium hinges.">
-        <span class="product-badge badge-new">New</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/sunglass/500/400" alt="Carbon Fiber Sunglasses" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Fashion</div>
-          <div class="product-name">Carbon Fiber Sunglasses</div>
-          <div class="product-stars"><span class="stars-row">★★★★½</span><span class="stars-count">(167)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$289</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 9 -->
-      <article class="product-card" data-id="9" data-name="Espresso Machine Deluxe" data-category="Home" data-price="699" data-img="https://picsum.photos/seed/coffee/500/400" data-desc="Professional-grade espresso machine with 15-bar pressure, built-in grinder, and milk frother.">
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/coffee/500/400" alt="Espresso Machine" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Home</div>
-          <div class="product-name">Espresso Machine Deluxe</div>
-          <div class="product-stars"><span class="stars-row">★★★★½</span><span class="stars-count">(521)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$699</span><span class="price-was">$899</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 10 -->
-      <article class="product-card" data-id="10" data-name="Smart Fitness Ring" data-category="Electronics" data-price="349" data-img="https://picsum.photos/seed/ring2/500/400" data-desc="24/7 health monitoring including sleep, heart rate, SpO2, and activity tracking in a slim ring form.">
-        <span class="product-badge badge-hot">Hot</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/ring2/500/400" alt="Smart Fitness Ring" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Electronics</div>
-          <div class="product-name">Smart Fitness Ring</div>
-          <div class="product-stars"><span class="stars-row">★★★★☆</span><span class="stars-count">(289)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$349</span><span class="price-was">$449</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 11 -->
-      <article class="product-card" data-id="11" data-name="Pure Cashmere Scarf" data-category="Fashion" data-price="199" data-img="https://picsum.photos/seed/scarf/500/400" data-desc="Pure Scottish cashmere scarf, 100% ethically sourced. Exceptionally soft with timeless plaid pattern.">
-        <span class="product-badge badge-sale">Sale</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/scarf/500/400" alt="Cashmere Scarf" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Fashion</div>
-          <div class="product-name">Pure Cashmere Scarf</div>
-          <div class="product-stars"><span class="stars-row">★★★★★</span><span class="stars-count">(412)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$199</span><span class="price-was">$279</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- PRODUCT 12 -->
-      <article class="product-card" data-id="12" data-name="Chronos Titanium Watch" data-category="Watches" data-price="2199" data-img="https://picsum.photos/seed/titanwatch/500/400" data-desc="Swiss-made titanium case with anti-reflective sapphire crystal and 72-hour power reserve.">
-        <span class="product-badge badge-limited">Limited</span>
-        <div class="product-img">
-          <img src="https://picsum.photos/seed/titanwatch/500/400" alt="Titanium Watch" loading="lazy"/>
-          <div class="product-overlay">
-            <button class="overlay-btn" onclick="quickView(this.closest('.product-card'))">Quick View</button>
-            <button class="overlay-btn" onclick="addToCartFromCard(this.closest('.product-card'))">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Watches</div>
-          <div class="product-name">Chronos Titanium Watch</div>
-          <div class="product-stars"><span class="stars-row">★★★★★</span><span class="stars-count">(67)</span></div>
-          <div class="product-price-row">
-            <div class="product-price"><span class="price-now">$2,199</span></div>
-            <button class="add-btn" onclick="addToCartFromCard(this.closest('.product-card'))">+</button>
-          </div>
-        </div>
-      </article>
-
+      
+      <?php endwhile; ?>
+      
       <div class="no-results" id="noResults" style="display:none">No products match your search.</div>
+
+      
+      
     </div>
   </section>
 
