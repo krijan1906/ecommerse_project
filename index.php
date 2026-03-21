@@ -792,14 +792,9 @@ footer{background:var(--bg);padding:5rem 5% 2.5rem;border-top:1px solid var(--bo
           $old   = (!empty($row['old_price']) && $row['old_price'] > 0) ? (float)$row['old_price'] : null;
           $desc  = htmlspecialchars($row['description'] ?? '');
       
-          // Fix image path
-          $raw = str_replace('\\', '/', $row['image']);
-          if (strpos($raw, 'uploads/') !== false) {
-              $raw = substr($raw, strpos($raw, 'uploads/'));
-          } else {
-              $raw = 'uploads/' . basename($raw);
-          }
-          $img = 'http://localhost/Ecommerse/' . $raw;
+         // NEW - correct path
+          $filename = basename(str_replace('\\', '/', $row['image']));
+          $img = 'http://localhost/Ecommerse/backend/uploads/' . $filename;
       ?>
       
       <article class="product-card"
