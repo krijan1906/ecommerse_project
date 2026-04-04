@@ -1138,30 +1138,33 @@ footer{background:var(--bg);padding:5rem 5% 2.5rem;border-top:1px solid var(--bo
   <div class="checkout-layout">
     <div>
       <!-- Contact -->
+      <form method="POST" action="backend/order_detail.php">
       <div class="checkout-box">
         <div class="checkout-box-title">Contact Information</div>
+        
         <div class="form-row">
-          <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" id="coFirst" placeholder="Jane"/></div>
-          <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" id="coLast" placeholder="Doe"/></div>
+          <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" id="coFirst" name="first_name" placeholder="Jane"/></div>
+          <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" id="coLast" name="last_name" placeholder="Doe"/></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="coEmail" type="email" placeholder="jane@email.com"/></div>
-          <div class="form-group"><label class="form-label">Phone *</label><input class="form-input" id="coPhone" type="tel" placeholder="+44 7911 000000"/></div>
+          <div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="coEmail" name="email" type="email" placeholder="jane@email.com"/></div>
+          <div class="form-group"><label class="form-label">Phone *</label><input class="form-input" id="coPhone" name="phone" type="tel" placeholder="+44 7911 000000"/></div>
         </div>
       </div>
       <!-- Shipping -->
       <div class="checkout-box">
         <div class="checkout-box-title">Shipping Address</div>
-        <div class="form-group"><label class="form-label">Street Address *</label><input class="form-input" id="coAddr" placeholder="42 Mayfair Lane"/></div>
+        <div class="form-group"><label class="form-label">Street Address *</label><input class="form-input" id="coAddr" name="street_address" placeholder="42 Mayfair Lane"/></div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">City *</label><input class="form-input" id="coCity" placeholder="London"/></div>
-          <div class="form-group"><label class="form-label">ZIP / Postcode *</label><input class="form-input" id="coZip" placeholder="W1K 4PL"/></div>
+          <div class="form-group"><label class="form-label">City *</label><input class="form-input" id="coCity" name="city" placeholder="London"/></div>
+          <div class="form-group"><label class="form-label">ZIP / Postcode *</label><input class="form-input" id="coZip" name="zip" placeholder="W1K 4PL"/></div>
         </div>
         <div class="form-group"><label class="form-label">Country</label>
-          <select class="form-input" id="coCountry">
+          <select class="form-input" name="country" id="coCountry">
             <option>United Kingdom</option><option>United States</option>
             <option>Canada</option><option>Australia</option>
             <option>Germany</option><option>France</option>
+            <option>Nepal</option><option>Japan</option><option>China</option>
           </select>
         </div>
         <div class="form-group"><label class="form-label">Delivery Notes (Optional)</label>
@@ -1178,7 +1181,8 @@ footer{background:var(--bg);padding:5rem 5% 2.5rem;border-top:1px solid var(--bo
           <div class="payment-opt" onclick="selectPayment(this)"><input type="radio" name="pay"/> 💵 Cash on Delivery</div>
         </div>
       </div>
-      <button class="btn btn-gold btn-full" style="padding:1rem" onclick="placeOrder()">🔒 Place Order Securely</button>
+      <button type="submit" class="btn btn-gold btn-full" style="padding:1rem" >🔒 Place Order Securely</button>
+      </form>  
     </div>
 
     <!-- Summary -->
