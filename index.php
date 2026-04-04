@@ -1138,7 +1138,9 @@ footer{background:var(--bg);padding:5rem 5% 2.5rem;border-top:1px solid var(--bo
   <div class="checkout-layout">
     <div>
       <!-- Contact -->
-      <form method="POST" action="backend/order_detail.php">
+      <form method="POST" action="backend/order_detail.php" onsubmit="injectCartItems()">
+        <input type="hidden" name="cart_items" id="cartItemsInput"/>
+        <input type="hidden" name="cart_amount" id="cartAmountInput"/>
       <div class="checkout-box">
         <div class="checkout-box-title">Contact Information</div>
         
@@ -1500,7 +1502,13 @@ function openDetailPage(card) {
   }).join('');
   showPage('detail');
 }
-
+//the name of item is comming from her
+function injectCartItems() {
+  var names = cartItems.map(function(i){ return i.name + ' ×' + i.qty; }).join(', ');
+  var total = cartItems.reduce(function(s, i){ return s + (i.price * i.qty); }, 0);
+  document.getElementById('cartItemsInput').value = names;
+  document.getElementById('cartAmountInput').value = total;
+}
 function addToWishlistFromDetail() {
   if (!currentDetailProduct) return;
   addToWishlist(currentDetailProduct.name, currentDetailProduct.price, currentDetailProduct.img);
