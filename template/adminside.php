@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: ../template/authentication/login.php"); // redirect to login page
+    exit();
+}
+?>
+<?php
 // ✅ Put ALL PHP logic at the very top — before <!DOCTYPE html>
 include '../configuration/database_connection.php';
 $orders_data = [];
@@ -646,6 +654,13 @@ ul { list-style:none }
       <div class="nav-item" data-tab="settings">
         <span class="nav-icon"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/settings.svg" alt="Settings"/></span> Settings
       </div>
+      <a href="../backend/logout.php" style="text-decoration:none; color:inherit;">
+      <div class="nav-item">
+        <span class="nav-icon">
+          <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/log-out.svg" alt="Logout"/>
+        </span> Logout
+      </div>
+      </a>
     </nav>
 
     <div class="sidebar-footer">

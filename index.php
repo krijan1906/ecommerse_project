@@ -823,6 +823,118 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
   .cart-drawer,.wish-drawer{width:100%}
   .info-grid,.form-row{grid-template-columns:1fr}
 }
+
+/* ═══════════════════════════════
+   ABOUT PAGE
+═══════════════════════════════ */
+.about-hero{
+  min-height:52vh;display:flex;align-items:center;
+  background:var(--ink2);position:relative;overflow:hidden;
+  padding:6rem 8%;border-bottom:1px solid var(--rim);
+}
+.about-hero::before{
+  content:'ABOUT';position:absolute;right:-2%;top:50%;transform:translateY(-50%);
+  font-family:var(--ff-d);font-size:22rem;font-weight:700;line-height:1;
+  color:rgba(255,255,255,0.018);pointer-events:none;letter-spacing:0.05em;white-space:nowrap;
+}
+.about-hero-inner{max-width:680px;z-index:2}
+.about-tag{display:inline-flex;align-items:center;gap:0.6rem;background:var(--amber3);border:1px solid rgba(212,168,83,0.3);border-radius:20px;padding:0.3rem 1rem;font-size:0.68rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:2rem}
+.about-hero h1{font-family:var(--ff-d);font-size:clamp(2.5rem,6vw,5.5rem);font-weight:700;line-height:1.0;margin-bottom:1.5rem}
+.about-hero h1 em{font-style:italic;font-weight:300;color:var(--amber)}
+.about-hero p{color:var(--ash);font-size:1rem;line-height:1.9;max-width:560px}
+
+.about-story{padding:6rem 8%;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-story-img{position:relative;border-radius:16px;overflow:hidden;height:460px}
+.about-story-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.75) contrast(1.1)}
+.about-story-img-overlay{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(8,9,13,0.85);border:1px solid var(--rim2);border-radius:10px;padding:1rem 1.4rem;backdrop-filter:blur(12px)}
+.asio-year{font-family:var(--ff-d);font-size:2.2rem;font-weight:700;color:var(--amber);line-height:1}
+.asio-label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ash);margin-top:0.25rem}
+.about-story-text h2{font-family:var(--ff-d);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;line-height:1.1;margin-bottom:1.2rem}
+.about-story-text h2 em{font-style:italic;color:var(--amber)}
+.about-story-text p{color:var(--ash);font-size:0.92rem;line-height:1.95;margin-bottom:1.2rem}
+
+.about-values{background:var(--ink2);padding:5rem 8%;border-top:1px solid var(--rim);border-bottom:1px solid var(--rim)}
+.about-values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.value-card{background:var(--card);border:1px solid var(--rim);border-radius:14px;padding:2.2rem 1.8rem;transition:all 0.28s var(--ease);position:relative;overflow:hidden}
+.value-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--amber);transform:scaleX(0);transition:transform 0.3s var(--ease)}
+.value-card:hover{border-color:rgba(212,168,83,0.3);transform:translateY(-4px)}
+.value-card:hover::after{transform:scaleX(1)}
+.value-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.value-title{font-family:var(--ff-d);font-size:1.2rem;font-weight:700;margin-bottom:0.7rem}
+.value-desc{color:var(--ash);font-size:0.86rem;line-height:1.8}
+
+.about-team{padding:5rem 8%}
+.about-team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;margin-top:3rem}
+.team-card{background:var(--card);border:1px solid var(--rim);border-radius:14px;padding:2rem;text-align:center;transition:all 0.28s var(--ease)}
+.team-card:hover{border-color:rgba(212,168,83,0.3);transform:translateY(-4px)}
+.team-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:1.8rem;border:2px solid var(--rim2)}
+.team-name{font-family:var(--ff-d);font-size:1.1rem;font-weight:700;margin-bottom:0.25rem}
+.team-role{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);font-weight:500}
+.team-stat{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rim);font-size:0.8rem;color:var(--fog)}
+
+.about-numbers{background:var(--ink2);border-top:1px solid var(--rim);padding:4rem 8%;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+.an-val{font-family:var(--ff-d);font-size:2.8rem;font-weight:700;color:var(--amber);line-height:1}
+.an-lbl{font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--fog);margin-top:0.4rem}
+
+@media(max-width:900px){
+  .about-story{grid-template-columns:1fr}
+  .about-story-img{height:280px}
+  .about-values-grid{grid-template-columns:1fr 1fr}
+  .about-numbers{grid-template-columns:1fr 1fr}
+}
+
+/* ═══════════════════════════════
+   CONTACT PAGE
+═══════════════════════════════ */
+.contact-hero{
+  padding:5rem 8% 3rem;background:var(--ink2);
+  border-bottom:1px solid var(--rim);position:relative;overflow:hidden;
+}
+.contact-hero::before{
+  content:'CONTACT';position:absolute;right:-2%;top:50%;transform:translateY(-50%);
+  font-family:var(--ff-d);font-size:18rem;font-weight:700;
+  color:rgba(255,255,255,0.018);pointer-events:none;letter-spacing:0.05em;white-space:nowrap;
+}
+.contact-hero h1{font-family:var(--ff-d);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:1.05;margin-bottom:0.6rem}
+.contact-hero h1 em{font-style:italic;color:var(--amber)}
+.contact-hero p{color:var(--ash);font-size:0.92rem;max-width:500px}
+
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:5rem 8%;align-items:start}
+
+.contact-info h2{font-family:var(--ff-d);font-size:1.8rem;font-weight:700;margin-bottom:0.5rem}
+.contact-info p{color:var(--ash);font-size:0.9rem;line-height:1.85;margin-bottom:2.5rem}
+.contact-detail-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
+.cdr-icon{width:42px;height:42px;background:var(--amber3);border:1px solid rgba(212,168,83,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;margin-top:0.1rem}
+.cdr-label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--fog);margin-bottom:0.2rem;font-weight:500}
+.cdr-value{font-size:0.9rem;color:var(--snow)}
+
+.team-section-title{font-family:var(--ff-d);font-size:1.4rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--rim)}
+.member-card{background:var(--card);border:1px solid var(--rim);border-radius:12px;padding:1.3rem 1.5rem;margin-bottom:0.85rem;display:flex;align-items:center;gap:1.2rem;transition:all 0.25s var(--ease)}
+.member-card:hover{border-color:rgba(212,168,83,0.3);transform:translateX(4px)}
+.mc-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-family:var(--ff-d);font-weight:700;flex-shrink:0;border:2px solid var(--rim2)}
+.mc-info{flex:1}
+.mc-name{font-size:0.95rem;font-weight:500;color:var(--snow);margin-bottom:0.15rem}
+.mc-role{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:0.3rem}
+.mc-phone{font-size:0.82rem;color:var(--ash);display:flex;align-items:center;gap:0.4rem}
+.mc-phone::before{content:'📞';font-size:0.72rem}
+.mc-badge{font-size:0.62rem;background:var(--ink3);border:1px solid var(--rim);border-radius:20px;padding:0.15rem 0.6rem;color:var(--fog);white-space:nowrap;align-self:flex-start;margin-top:0.2rem}
+
+.contact-form-box{background:var(--card);border:1px solid var(--rim);border-radius:16px;padding:2.5rem}
+.contact-form-box h2{font-family:var(--ff-d);font-size:1.6rem;font-weight:700;margin-bottom:0.4rem}
+.contact-form-box p{color:var(--ash);font-size:0.86rem;margin-bottom:2rem}
+.cf-textarea{width:100%;background:var(--ink3);border:1px solid var(--rim2);color:var(--snow);padding:0.8rem 1rem;border-radius:8px;font-size:0.88rem;resize:vertical;min-height:120px;transition:all 0.22s;font-family:var(--ff-s)}
+.cf-textarea:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(212,168,83,0.1)}
+.cf-textarea::placeholder{color:var(--fog)}
+.map-strip{background:var(--ink2);border-top:1px solid var(--rim);padding:5rem 8%}
+.map-strip h2{font-family:var(--ff-d);font-size:2rem;font-weight:700;margin-bottom:0.5rem}
+.map-strip p{color:var(--ash);font-size:0.9rem;margin-bottom:2rem}
+.map-placeholder{background:var(--card);border:1px solid var(--rim);border-radius:16px;height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--fog);gap:1rem;font-size:0.9rem}
+.map-placeholder-icon{font-size:3rem;opacity:0.4}
+
+@media(max-width:900px){
+  .contact-layout{grid-template-columns:1fr}
+  .about-team-grid{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
@@ -936,6 +1048,8 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
   <button class="mnav-close" onclick="closeMobileNav()">✕</button>
   <a onclick="closeMobileNav();showPage('home');setNavActive('home')">Home</a>
   <a onclick="closeMobileNav();showPage('shop');setNavActive('shop')">Shop</a>
+  <a onclick="closeMobileNav();showPage('about');setNavActive('about')">About</a>
+  <a onclick="closeMobileNav();showPage('contact');setNavActive('contact')">Contact</a>
   <a onclick="closeMobileNav();showPage('profile')">Account</a>
   <a onclick="closeMobileNav();showPage('checkout')">Checkout</a>
 </nav>
@@ -950,8 +1064,8 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
   <div class="nav-links">
     <span class="nav-link active" id="nl-home" onclick="showPage('home');setNavActive('home')">Home</span>
     <span class="nav-link" id="nl-shop" onclick="showPage('shop');setNavActive('shop')">Shop</span>
-    <span class="nav-link" id="nl-about" onclick="showToast('About page coming soon')">About</span>
-    <span class="nav-link" id="nl-contact" onclick="showToast('Contact coming soon')">Contact</span>
+    <span class="nav-link" id="nl-about" onclick="showPage('about');setNavActive('about')">About</span>
+    <span class="nav-link" id="nl-contact" onclick="showPage('contact');setNavActive('contact')">Contact</span>
   </div>
   <div style="display:flex;align-items:center;gap:0.75rem">
     <div class="nav-search">
@@ -1378,6 +1492,269 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
 </div>
 
 <!-- ══════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════ -->
+<div class="page" id="page-about">
+
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div class="about-tag">◆ Our Story</div>
+      <h1>Crafting <em>Extraordinary</em><br/>Since 2018</h1>
+      <p>Obsidian was born from a simple belief — that the objects surrounding us shape the quality of our days. We curate with obsession so you can live with intention.</p>
+    </div>
+  </div>
+
+  <div class="about-story">
+    <div class="about-story-img">
+      <img src="https://picsum.photos/seed/about-obsidian/700/600" alt="Our Story"/>
+      <div class="about-story-img-overlay">
+        <div class="asio-year">2018</div>
+        <div class="asio-label">Founded in Kathmandu</div>
+      </div>
+    </div>
+    <div class="about-story-text">
+      <div class="eyebrow">Who We Are</div>
+      <h2>More Than a Store.<br/>A <em>Philosophy</em>.</h2>
+      <p>Obsidian started as a small curation studio in Kathmandu, Nepal — a team of five people who believed that access to thoughtfully designed goods shouldn't be limited by geography. Every item in our collection is handpicked, tested, and authenticated before it reaches your door.</p>
+      <p>We don't chase trends. We seek permanence — pieces that hold their meaning across seasons and years. Our team travels to source directly from artisans, workshops, and makers who share our commitment to enduring quality.</p>
+      <p>Today we serve over 50,000 clients worldwide, yet our approach remains unchanged: curate less, curate better.</p>
+      <button class="btn btn-amber" onclick="showPage('shop');setNavActive('shop')">Explore the Collection</button>
+    </div>
+  </div>
+
+  <div class="about-values">
+    <div class="eyebrow">What Drives Us</div>
+    <h2 class="section-title">Our Core Values</h2>
+    <div class="about-values-grid">
+      <div class="value-card">
+        <span class="value-icon">🔍</span>
+        <div class="value-title">Obsessive Curation</div>
+        <div class="value-desc">Every product passes a 12-point review before it earns a place in our collection. We reject more than 90% of what we consider.</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">✅</span>
+        <div class="value-title">Radical Authenticity</div>
+        <div class="value-desc">Every item comes with a certificate of authenticity. We work only with verified makers and authorised distributors worldwide.</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">♻️</span>
+        <div class="value-title">Sustainable Sourcing</div>
+        <div class="value-desc">We prioritise artisans who use responsible materials and ethical practices. Beauty should never come at the cost of the planet.</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🤝</span>
+        <div class="value-title">Client-First Always</div>
+        <div class="value-desc">Our 24/7 concierge, 30-day returns, and lifetime authenticity guarantee aren't policies — they're promises.</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🌏</span>
+        <div class="value-title">Global Reach</div>
+        <div class="value-desc">From Kathmandu to Tokyo, New York to London — we ship to over 80 countries with complimentary express delivery.</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">💎</span>
+        <div class="value-title">Timeless Design</div>
+        <div class="value-desc">We curate for longevity, not trends. Every piece in our collection is chosen because it will be just as beautiful in ten years.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-team section">
+    <div class="eyebrow">The People</div>
+    <h2 class="section-title">Meet Our Team</h2>
+    <div class="about-team-grid">
+      <div class="team-card">
+        <div class="team-avatar" style="background:rgba(212,168,83,0.15);border-color:rgba(212,168,83,0.4)">KM</div>
+        <div class="team-name">Krijan Maharjan</div>
+        <div class="team-role">Backend & Database</div>
+        <div class="team-stat">📞 9813638784</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:rgba(79,142,247,0.12);border-color:rgba(79,142,247,0.3)">B</div>
+        <div class="team-name">Basant</div>
+        <div class="team-role">Frontend Developer</div>
+        <div class="team-stat">Building beautiful interfaces</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:rgba(63,168,154,0.12);border-color:rgba(63,168,154,0.3)">P</div>
+        <div class="team-name">Prakash</div>
+        <div class="team-role">Frontend Developer</div>
+        <div class="team-stat">Crafting user experiences</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:rgba(155,114,240,0.12);border-color:rgba(155,114,240,0.3)">Pb</div>
+        <div class="team-name">Prabej</div>
+        <div class="team-role">Frontend Developer</div>
+        <div class="team-stat">Designing for delight</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:rgba(192,89,106,0.12);border-color:rgba(192,89,106,0.3)">B</div>
+        <div class="team-name">Biraj</div>
+        <div class="team-role">Frontend Developer</div>
+        <div class="team-stat">Pixel-perfect every time</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-numbers">
+    <div><div class="an-val">2018</div><div class="an-lbl">Founded</div></div>
+    <div><div class="an-val">50K+</div><div class="an-lbl">Happy Clients</div></div>
+    <div><div class="an-val">80+</div><div class="an-lbl">Countries Served</div></div>
+    <div><div class="an-val">4.9★</div><div class="an-lbl">Avg. Rating</div></div>
+  </div>
+
+</div><!-- end about -->
+
+<!-- ══════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════ -->
+<div class="page" id="page-contact">
+
+  <div class="contact-hero">
+    <div class="eyebrow">Get in Touch</div>
+    <h1>Let's <em>Talk</em></h1>
+    <p>Whether you have a question about a product, need styling advice, or just want to say hello — our team is always here for you.</p>
+  </div>
+
+  <div class="contact-layout">
+
+    <!-- Left: info + team -->
+    <div>
+      <div class="contact-info">
+        <h2>Reach Us Directly</h2>
+        <p>Our team is based in Kathmandu, Nepal and available across time zones. Pick a channel that works best for you.</p>
+
+        <div class="contact-detail-row">
+          <div class="cdr-icon">📍</div>
+          <div><div class="cdr-label">Address</div><div class="cdr-value">Kathmandu, Bagmati Province, Nepal</div></div>
+        </div>
+        <div class="contact-detail-row">
+          <div class="cdr-icon">✉️</div>
+          <div><div class="cdr-label">Email</div><div class="cdr-value">krijanmaharjan31@gmail.com</div></div>
+        </div>
+        <div class="contact-detail-row">
+          <div class="cdr-icon">⏰</div>
+          <div><div class="cdr-label">Working Hours</div><div class="cdr-value">Sunday – Friday, 9:00 AM – 6:00 PM NPT</div></div>
+        </div>
+      </div>
+
+      <div class="team-section-title">Development Team</div>
+
+      <!-- Krijan — with phone -->
+      <div class="member-card">
+        <div class="mc-avatar" style="background:rgba(212,168,83,0.15);border-color:rgba(212,168,83,0.4);color:var(--amber)">KM</div>
+        <div class="mc-info">
+          <div class="mc-name">Krijan Maharjan</div>
+          <div class="mc-role">Backend &amp; Database</div>
+          <div class="mc-phone">9813638784</div>
+        </div>
+        <div class="mc-badge">Backend Lead</div>
+      </div>
+
+      <!-- Basant -->
+      <div class="member-card">
+        <div class="mc-avatar" style="background:rgba(79,142,247,0.12);border-color:rgba(79,142,247,0.3);color:#7ab0fa">B</div>
+        <div class="mc-info">
+          <div class="mc-name">Basant</div>
+          <div class="mc-role">Frontend Developer</div>
+          <div class="mc-phone">Contact via office</div>
+        </div>
+        <div class="mc-badge">Frontend</div>
+      </div>
+
+      <!-- Prakash -->
+      <div class="member-card">
+        <div class="mc-avatar" style="background:rgba(63,168,154,0.12);border-color:rgba(63,168,154,0.3);color:#3fa89a">P</div>
+        <div class="mc-info">
+          <div class="mc-name">Prakash</div>
+          <div class="mc-role">Frontend Developer</div>
+          <div class="mc-phone">Contact via office</div>
+        </div>
+        <div class="mc-badge">Frontend</div>
+      </div>
+
+      <!-- Prabej -->
+      <div class="member-card">
+        <div class="mc-avatar" style="background:rgba(155,114,240,0.12);border-color:rgba(155,114,240,0.3);color:#9b72f0">Pb</div>
+        <div class="mc-info">
+          <div class="mc-name">Prabej</div>
+          <div class="mc-role">Frontend Developer</div>
+          <div class="mc-phone">Contact via office</div>
+        </div>
+        <div class="mc-badge">Frontend</div>
+      </div>
+
+      <!-- Biraj -->
+      <div class="member-card">
+        <div class="mc-avatar" style="background:rgba(192,89,106,0.12);border-color:rgba(192,89,106,0.3);color:#c0596a">Bi</div>
+        <div class="mc-info">
+          <div class="mc-name">Biraj</div>
+          <div class="mc-role">Frontend Developer</div>
+          <div class="mc-phone">Contact via office</div>
+        </div>
+        <div class="mc-badge">Frontend</div>
+      </div>
+
+    </div><!-- end left -->
+
+    <!-- Right: contact form -->
+    <div>
+      <div class="contact-form-box">
+        <h2>Send a Message</h2>
+        <p>Fill in the form below and we'll get back to you within 24 hours.</p>
+        <form onsubmit="submitContactForm(event)">
+          <div class="form-row" style="margin-bottom:1rem">
+            <div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" id="cfFirst" placeholder="Jane"/></div>
+            <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" id="cfLast" placeholder="Doe"/></div>
+          </div>
+          <div class="form-group" style="margin-bottom:1rem"><label class="form-label">Email Address</label><input class="form-input" type="email" id="cfEmail" placeholder="you@email.com"/></div>
+          <div class="form-group" style="margin-bottom:1rem"><label class="form-label">Subject</label>
+            <select class="form-input" id="cfSubject">
+              <option value="">Select a subject…</option>
+              <option>Product Enquiry</option>
+              <option>Order Status</option>
+              <option>Returns &amp; Refunds</option>
+              <option>Shipping Information</option>
+              <option>Wholesale / Partnerships</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:1.5rem"><label class="form-label">Message</label><textarea class="cf-textarea" id="cfMessage" placeholder="Tell us how we can help you…"></textarea></div>
+          <button type="submit" class="btn btn-amber btn-full">Send Message →</button>
+        </form>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--rim)">
+          <div style="background:var(--ink3);border:1px solid var(--rim);border-radius:10px;padding:1rem;text-align:center">
+            <div style="font-size:1.4rem;margin-bottom:0.4rem">💬</div>
+            <div style="font-size:0.76rem;font-weight:600;margin-bottom:0.2rem">Live Chat</div>
+            <div style="font-size:0.72rem;color:var(--fog)">Available 9am–6pm</div>
+          </div>
+          <div style="background:var(--ink3);border:1px solid var(--rim);border-radius:10px;padding:1rem;text-align:center">
+            <div style="font-size:1.4rem;margin-bottom:0.4rem">📞</div>
+            <div style="font-size:0.76rem;font-weight:600;margin-bottom:0.2rem">Phone Support</div>
+            <div style="font-size:0.72rem;color:var(--fog)">+977 9813638784</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end contact-layout -->
+
+  <div class="map-strip">
+    <div class="eyebrow">Where We Are</div>
+    <h2>Find Us in Kathmandu</h2>
+    <p>Visit our showroom or reach out to schedule a private viewing.</p>
+    <div class="map-placeholder">
+      <div class="map-placeholder-icon">🗺️</div>
+      <div>Kathmandu, Bagmati Province, Nepal</div>
+      <div style="font-size:0.78rem;color:var(--fog)">Interactive map — open in Google Maps</div>
+      <button class="btn btn-ghost btn-sm" onclick="window.open('https://maps.google.com/?q=Kathmandu,Nepal','_blank')">Open in Maps →</button>
+    </div>
+  </div>
+
+</div><!-- end contact -->
+
+<!-- ══════════════════════════════════
      CHECKOUT PAGE
 ══════════════════════════════════ -->
 <div class="page" id="page-checkout">
@@ -1700,6 +2077,21 @@ function selectPayment(el){document.querySelectorAll('.pay-opt').forEach(functio
 
 /* ── NEWSLETTER ── */
 function subscribeNewsletter(e){e.preventDefault();e.target.querySelector('input').value='';showToast('✓ Welcome to the inner circle!')}
+
+/* ── CONTACT FORM ── */
+function submitContactForm(e){
+  e.preventDefault();
+  var first=document.getElementById('cfFirst').value.trim();
+  var email=document.getElementById('cfEmail').value.trim();
+  var msg=document.getElementById('cfMessage').value.trim();
+  if(!first||!email||!msg){showToast('Please fill in all required fields','error');return}
+  document.getElementById('cfFirst').value='';
+  document.getElementById('cfLast').value='';
+  document.getElementById('cfEmail').value='';
+  document.getElementById('cfSubject').value='';
+  document.getElementById('cfMessage').value='';
+  showToast('✓ Message sent! We\'ll reply within 24 hours.');
+}
 
 /* ── TOAST ── */
 function showToast(msg,type){
