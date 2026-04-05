@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 
 include '../configuration/database_connection.php';
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == "POST") { 
     $first_name  = mysqli_real_escape_string($conn, $_POST['first_name']);
     $last_name   = mysqli_real_escape_string($conn, $_POST['last_name']);
     $email       = mysqli_real_escape_string($conn, $_POST['email']);
@@ -23,4 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         die("DB Error: " . mysqli_error($conn));
     }
 }
+//delete
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    mysqli_query($conn, "DELETE FROM orders WHERE id='$id'");
+    header("Location: ../template/adminside.php");
+    exit; 
+}
+
 ?>

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Create path
     $image_path = "uploads/" . $image_name;
 
-    // Move image
+    // Move image   
     if (move_uploaded_file($tmp_name, $image_path)) {
        echo "Image uploaded successfully";
     } else {

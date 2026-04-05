@@ -1,7 +1,13 @@
 <?php
 // ✅ Put ALL PHP logic at the very top — before <!DOCTYPE html>
 include '../configuration/database_connection.php';
+$orders_data = [];
 
+$result = $conn->query("SELECT * FROM orders ORDER BY id DESC");
+
+if ($result && $result->num_rows > 0) {
+    $orders_data = $result->fetch_all(MYSQLI_ASSOC);
+}
 
 $users_result = mysqli_query($conn, "SELECT * FROM user_authentication");
 $products_result=mysqli_query($conn,"SELECT * FROM product_detail");
@@ -849,9 +855,85 @@ ul { list-style:none }
         <div class="table-wrap">
           <table class="data-table">
             <thead>
-              <tr><th>Order ID</th><th>Customer</th><th>Email</th><th>Items</th><th>Amount</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+              <tr><th>Order Name</th><th>Customer</th><th>Email</th><th>Amount</th><th>Status</th><th>Date</th><th>Actions</th></tr>
             </thead>
-            <tbody id="orders-tbody"></tbody>
+            <tbody id="orders-tbody">
+                  <?php if (!empty($orders_data)): ?>
+                    <?php foreach ($orders_data as $row): ?>
+                      <?php
+                        $customer = $row['first_name'] . ' ' . $row['last_name'];
+                        $statusClass = ($row['status'] === 'PENDING') ? 'badge-pending' : 'badge-success';
+                      ?>
+                  
+                      <tr
+                        data-id="<?php echo htmlspecialchars($row['id']); ?>"
+                        data-email="<?php echo htmlspecialchars($row['email']); ?>"
+                        data-status="<?php echo htmlspecialchars($row['status']); ?>"
+                      >
+                  
+                        <!-- ID -->
+                        <td style="color:var(--gold);font-weight:600">
+                          <?php echo htmlspecialchars($row['order_name']); ?>
+                        </td>
+                  
+                        <!-- Customer -->
+                        <td>
+                          <div style="display:flex;align-items:center;gap:0.65rem">
+                            <div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0">
+                              <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($customer); ?>&background=1a1d24&color=c9a84c&size=30&bold=true" />
+                            </div>
+                            <?php echo htmlspecialchars($customer); ?>
+                          </div>
+                        </td>
+                  
+                        <!-- Email -->
+                        <td class="text-gray">
+                          <?php echo htmlspecialchars($row['email']); ?>
+                        </td>
+                  
+                        
+                  
+                        <!-- Amount -->
+                        <td class="text-gold">
+                          $<?php echo number_format($row['amount'], 2); ?>
+                        </td>
+                  
+                        <!-- Status -->
+                        <td>
+                          <span class="badge <?php echo $statusClass; ?>">
+                            <?php echo htmlspecialchars($row['status']); ?>
+                          </span>
+                        </td>
+                  
+                        <!-- Date -->
+                        <td class="text-gray">
+                          <?php echo htmlspecialchars($row['order_date']); ?>
+                        </td>
+                  
+                        <!-- Actions -->
+                        <td>
+                          <div class="action-btns">
+                            
+                  
+                            <a href="../backend/order_detail.php?delete=<?php echo $row['id']; ?>"
+                               class="action-btn btn-del"
+                               onclick="return confirm('Delete this order?')">
+                              Delete
+                            </a>
+                          </div>
+                        </td>
+                  
+                      </tr>
+                    <?php endforeach; ?>
+                  
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="8" style="text-align:center;color:gray;padding:2rem">
+                        No orders found
+                      </td>
+                    </tr>
+                  <?php endif; ?>
+            </tbody>
           </table>
         </div>
       </div>
@@ -870,7 +952,7 @@ ul { list-style:none }
         <div class="table-wrap">
           <table class="data-table">
             <thead>
-              <tr><th>Name</th><th>Email</th><th>Role</th><th>Orders</th><th>Total Spent</th><th>Joined</th><th>Status</th><th>Actions</th></tr>
+              <tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Status</th><th>Actions</th></tr>
             </thead>
             <tbody>
               <?php if (!empty($users_data)): ?>
@@ -890,15 +972,12 @@ ul { list-style:none }
                   </td>
                   <td class='text-gray'><?php echo htmlspecialchars($row['email']); ?></td>
                   <td><span style='font-size:0.78rem;color:var(--blue)'>Customer</span></td>
-                  <td>0</td>
-                  <td class='text-gold'>$0</td>
+                  
                   <td class='text-gray'>2025</td>
                   <td><span class='badge badge-active'>Active</span></td>
                   <td>
                     <div class='action-btns'>
-                      <button class='action-btn btn-edit' onclick='openEditUserFromRow(this)'>
-                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/pencil.svg" alt=""/>Edit
-                      </button>
+                      
                       <a href='../backend/add_user.php?delete=<?php echo $row['id']; ?>'
                         class='action-btn btn-del'
                         onclick='return confirm("Are you sure you want to delete this user?")'>
@@ -1373,7 +1452,7 @@ function switchTab(name) {
 /* ═══════════════════════════════════════
    ORDERS (JS data — no backend yet)
 ═══════════════════════════════════════ */
-var orders = [
+/*var orders = [
   {id:'#ORD-001', customer:'John Doe',     email:'john@email.com',  items:3, amount:299,  status:'Delivered', date:'Mar 05, 2025'},
   {id:'#ORD-002', customer:'Jane Smith',   email:'jane@email.com',  items:1, amount:799,  status:'Shipped',   date:'Mar 04, 2025'},
   {id:'#ORD-003', customer:'Mike Johnson', email:'mike@email.com',  items:2, amount:149,  status:'Processing',date:'Mar 04, 2025'},
@@ -1381,13 +1460,13 @@ var orders = [
   {id:'#ORD-005', customer:'Tom Brown',    email:'tom@email.com',   items:4, amount:450,  status:'Cancelled', date:'Mar 02, 2025'},
   {id:'#ORD-006', customer:'Alice Wang',   email:'alice@email.com', items:2, amount:888,  status:'Delivered', date:'Mar 01, 2025'},
   {id:'#ORD-007', customer:'Bob Martinez', email:'bob@email.com',   items:1, amount:349,  status:'Shipped',   date:'Feb 28, 2025'},
-];
+];*/
 
 function renderOrders() {
   var filterStatus = document.getElementById('order-status-filter') ? document.getElementById('order-status-filter').value : '';
   var filtered = filterStatus ? orders.filter(function(o){ return o.status === filterStatus }) : orders;
 
-  document.getElementById('orders-tbody').innerHTML = filtered.map(function(o){
+  /*document.getElementById('orders-tbody').innerHTML = filtered.map(function(o){
     var cls = 'badge-' + o.status.toLowerCase();
     var initials = o.customer.split(' ').map(function(n){ return n[0]; }).join('');
     return '<tr>' +
@@ -1403,7 +1482,7 @@ function renderOrders() {
         '<button class="action-btn btn-del"  onclick="deleteOrder(\'' + o.id + '\')"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/trash-2.svg" alt=""/>Delete</button>' +
       '</div></td>' +
     '</tr>';
-  }).join('');
+  }).join('');*/
 }
 
 function viewOrder(id) {
