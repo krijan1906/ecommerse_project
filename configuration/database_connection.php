@@ -16,6 +16,6 @@ else{
         text-align:center;
         margin-top:20px;
         text-shadow:1px 1px 5px rgba(0,0,0,0.2);
-    '>🚀 Powered by Krijan Server</h2>";
+    '>🚀 Powered by Krijan DB Server</h2>";
 }
 ?>

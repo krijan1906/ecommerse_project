@@ -1449,40 +1449,12 @@ function switchTab(name) {
   }
 }
 
-/* ═══════════════════════════════════════
-   ORDERS (JS data — no backend yet)
-═══════════════════════════════════════ */
-/*var orders = [
-  {id:'#ORD-001', customer:'John Doe',     email:'john@email.com',  items:3, amount:299,  status:'Delivered', date:'Mar 05, 2025'},
-  {id:'#ORD-002', customer:'Jane Smith',   email:'jane@email.com',  items:1, amount:799,  status:'Shipped',   date:'Mar 04, 2025'},
-  {id:'#ORD-003', customer:'Mike Johnson', email:'mike@email.com',  items:2, amount:149,  status:'Processing',date:'Mar 04, 2025'},
-  {id:'#ORD-004', customer:'Sara Lee',     email:'sara@email.com',  items:1, amount:1299, status:'Pending',   date:'Mar 03, 2025'},
-  {id:'#ORD-005', customer:'Tom Brown',    email:'tom@email.com',   items:4, amount:450,  status:'Cancelled', date:'Mar 02, 2025'},
-  {id:'#ORD-006', customer:'Alice Wang',   email:'alice@email.com', items:2, amount:888,  status:'Delivered', date:'Mar 01, 2025'},
-  {id:'#ORD-007', customer:'Bob Martinez', email:'bob@email.com',   items:1, amount:349,  status:'Shipped',   date:'Feb 28, 2025'},
-];*/
 
 function renderOrders() {
   var filterStatus = document.getElementById('order-status-filter') ? document.getElementById('order-status-filter').value : '';
   var filtered = filterStatus ? orders.filter(function(o){ return o.status === filterStatus }) : orders;
 
-  /*document.getElementById('orders-tbody').innerHTML = filtered.map(function(o){
-    var cls = 'badge-' + o.status.toLowerCase();
-    var initials = o.customer.split(' ').map(function(n){ return n[0]; }).join('');
-    return '<tr>' +
-      '<td style="color:var(--gold);font-weight:600">' + o.id + '</td>' +
-      '<td><div style="display:flex;align-items:center;gap:0.65rem"><div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="https://ui-avatars.com/api/?name=' + encodeURIComponent(o.customer) + '&background=1a1d24&color=c9a84c&size=30&bold=true" alt="" style="width:100%;height:100%;object-fit:cover"/></div>' + o.customer + '</div></td>' +
-      '<td class="text-gray">' + o.email + '</td>' +
-      '<td>' + o.items + ' item' + (o.items > 1 ? 's' : '') + '</td>' +
-      '<td class="text-gold">$' + o.amount.toLocaleString() + '</td>' +
-      '<td><span class="badge ' + cls + '">' + o.status + '</span></td>' +
-      '<td class="text-gray">' + o.date + '</td>' +
-      '<td><div class="action-btns">' +
-        '<button class="action-btn btn-view" onclick="viewOrder(\'' + o.id + '\')"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button>' +
-        '<button class="action-btn btn-del"  onclick="deleteOrder(\'' + o.id + '\')"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/trash-2.svg" alt=""/>Delete</button>' +
-      '</div></td>' +
-    '</tr>';
-  }).join('');*/
+  
 }
 
 function viewOrder(id) {

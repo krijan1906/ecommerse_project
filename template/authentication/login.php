@@ -409,16 +409,17 @@ body::after {
       <span id="login-alert-msg">Invalid email or password.</span>
     </div>
 
-    <form id="login-form" onsubmit="handleLogin(event)" novalidate>
+    <form  method="POST" action="../../backend/authentication.php" novalidate>
 
       <!-- Email -->
       <div class="form-group" id="fg-email">
-        <label>Admin Email</label>
+        <label>Admin user</label>
         <div class="input-wrap">
           <span class="input-icon">📧</span>
           <input
             type="email"
             id="login-email"
+            name="email"
             placeholder="admin@luxe.com"
             autocomplete="email"
           />
@@ -434,10 +435,11 @@ body::after {
           <input
             type="password"
             id="login-password"
+            name="password"
             placeholder="Enter your password"
             autocomplete="current-password"
           />
-          <button type="button" class="toggle-pass" onclick="togglePassword('login-password', this)">👁️</button>
+          <button type="submit" class="toggle-pass" >👁️</button>
         </div>
         <span class="error-msg" id="err-password">Password must be at least 6 characters</span>
       </div>
