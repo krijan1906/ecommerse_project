@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 include '../configuration/database_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") { 
-    $first_name  = mysqli_real_escape_string($conn, $_POST['first_name']);
+    $first_name  = mysqli_real_escape_string($conn, $_POST['first_name']);//kunai symboles jasle break garxa teslai manage garxa 
     $last_name   = mysqli_real_escape_string($conn, $_POST['last_name']);
     $email       = mysqli_real_escape_string($conn, $_POST['email']);
     $cart_items  = mysqli_real_escape_string($conn, $_POST['cart_items'] ?? '');

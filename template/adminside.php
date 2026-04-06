@@ -393,23 +393,7 @@ ul { list-style:none }
         </div>
       </div>
 
-      <div class="section-box">
-        <div class="section-head">
-          <h3>Recent Orders</h3>
-          <button class="btn btn-outline btn-sm" onclick="switchTab('orders')">View All →</button>
-        </div>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead><tr><th>Order ID</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
-            <tbody>
-              <tr><td>#ORD-001</td><td>John Doe</td><td class="text-gold">$299.00</td><td><span class="badge badge-delivered">Delivered</span></td><td>Mar 05</td><td><button class="action-btn btn-view"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button></td></tr>
-              <tr><td>#ORD-002</td><td>Jane Smith</td><td class="text-gold">$799.00</td><td><span class="badge badge-shipped">Shipped</span></td><td>Mar 04</td><td><button class="action-btn btn-view"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button></td></tr>
-              <tr><td>#ORD-003</td><td>Mike Johnson</td><td class="text-gold">$149.00</td><td><span class="badge badge-processing">Processing</span></td><td>Mar 04</td><td><button class="action-btn btn-view"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button></td></tr>
-              <tr><td>#ORD-004</td><td>Sara Lee</td><td class="text-gold">$1,299.00</td><td><span class="badge badge-pending">Pending</span></td><td>Mar 03</td><td><button class="action-btn btn-view"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/eye.svg" alt=""/>View</button></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      
     </div><!-- end dashboard -->
 
     <!-- ══ PRODUCTS TAB ══ -->
