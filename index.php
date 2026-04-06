@@ -1,6 +1,8 @@
 <?php
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+session_start();
 
 include 'configuration/database_connection.php';
 
@@ -20,7 +22,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>OBSIDIAN — Curated Luxury</title>
+<title>LUXE — Curated Luxury</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,600&family=Epilogue:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -971,7 +973,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
 <div class="modal-wrap" id="authModal">
   <div class="modal-box">
     <div class="modal-head">
-      <h3>Welcome to Obsidian</h3>
+      <h3>Welcome to LUXE</h3>
       <button class="modal-close-btn" onclick="closeModal('authModal')">✕</button>
     </div>
     <div class="auth-tabs">
@@ -979,18 +981,19 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
       <div class="auth-tab" onclick="switchAuthTab('register')">Register</div>
     </div>
     <div class="auth-panel active" id="loginPanel">
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="loginEmail" placeholder="you@email.com"/></div>
-      <div class="form-group">
-        <label class="form-label" style="display:flex;justify-content:space-between">Password <span class="form-link" onclick="showToast('Reset link sent!')">Forgot?</span></label>
-        <input class="form-input" type="password" id="loginPass" placeholder="••••••••"/>
-      </div>
-      <button class="btn btn-amber btn-full" style="margin-bottom:.9rem" onclick="doLogin()">Sign In</button>
-      <div class="form-divider">or</div>
-      <div style="display:flex;gap:.65rem;margin-top:.65rem">
-        <button class="btn btn-ghost btn-full btn-sm" onclick="doSocialLogin('Google')">🔵 Google</button>
-        <button class="btn btn-ghost btn-full btn-sm" onclick="doSocialLogin('Apple')">🍎 Apple</button>
-      </div>
-      <p class="auth-footer-text">No account? <span class="form-link" onclick="switchAuthTab('register')">Register free</span></p>
+      <form method="POST" action="backend/client_login.php">
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="loginEmail" name="email" placeholder="you@email.com"/></div>
+        <div class="form-group">
+          <label class="form-label" style="display:flex;justify-content:space-between">Password <span class="form-link" onclick="showToast('Reset link sent!')">Forgot?</span></label>
+          <input class="form-input" type="password" id="loginPass" name="password" placeholder="••••••••"/>
+        </div>
+           <button type="submit" class="btn btn-amber btn-full" style="margin-bottom:.9rem">Sign In</button>        <div class="form-divider">or</div>
+        <div style="display:flex;gap:.65rem;margin-top:.65rem">
+          <button class="btn btn-ghost btn-full btn-sm" onclick="doSocialLogin('Google')">🔵 Google</button>
+          <button class="btn btn-ghost btn-full btn-sm" onclick="doSocialLogin('Apple')">🍎 Apple</button>
+        </div>
+        <p class="auth-footer-text">No account? <span class="form-link" onclick="switchAuthTab('register')">Register free</span></p>
+      </form>
     </div>
     <form method="POST" action="backend/add_user.php">
     <div class="auth-panel" id="registerPanel">
@@ -1036,7 +1039,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     <p style="color:var(--ash);margin-bottom:1.8rem;font-size:.88rem;line-height:1.75">Your order is confirmed. Arrival in 3–5 business days.</p>
     <div style="background:var(--ink3);border-radius:8px;padding:.9rem;margin-bottom:1.3rem">
       <div style="color:var(--fog);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Reference</div>
-      <div style="color:var(--amber);font-size:1.15rem;font-weight:700" id="orderIdDisplay">#OBSIDIAN-0000</div>
+      <div style="color:var(--amber);font-size:1.15rem;font-weight:700" id="orderIdDisplay">#LUXE-0000</div>
     </div>
     <button class="btn btn-amber btn-full" onclick="closeModal('orderModal');showPage('home')">Continue Shopping</button>
     <button class="btn btn-ghost btn-full btn-sm" style="margin-top:.5rem" onclick="closeModal('orderModal');showPage('profile')">View Orders</button>
@@ -1059,7 +1062,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
 ══════════════════════════════════ -->
 <nav class="navbar">
   <div class="nav-logo" onclick="showPage('home');setNavActive('home')">
-    OBSIDIAN<div class="nav-logo-dot"></div>
+    LUXE<div class="nav-logo-dot"></div>
   </div>
   <div class="nav-links">
     <span class="nav-link active" id="nl-home" onclick="showPage('home');setNavActive('home')">Home</span>
@@ -1108,7 +1111,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
       </div>
     </div>
     <div class="hero-right">
-      <img class="hero-right-img" src="https://picsum.photos/seed/obsidian-hero/900/800" alt="Luxury"/>
+      <img class="hero-right-img" src="https://picsum.photos/seed/luxe-hero/900/800" alt="Luxury"/>
       <div class="hero-right-vignette"></div>
       <div class="hero-float-card">
         <div class="hfc-label">Featured Piece</div>
@@ -1160,7 +1163,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
 
   <!-- Editorial -->
   <div class="editorial">
-    <div class="ed-img"><img src="https://picsum.photos/seed/editorial-obsidian/800/600" alt="Luxury Edit"/></div>
+    <div class="ed-img"><img src="https://picsum.photos/seed/editorial-luxe/800/600" alt="Luxury Edit"/></div>
     <div class="ed-content">
       <div class="ed-tag">◆ Limited Archive</div>
       <h2>Up to <em>40% Off</em><br/>The Luxury Edit</h2>
@@ -1190,7 +1193,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo">OBSIDIAN.</div>
+        <div class="footer-logo">LUXE</div>
         <p>A curated destination for luxury goods and exceptional craftsmanship. We believe in the beauty of things made to last.</p>
         <div class="socials">
           <a class="social" href="#">📷</a>
@@ -1219,7 +1222,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
       </ul></div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Obsidian. All rights reserved.</p>
+      <p>© 2025 LUXE. All rights reserved.</p>
       <p>Privacy · Terms · Cookies</p>
     </div>
   </footer>
@@ -1500,13 +1503,13 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     <div class="about-hero-inner">
       <div class="about-tag">◆ Our Story</div>
       <h1>Crafting <em>Extraordinary</em><br/>Since 2018</h1>
-      <p>Obsidian was born from a simple belief — that the objects surrounding us shape the quality of our days. We curate with obsession so you can live with intention.</p>
+      <p>LUXE was born from a simple belief — that the objects surrounding us shape the quality of our days. We curate with obsession so you can live with intention.</p>
     </div>
   </div>
 
   <div class="about-story">
     <div class="about-story-img">
-      <img src="https://picsum.photos/seed/about-obsidian/700/600" alt="Our Story"/>
+      <img src="https://picsum.photos/seed/about-luxe/700/600" alt="Our Story"/>
       <div class="about-story-img-overlay">
         <div class="asio-year">2018</div>
         <div class="asio-label">Founded in Kathmandu</div>
@@ -1515,7 +1518,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     <div class="about-story-text">
       <div class="eyebrow">Who We Are</div>
       <h2>More Than a Store.<br/>A <em>Philosophy</em>.</h2>
-      <p>Obsidian started as a small curation studio in Kathmandu, Nepal — a team of five people who believed that access to thoughtfully designed goods shouldn't be limited by geography. Every item in our collection is handpicked, tested, and authenticated before it reaches your door.</p>
+      <p>LUXE started as a small curation studio in Kathmandu, Nepal — a team of five people who believed that access to thoughtfully designed goods shouldn't be limited by geography. Every item in our collection is handpicked, tested, and authenticated before it reaches your door.</p>
       <p>We don't chase trends. We seek permanence — pieces that hold their meaning across seasons and years. Our team travels to source directly from artisans, workshops, and makers who share our commitment to enduring quality.</p>
       <p>Today we serve over 50,000 clients worldwide, yet our approach remains unchanged: curate less, curate better.</p>
       <button class="btn btn-amber" onclick="showPage('shop');setNavActive('shop')">Explore the Collection</button>
@@ -2107,6 +2110,25 @@ function showToast(msg,type){
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){closeAllDrawers();closeMobileNav();document.querySelectorAll('.modal-wrap').forEach(function(m){m.classList.remove('open')})}
 });
+// Show login success / error from PHP redirect
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('login') === 'success') {
+        var name = '<?php echo isset($_SESSION["fullname"]) ? addslashes($_SESSION["fullname"]) : "" ?>';
+        if (name) {
+            currentUser = {
+                name: name,
+                email: '<?php echo isset($_SESSION["email"]) ? addslashes($_SESSION["email"]) : "" ?>'
+            };
+            updateProfileUI();
+            showToast('Welcome back, ' + name + '!');
+        }
+    }
+    if (params.get('error')) {
+        showToast(decodeURIComponent(params.get('error')), 'error');
+        openModal('authModal');
+    }
+})();
 </script>
 </body>
 </html>
