@@ -173,9 +173,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 .btn-full{width:100%}
 
 /* ═══════════════════════════════
-   ╔══════════════════════╗
-   ║   HOME PAGE          ║
-   ╚══════════════════════╝
+   HOME PAGE
 ═══════════════════════════════ */
 
 /* ─── HERO ─── */
@@ -403,9 +401,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
 .footer-bottom p{color:var(--fog);font-size:0.78rem}
 
 /* ═══════════════════════════════
-   ╔══════════════════════╗
-   ║  PRODUCTS PAGE       ║
-   ╚══════════════════════╝
+   PRODUCTS PAGE
 ═══════════════════════════════ */
 .shop-hero{
   background:var(--ink2);
@@ -782,6 +778,30 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
 .form-divider::after{right:0}
 .auth-footer-text{text-align:center;font-size:0.8rem;color:var(--fog);margin-top:1.1rem}
 
+/* ─── LOGIN REQUIRED BANNER ─── */
+.login-required-banner{
+  display:none;
+  background:rgba(212,168,83,0.08);
+  border:1px solid rgba(212,168,83,0.3);
+  border-radius:10px;
+  padding:1rem 1.4rem;
+  margin-bottom:1.2rem;
+  align-items:center;
+  gap:0.9rem;
+}
+.login-required-banner.show{display:flex}
+.lrb-icon{font-size:1.4rem;flex-shrink:0}
+.lrb-text{font-size:0.84rem;color:var(--ash);line-height:1.5}
+.lrb-text strong{color:var(--amber)}
+.lrb-btn{
+  margin-left:auto;flex-shrink:0;
+  background:var(--amber);color:#000;border:none;
+  padding:0.45rem 1rem;border-radius:5px;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.22s;font-family:var(--ff-s);
+}
+.lrb-btn:hover{background:var(--amber2)}
+
 /* ═══════════════════════════════
    TOAST
 ═══════════════════════════════ */
@@ -954,7 +974,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
   <div class="cart-items" id="cartItemsList" style="display:none"></div>
   <div class="cart-footer" id="cartFooter" style="display:none">
     <div class="cart-total-row"><span>Total</span><strong id="cartTotalAmt">$0</strong></div>
-    <button class="btn btn-amber btn-full" onclick="closeAllDrawers();showPage('checkout')" style="margin-bottom:.6rem">Checkout →</button>
+    <button class="btn btn-amber btn-full" onclick="goToCheckout()" style="margin-bottom:.6rem">Checkout →</button>
     <button class="btn btn-ghost btn-full btn-sm" onclick="closeAllDrawers()">Continue Shopping</button>
   </div>
 </aside>
@@ -987,7 +1007,8 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
           <label class="form-label" style="display:flex;justify-content:space-between">Password <span class="form-link" onclick="showToast('Reset link sent!')">Forgot?</span></label>
           <input class="form-input" type="password" id="loginPass" name="password" placeholder="••••••••"/>
         </div>
-           <button type="submit" class="btn btn-amber btn-full" style="margin-bottom:.9rem">Sign In</button>        <div class="form-divider">or</div>
+        <button type="submit" class="btn btn-amber btn-full" style="margin-bottom:.9rem">Sign In</button>
+        <div class="form-divider">or</div>
         <div style="display:flex;gap:.65rem;margin-top:.65rem">
           <button class="btn btn-ghost btn-full btn-sm" onclick="doSocialLogin('Google')">🔵 Google</button>
           <button class="btn btn-ghost btn-full btn-sm" onclick="doSocialLogin('Apple')">🍎 Apple</button>
@@ -1054,7 +1075,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
   <a onclick="closeMobileNav();showPage('about');setNavActive('about')">About</a>
   <a onclick="closeMobileNav();showPage('contact');setNavActive('contact')">Contact</a>
   <a onclick="closeMobileNav();showPage('profile')">Account</a>
-  <a onclick="closeMobileNav();showPage('checkout')">Checkout</a>
+  <a onclick="closeMobileNav();goToCheckout()">Checkout</a>
 </nav>
 
 <!-- ══════════════════════════════════
@@ -1094,7 +1115,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
 ══════════════════════════════════ -->
 <div class="page active" id="page-home">
 
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-left">
       <div class="hero-tag"><span class="hero-tag-line"></span>Spring Collection 2025</div>
@@ -1122,7 +1142,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     </div>
   </section>
 
-  <!-- Ticker -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       <span class="ticker-item">Free Worldwide Shipping</span>
@@ -1138,7 +1157,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     </div>
   </div>
 
-  <!-- Categories -->
   <section class="section" id="categories-section">
     <div class="eyebrow">Explore</div>
     <h2 class="section-title">Shop by Category</h2>
@@ -1153,7 +1171,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     </div>
   </section>
 
-  <!-- Features -->
   <div class="features-strip">
     <div class="feature-item"><span class="feat-icon">🚚</span><div class="feat-title">Free Shipping</div><div class="feat-desc">Worldwide on all orders</div></div>
     <div class="feature-item"><span class="feat-icon">✅</span><div class="feat-title">Authenticated</div><div class="feat-desc">Every product verified</div></div>
@@ -1161,7 +1178,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     <div class="feature-item"><span class="feat-icon">🎁</span><div class="feat-title">Luxury Packaging</div><div class="feat-desc">Signature gift box</div></div>
   </div>
 
-  <!-- Editorial -->
   <div class="editorial">
     <div class="ed-img"><img src="https://picsum.photos/seed/editorial-luxe/800/600" alt="Luxury Edit"/></div>
     <div class="ed-content">
@@ -1178,7 +1194,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     </div>
   </div>
 
-  <!-- Newsletter -->
   <section class="newsletter">
     <div class="eyebrow" style="justify-content:center;margin-bottom:0.6rem">Inner Circle</div>
     <h2>Join the <em>Inner Circle</em></h2>
@@ -1189,7 +1204,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     </form>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
@@ -1226,10 +1240,10 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
       <p>Privacy · Terms · Cookies</p>
     </div>
   </footer>
-</div><!-- end home -->
+</div>
 
 <!-- ══════════════════════════════════
-     SHOP PAGE (Products from DB)
+     SHOP PAGE
 ══════════════════════════════════ -->
 <div class="page" id="page-shop">
 
@@ -1246,17 +1260,13 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
   </div>
 
   <div class="shop-layout">
-
-    <!-- Sidebar filters -->
     <div class="shop-sidebar">
       <div class="sidebar-section">
         <div class="sidebar-section-head">Categories</div>
-
         <div class="cat-filter-btn active" id="cfb-all" onclick="filterByCat('all',this)">
           <div class="cfb-left"><div class="cfb-color" style="background:#888"></div><span class="cfb-name">All Products</span></div>
           <span class="cfb-count"><?= count($all_products) ?></span>
         </div>
-
         <?php
         $cats = [];
         foreach($all_products as $p){ $cats[$p['category']] = ($cats[$p['category']] ?? 0) + 1; }
@@ -1270,9 +1280,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
         </div>
         <?php endforeach; ?>
       </div>
-
       <div class="sidebar-divider"></div>
-
       <div class="sort-section">
         <span class="sort-label">Sort By</span>
         <select class="sort-select" id="shopSort" onchange="applySortAndFilter()">
@@ -1282,15 +1290,19 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
           <option value="name">Name A–Z</option>
         </select>
       </div>
-
       <div class="sidebar-divider"></div>
-
       <div class="sidebar-mini-stat"><span class="sms-label">Total items</span><span class="sms-val"><?= count($all_products) ?></span></div>
       <div class="sidebar-mini-stat"><span class="sms-label">Categories</span><span class="sms-val"><?= count($cats) ?></span></div>
     </div>
 
-    <!-- Products area -->
     <div class="shop-content">
+      <!-- Login required banner — shown when not logged in -->
+      <div class="login-required-banner" id="shopLoginBanner">
+        <span class="lrb-icon">🔒</span>
+        <div class="lrb-text"><strong>Sign in to shop.</strong> You need an account to add items to your cart and place orders.</div>
+        <button class="lrb-btn" onclick="openModal('authModal')">Sign In</button>
+      </div>
+
       <div class="shop-toolbar">
         <span class="active-filter-tag" id="activeFilterTag">◆ All Products</span>
         <div class="view-switcher">
@@ -1347,7 +1359,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
       </div>
     </div>
   </div>
-</div><!-- end shop -->
+</div>
 
 <!-- ══════════════════════════════════
      PRODUCT DETAIL PAGE
@@ -1498,7 +1510,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
      ABOUT PAGE
 ══════════════════════════════════ -->
 <div class="page" id="page-about">
-
   <div class="about-hero">
     <div class="about-hero-inner">
       <div class="about-tag">◆ Our Story</div>
@@ -1506,7 +1517,6 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
       <p>LUXE was born from a simple belief — that the objects surrounding us shape the quality of our days. We curate with obsession so you can live with intention.</p>
     </div>
   </div>
-
   <div class="about-story">
     <div class="about-story-img">
       <img src="https://picsum.photos/seed/about-luxe/700/600" alt="Our Story"/>
@@ -1518,189 +1528,68 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
     <div class="about-story-text">
       <div class="eyebrow">Who We Are</div>
       <h2>More Than a Store.<br/>A <em>Philosophy</em>.</h2>
-      <p>LUXE started as a small curation studio in Kathmandu, Nepal — a team of five people who believed that access to thoughtfully designed goods shouldn't be limited by geography. Every item in our collection is handpicked, tested, and authenticated before it reaches your door.</p>
+      <p>LUXE started as a small curation studio in Kathmandu, Nepal — a team of five people who believed that access to thoughtfully designed goods shouldn't be limited by geography.</p>
       <p>We don't chase trends. We seek permanence — pieces that hold their meaning across seasons and years. Our team travels to source directly from artisans, workshops, and makers who share our commitment to enduring quality.</p>
       <p>Today we serve over 50,000 clients worldwide, yet our approach remains unchanged: curate less, curate better.</p>
       <button class="btn btn-amber" onclick="showPage('shop');setNavActive('shop')">Explore the Collection</button>
     </div>
   </div>
-
   <div class="about-values">
     <div class="eyebrow">What Drives Us</div>
     <h2 class="section-title">Our Core Values</h2>
     <div class="about-values-grid">
-      <div class="value-card">
-        <span class="value-icon">🔍</span>
-        <div class="value-title">Obsessive Curation</div>
-        <div class="value-desc">Every product passes a 12-point review before it earns a place in our collection. We reject more than 90% of what we consider.</div>
-      </div>
-      <div class="value-card">
-        <span class="value-icon">✅</span>
-        <div class="value-title">Radical Authenticity</div>
-        <div class="value-desc">Every item comes with a certificate of authenticity. We work only with verified makers and authorised distributors worldwide.</div>
-      </div>
-      <div class="value-card">
-        <span class="value-icon">♻️</span>
-        <div class="value-title">Sustainable Sourcing</div>
-        <div class="value-desc">We prioritise artisans who use responsible materials and ethical practices. Beauty should never come at the cost of the planet.</div>
-      </div>
-      <div class="value-card">
-        <span class="value-icon">🤝</span>
-        <div class="value-title">Client-First Always</div>
-        <div class="value-desc">Our 24/7 concierge, 30-day returns, and lifetime authenticity guarantee aren't policies — they're promises.</div>
-      </div>
-      <div class="value-card">
-        <span class="value-icon">🌏</span>
-        <div class="value-title">Global Reach</div>
-        <div class="value-desc">From Kathmandu to Tokyo, New York to London — we ship to over 80 countries with complimentary express delivery.</div>
-      </div>
-      <div class="value-card">
-        <span class="value-icon">💎</span>
-        <div class="value-title">Timeless Design</div>
-        <div class="value-desc">We curate for longevity, not trends. Every piece in our collection is chosen because it will be just as beautiful in ten years.</div>
-      </div>
+      <div class="value-card"><span class="value-icon">🔍</span><div class="value-title">Obsessive Curation</div><div class="value-desc">Every product passes a 12-point review before it earns a place in our collection. We reject more than 90% of what we consider.</div></div>
+      <div class="value-card"><span class="value-icon">✅</span><div class="value-title">Radical Authenticity</div><div class="value-desc">Every item comes with a certificate of authenticity. We work only with verified makers and authorised distributors worldwide.</div></div>
+      <div class="value-card"><span class="value-icon">♻️</span><div class="value-title">Sustainable Sourcing</div><div class="value-desc">We prioritise artisans who use responsible materials and ethical practices. Beauty should never come at the cost of the planet.</div></div>
+      <div class="value-card"><span class="value-icon">🤝</span><div class="value-title">Client-First Always</div><div class="value-desc">Our 24/7 concierge, 30-day returns, and lifetime authenticity guarantee aren't policies — they're promises.</div></div>
+      <div class="value-card"><span class="value-icon">🌏</span><div class="value-title">Global Reach</div><div class="value-desc">From Kathmandu to Tokyo, New York to London — we ship to over 80 countries with complimentary express delivery.</div></div>
+      <div class="value-card"><span class="value-icon">💎</span><div class="value-title">Timeless Design</div><div class="value-desc">We curate for longevity, not trends. Every piece in our collection is chosen because it will be just as beautiful in ten years.</div></div>
     </div>
   </div>
-
   <div class="about-team section">
     <div class="eyebrow">The People</div>
     <h2 class="section-title">Meet Our Team</h2>
     <div class="about-team-grid">
-      <div class="team-card">
-        <div class="team-avatar" style="background:rgba(212,168,83,0.15);border-color:rgba(212,168,83,0.4)">KM</div>
-        <div class="team-name">Krijan Maharjan</div>
-        <div class="team-role">Backend & Database</div>
-        <div class="team-stat">📞 9813638784</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar" style="background:rgba(79,142,247,0.12);border-color:rgba(79,142,247,0.3)">B</div>
-        <div class="team-name">Basant</div>
-        <div class="team-role">Frontend Developer</div>
-        <div class="team-stat">Building beautiful interfaces</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar" style="background:rgba(63,168,154,0.12);border-color:rgba(63,168,154,0.3)">P</div>
-        <div class="team-name">Prakash</div>
-        <div class="team-role">Frontend Developer</div>
-        <div class="team-stat">Crafting user experiences</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar" style="background:rgba(155,114,240,0.12);border-color:rgba(155,114,240,0.3)">Pb</div>
-        <div class="team-name">Prabej</div>
-        <div class="team-role">Frontend Developer</div>
-        <div class="team-stat">Designing for delight</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar" style="background:rgba(192,89,106,0.12);border-color:rgba(192,89,106,0.3)">B</div>
-        <div class="team-name">Biraj</div>
-        <div class="team-role">Frontend Developer</div>
-        <div class="team-stat">Pixel-perfect every time</div>
-      </div>
+      <div class="team-card"><div class="team-avatar" style="background:rgba(212,168,83,0.15);border-color:rgba(212,168,83,0.4)">KM</div><div class="team-name">Krijan Maharjan</div><div class="team-role">Backend & Database</div><div class="team-stat">📞 9813638784</div></div>
+      <div class="team-card"><div class="team-avatar" style="background:rgba(79,142,247,0.12);border-color:rgba(79,142,247,0.3)">B</div><div class="team-name">Basant</div><div class="team-role">Frontend Developer</div><div class="team-stat">Building beautiful interfaces</div></div>
+      <div class="team-card"><div class="team-avatar" style="background:rgba(63,168,154,0.12);border-color:rgba(63,168,154,0.3)">P</div><div class="team-name">Prakash</div><div class="team-role">Frontend Developer</div><div class="team-stat">Crafting user experiences</div></div>
+      <div class="team-card"><div class="team-avatar" style="background:rgba(155,114,240,0.12);border-color:rgba(155,114,240,0.3)">Pb</div><div class="team-name">Prabej</div><div class="team-role">Frontend Developer</div><div class="team-stat">Designing for delight</div></div>
+      <div class="team-card"><div class="team-avatar" style="background:rgba(192,89,106,0.12);border-color:rgba(192,89,106,0.3)">B</div><div class="team-name">Biraj</div><div class="team-role">Frontend Developer</div><div class="team-stat">Pixel-perfect every time</div></div>
     </div>
   </div>
-
   <div class="about-numbers">
     <div><div class="an-val">2018</div><div class="an-lbl">Founded</div></div>
     <div><div class="an-val">50K+</div><div class="an-lbl">Happy Clients</div></div>
     <div><div class="an-val">80+</div><div class="an-lbl">Countries Served</div></div>
     <div><div class="an-val">4.9★</div><div class="an-lbl">Avg. Rating</div></div>
   </div>
-
-</div><!-- end about -->
+</div>
 
 <!-- ══════════════════════════════════
      CONTACT PAGE
 ══════════════════════════════════ -->
 <div class="page" id="page-contact">
-
   <div class="contact-hero">
     <div class="eyebrow">Get in Touch</div>
     <h1>Let's <em>Talk</em></h1>
     <p>Whether you have a question about a product, need styling advice, or just want to say hello — our team is always here for you.</p>
   </div>
-
   <div class="contact-layout">
-
-    <!-- Left: info + team -->
     <div>
       <div class="contact-info">
         <h2>Reach Us Directly</h2>
-        <p>Our team is based in Kathmandu, Nepal and available across time zones. Pick a channel that works best for you.</p>
-
-        <div class="contact-detail-row">
-          <div class="cdr-icon">📍</div>
-          <div><div class="cdr-label">Address</div><div class="cdr-value">Kathmandu, Bagmati Province, Nepal</div></div>
-        </div>
-        <div class="contact-detail-row">
-          <div class="cdr-icon">✉️</div>
-          <div><div class="cdr-label">Email</div><div class="cdr-value">krijanmaharjan31@gmail.com</div></div>
-        </div>
-        <div class="contact-detail-row">
-          <div class="cdr-icon">⏰</div>
-          <div><div class="cdr-label">Working Hours</div><div class="cdr-value">Sunday – Friday, 9:00 AM – 6:00 PM NPT</div></div>
-        </div>
+        <p>Our team is based in Kathmandu, Nepal and available across time zones.</p>
+        <div class="contact-detail-row"><div class="cdr-icon">📍</div><div><div class="cdr-label">Address</div><div class="cdr-value">Kathmandu, Bagmati Province, Nepal</div></div></div>
+        <div class="contact-detail-row"><div class="cdr-icon">✉️</div><div><div class="cdr-label">Email</div><div class="cdr-value">krijanmaharjan31@gmail.com</div></div></div>
+        <div class="contact-detail-row"><div class="cdr-icon">⏰</div><div><div class="cdr-label">Working Hours</div><div class="cdr-value">Sunday – Friday, 9:00 AM – 6:00 PM NPT</div></div></div>
       </div>
-
       <div class="team-section-title">Development Team</div>
-
-      <!-- Krijan — with phone -->
-      <div class="member-card">
-        <div class="mc-avatar" style="background:rgba(212,168,83,0.15);border-color:rgba(212,168,83,0.4);color:var(--amber)">KM</div>
-        <div class="mc-info">
-          <div class="mc-name">Krijan Maharjan</div>
-          <div class="mc-role">Backend &amp; Database</div>
-          <div class="mc-phone">9813638784</div>
-        </div>
-        <div class="mc-badge">Backend Lead</div>
-      </div>
-
-      <!-- Basant -->
-      <div class="member-card">
-        <div class="mc-avatar" style="background:rgba(79,142,247,0.12);border-color:rgba(79,142,247,0.3);color:#7ab0fa">B</div>
-        <div class="mc-info">
-          <div class="mc-name">Basant</div>
-          <div class="mc-role">Frontend Developer</div>
-          <div class="mc-phone">Contact via office</div>
-        </div>
-        <div class="mc-badge">Frontend</div>
-      </div>
-
-      <!-- Prakash -->
-      <div class="member-card">
-        <div class="mc-avatar" style="background:rgba(63,168,154,0.12);border-color:rgba(63,168,154,0.3);color:#3fa89a">P</div>
-        <div class="mc-info">
-          <div class="mc-name">Prakash</div>
-          <div class="mc-role">Frontend Developer</div>
-          <div class="mc-phone">Contact via office</div>
-        </div>
-        <div class="mc-badge">Frontend</div>
-      </div>
-
-      <!-- Prabej -->
-      <div class="member-card">
-        <div class="mc-avatar" style="background:rgba(155,114,240,0.12);border-color:rgba(155,114,240,0.3);color:#9b72f0">Pb</div>
-        <div class="mc-info">
-          <div class="mc-name">Prabej</div>
-          <div class="mc-role">Frontend Developer</div>
-          <div class="mc-phone">Contact via office</div>
-        </div>
-        <div class="mc-badge">Frontend</div>
-      </div>
-
-      <!-- Biraj -->
-      <div class="member-card">
-        <div class="mc-avatar" style="background:rgba(192,89,106,0.12);border-color:rgba(192,89,106,0.3);color:#c0596a">Bi</div>
-        <div class="mc-info">
-          <div class="mc-name">Biraj</div>
-          <div class="mc-role">Frontend Developer</div>
-          <div class="mc-phone">Contact via office</div>
-        </div>
-        <div class="mc-badge">Frontend</div>
-      </div>
-
-    </div><!-- end left -->
-
-    <!-- Right: contact form -->
+      <div class="member-card"><div class="mc-avatar" style="background:rgba(212,168,83,0.15);border-color:rgba(212,168,83,0.4);color:var(--amber)">KM</div><div class="mc-info"><div class="mc-name">Krijan Maharjan</div><div class="mc-role">Backend &amp; Database</div><div class="mc-phone">9813638784</div></div><div class="mc-badge">Backend Lead</div></div>
+      <div class="member-card"><div class="mc-avatar" style="background:rgba(79,142,247,0.12);border-color:rgba(79,142,247,0.3);color:#7ab0fa">B</div><div class="mc-info"><div class="mc-name">Basant</div><div class="mc-role">Frontend Developer</div><div class="mc-phone">Contact via office</div></div><div class="mc-badge">Frontend</div></div>
+      <div class="member-card"><div class="mc-avatar" style="background:rgba(63,168,154,0.12);border-color:rgba(63,168,154,0.3);color:#3fa89a">P</div><div class="mc-info"><div class="mc-name">Prakash</div><div class="mc-role">Frontend Developer</div><div class="mc-phone">Contact via office</div></div><div class="mc-badge">Frontend</div></div>
+      <div class="member-card"><div class="mc-avatar" style="background:rgba(155,114,240,0.12);border-color:rgba(155,114,240,0.3);color:#9b72f0">Pb</div><div class="mc-info"><div class="mc-name">Prabej</div><div class="mc-role">Frontend Developer</div><div class="mc-phone">Contact via office</div></div><div class="mc-badge">Frontend</div></div>
+      <div class="member-card"><div class="mc-avatar" style="background:rgba(192,89,106,0.12);border-color:rgba(192,89,106,0.3);color:#c0596a">Bi</div><div class="mc-info"><div class="mc-name">Biraj</div><div class="mc-role">Frontend Developer</div><div class="mc-phone">Contact via office</div></div><div class="mc-badge">Frontend</div></div>
+    </div>
     <div>
       <div class="contact-form-box">
         <h2>Send a Message</h2>
@@ -1714,35 +1603,20 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
           <div class="form-group" style="margin-bottom:1rem"><label class="form-label">Subject</label>
             <select class="form-input" id="cfSubject">
               <option value="">Select a subject…</option>
-              <option>Product Enquiry</option>
-              <option>Order Status</option>
-              <option>Returns &amp; Refunds</option>
-              <option>Shipping Information</option>
-              <option>Wholesale / Partnerships</option>
-              <option>General Enquiry</option>
+              <option>Product Enquiry</option><option>Order Status</option><option>Returns &amp; Refunds</option>
+              <option>Shipping Information</option><option>Wholesale / Partnerships</option><option>General Enquiry</option>
             </select>
           </div>
           <div class="form-group" style="margin-bottom:1.5rem"><label class="form-label">Message</label><textarea class="cf-textarea" id="cfMessage" placeholder="Tell us how we can help you…"></textarea></div>
           <button type="submit" class="btn btn-amber btn-full">Send Message →</button>
         </form>
-
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--rim)">
-          <div style="background:var(--ink3);border:1px solid var(--rim);border-radius:10px;padding:1rem;text-align:center">
-            <div style="font-size:1.4rem;margin-bottom:0.4rem">💬</div>
-            <div style="font-size:0.76rem;font-weight:600;margin-bottom:0.2rem">Live Chat</div>
-            <div style="font-size:0.72rem;color:var(--fog)">Available 9am–6pm</div>
-          </div>
-          <div style="background:var(--ink3);border:1px solid var(--rim);border-radius:10px;padding:1rem;text-align:center">
-            <div style="font-size:1.4rem;margin-bottom:0.4rem">📞</div>
-            <div style="font-size:0.76rem;font-weight:600;margin-bottom:0.2rem">Phone Support</div>
-            <div style="font-size:0.72rem;color:var(--fog)">+977 9813638784</div>
-          </div>
+          <div style="background:var(--ink3);border:1px solid var(--rim);border-radius:10px;padding:1rem;text-align:center"><div style="font-size:1.4rem;margin-bottom:0.4rem">💬</div><div style="font-size:0.76rem;font-weight:600;margin-bottom:0.2rem">Live Chat</div><div style="font-size:0.72rem;color:var(--fog)">Available 9am–6pm</div></div>
+          <div style="background:var(--ink3);border:1px solid var(--rim);border-radius:10px;padding:1rem;text-align:center"><div style="font-size:1.4rem;margin-bottom:0.4rem">📞</div><div style="font-size:0.76rem;font-weight:600;margin-bottom:0.2rem">Phone Support</div><div style="font-size:0.72rem;color:var(--fog)">+977 9813638784</div></div>
         </div>
       </div>
     </div>
-
-  </div><!-- end contact-layout -->
-
+  </div>
   <div class="map-strip">
     <div class="eyebrow">Where We Are</div>
     <h2>Find Us in Kathmandu</h2>
@@ -1754,8 +1628,7 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
       <button class="btn btn-ghost btn-sm" onclick="window.open('https://maps.google.com/?q=Kathmandu,Nepal','_blank')">Open in Maps →</button>
     </div>
   </div>
-
-</div><!-- end contact -->
+</div>
 
 <!-- ══════════════════════════════════
      CHECKOUT PAGE
@@ -1793,7 +1666,9 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
           </div>
           <div class="form-group"><label class="form-label">Country</label>
             <select class="form-input" name="country" id="coCountry">
-              <option>United Kingdom</option><option>United States</option><option>Canada</option><option>Australia</option><option>Germany</option><option>France</option><option>Nepal</option><option>Japan</option><option>China</option>
+              <option>United Kingdom</option><option>United States</option><option>Canada</option>
+              <option>Australia</option><option>Germany</option><option>France</option>
+              <option>Nepal</option><option>Japan</option><option>China</option>
             </select>
           </div>
           <div class="form-group"><label class="form-label">Notes (Optional)</label><input class="form-input" id="coNotes" placeholder="Leave at door…"/></div>
@@ -1826,308 +1701,519 @@ footer{background:var(--ink);padding:5rem 8% 2.5rem;border-top:1px solid var(--r
      JAVASCRIPT
 ══════════════════════════════════ -->
 <script>
-var cartItems=[];var cartTotal=0;var wishItems=[];var currentUser=null;var currentDetailProduct=null;
-var currentCat='all';var currentSort='default';var currentView='grid';
+// ── STATE ──
+var cartItems = [];
+var cartTotal = 0;
+var wishItems = [];
+var currentUser = null;
+var currentDetailProduct = null;
+var currentCat = 'all';
+var currentSort = 'default';
+var currentView = 'grid';
 
-/* ── NAV ACTIVE ── */
-function setNavActive(id){
-  document.querySelectorAll('.nav-link').forEach(function(n){n.classList.remove('active')});
-  var el=document.getElementById('nl-'+id);
-  if(el)el.classList.add('active');
+// ── Read PHP session on page load ──
+// If PHP session has a logged-in user, pre-populate currentUser
+<?php if (!empty($_SESSION['fullname'])): ?>
+currentUser = {
+  name: '<?= addslashes($_SESSION['fullname']) ?>',
+  email: '<?= addslashes($_SESSION['email'] ?? '') ?>'
+};
+<?php endif; ?>
+
+/* ════════════════════════════════
+   LOGIN GUARD — core helper
+   Call this before ANY action that
+   requires authentication.
+   Returns true if logged in, false
+   (+ opens modal) if not.
+════════════════════════════════ */
+function requireLogin(message) {
+  if (currentUser) return true;
+  var msg = message || 'Please sign in to continue.';
+  showToast(msg, 'error');
+  openModal('authModal');
+  return false;
 }
 
-/* ── PAGES ── */
-function showPage(id){
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
-  var pg=document.getElementById('page-'+id);
-  if(pg){pg.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
-  if(id==='checkout')renderCheckoutSummary();
-  if(id==='profile')renderProfileWishlist();
+/* ─── update the shop banner based on login state ─── */
+function updateShopBanner() {
+  var banner = document.getElementById('shopLoginBanner');
+  if (!banner) return;
+  if (currentUser) {
+    banner.classList.remove('show');
+  } else {
+    banner.classList.add('show');
+  }
 }
 
-/* ── MOBILE NAV ── */
-function openMobileNav(){document.getElementById('mobileNav').classList.add('open')}
-function closeMobileNav(){document.getElementById('mobileNav').classList.remove('open')}
-
-/* ── DRAWERS ── */
-function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('overlayBg').classList.add('open')}
-function openWishlist(){document.getElementById('wishDrawer').classList.add('open');document.getElementById('overlayBg').classList.add('open')}
-function closeAllDrawers(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('wishDrawer').classList.remove('open');document.getElementById('overlayBg').classList.remove('open')}
-
-/* ── MODALS ── */
-function openModal(id){document.getElementById(id).classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
-document.querySelectorAll('.modal-wrap').forEach(function(m){m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')})});
-
-/* ── AUTH ── */
-function handleAccountClick(){if(currentUser){showPage('profile')}else{openModal('authModal')}}
-function switchAuthTab(tab){
-  document.querySelectorAll('.auth-tab').forEach(function(t,i){t.classList.toggle('active',(i===0&&tab==='login')||(i===1&&tab==='register'))});
-  document.getElementById('loginPanel').classList.toggle('active',tab==='login');
-  document.getElementById('registerPanel').classList.toggle('active',tab==='register');
-}
-function doLogin(){
-  var email=document.getElementById('loginEmail').value.trim();
-  var pass=document.getElementById('loginPass').value;
-  if(!email||!pass){showToast('Please fill in all fields','error');return}
-  if(pass.length<6){showToast('Password too short','error');return}
-  currentUser={name:email.split('@')[0],email:email};
-  updateProfileUI();closeModal('authModal');showToast('Welcome back, '+currentUser.name+'!');
-}
-function doSocialLogin(p){currentUser={name:p+' User',email:'user@'+p.toLowerCase()+'.com'};updateProfileUI();closeModal('authModal');showToast('Signed in with '+p+'!')}
-function doLogout(){currentUser=null;updateProfileUI();showPage('home');setNavActive('home');showToast('Signed out successfully')}
-function updateProfileUI(){
-  var name=currentUser?currentUser.name:'Guest User';
-  var email=currentUser?currentUser.email:'Not signed in';
-  document.getElementById('profileName').textContent=name;
-  document.getElementById('profileEmail').textContent=email;
-  document.getElementById('profileAvatar').textContent=currentUser?currentUser.name[0].toUpperCase():'👤';
-  if(currentUser){document.getElementById('settingFirst').value=name.split(' ')[0]||'';document.getElementById('settingEmail').value=email}
+/* ════════════════════════════════
+   NAV ACTIVE
+════════════════════════════════ */
+function setNavActive(id) {
+  document.querySelectorAll('.nav-link').forEach(function(n) { n.classList.remove('active'); });
+  var el = document.getElementById('nl-' + id);
+  if (el) el.classList.add('active');
 }
 
-/* ── PROFILE TABS ── */
-function switchProfileTab(tab){
-  document.querySelectorAll('.pnav-item').forEach(function(i){i.classList.remove('active')});
-  document.querySelectorAll('.profile-panel').forEach(function(p){p.classList.remove('active')});
-  var map={overview:0,orders:1,'wishlist-p':2,addresses:3,settings:4};
-  var items=document.querySelectorAll('.pnav-item');
-  if(map[tab]!==undefined)items[map[tab]].classList.add('active');
-  var panel=document.getElementById('panel-'+tab);
-  if(panel)panel.classList.add('active');
-  if(tab==='wishlist-p')renderProfileWishlist();
+/* ════════════════════════════════
+   PAGES
+════════════════════════════════ */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  var pg = document.getElementById('page-' + id);
+  if (pg) { pg.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  if (id === 'checkout') renderCheckoutSummary();
+  if (id === 'profile') renderProfileWishlist();
+  if (id === 'shop') updateShopBanner();
 }
 
-/* ── CART ── */
-function addToCartFromCard(card){addToCart(card.dataset.name,parseInt(card.dataset.price),card.dataset.img)}
-function addToCart(name,price,img){
-  var ex=cartItems.find(function(i){return i.name===name});
-  if(ex){ex.qty++}else{cartItems.push({name:name,price:price,img:img,qty:1})}
-  cartTotal+=price;updateCartUI();showToast('✓ '+name+' added');openCart();
+/* ════════════════════════════════
+   MOBILE NAV
+════════════════════════════════ */
+function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+/* ════════════════════════════════
+   DRAWERS
+════════════════════════════════ */
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('overlayBg').classList.add('open');
 }
-function removeFromCart(name,price){
-  var idx=cartItems.findIndex(function(i){return i.name===name});
-  if(idx>-1){cartTotal-=price*cartItems[idx].qty;cartItems.splice(idx,1);updateCartUI()}
+function openWishlist() {
+  document.getElementById('wishDrawer').classList.add('open');
+  document.getElementById('overlayBg').classList.add('open');
 }
-function updateCartUI(){
-  var qty=cartItems.reduce(function(s,i){return s+i.qty},0);
-  document.getElementById('cartBadge').textContent=qty;
-  document.getElementById('cartCountLabel').textContent='('+qty+')';
-  document.getElementById('cartTotalAmt').textContent='$'+cartTotal.toLocaleString();
-  var empty=cartItems.length===0;
-  document.getElementById('cartEmpty').style.display=empty?'flex':'none';
-  document.getElementById('cartItemsList').style.display=empty?'none':'block';
-  document.getElementById('cartFooter').style.display=empty?'none':'block';
-  document.getElementById('cartItemsList').innerHTML=cartItems.map(function(item){
-    return '<div class="cart-item"><div class="ci-img"><img src="'+item.img+'" alt="'+item.name+'"/></div>'+
-      '<div class="ci-info"><div class="ci-name">'+item.name+(item.qty>1?' ×'+item.qty:'')+'</div>'+
-      '<div class="ci-price">$'+(item.price*item.qty).toLocaleString()+'</div></div>'+
-      '<button class="ci-rm" onclick="removeFromCart(\''+item.name+'\','+item.price+')">✕</button></div>';
+function closeAllDrawers() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('wishDrawer').classList.remove('open');
+  document.getElementById('overlayBg').classList.remove('open');
+}
+
+/* ════════════════════════════════
+   MODALS
+════════════════════════════════ */
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-wrap').forEach(function(m) {
+  m.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+});
+
+/* ════════════════════════════════
+   AUTH
+════════════════════════════════ */
+function handleAccountClick() {
+  if (currentUser) { showPage('profile'); } else { openModal('authModal'); }
+}
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach(function(t, i) {
+    t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
+  });
+  document.getElementById('loginPanel').classList.toggle('active', tab === 'login');
+  document.getElementById('registerPanel').classList.toggle('active', tab === 'register');
+}
+function doSocialLogin(p) {
+  currentUser = { name: p + ' User', email: 'user@' + p.toLowerCase() + '.com' };
+  updateProfileUI();
+  updateShopBanner();
+  closeModal('authModal');
+  showToast('Signed in with ' + p + '!');
+}
+function doLogout() {
+  currentUser = null;
+  cartItems = [];
+  cartTotal = 0;
+  updateCartUI();
+  updateProfileUI();
+  updateShopBanner();
+  showPage('home');
+  setNavActive('home');
+  showToast('Signed out successfully');
+}
+function updateProfileUI() {
+  var name = currentUser ? currentUser.name : 'Guest User';
+  var email = currentUser ? currentUser.email : 'Not signed in';
+  document.getElementById('profileName').textContent = name;
+  document.getElementById('profileEmail').textContent = email;
+  document.getElementById('profileAvatar').textContent = currentUser ? currentUser.name[0].toUpperCase() : '👤';
+  if (currentUser) {
+    document.getElementById('settingFirst').value = name.split(' ')[0] || '';
+    document.getElementById('settingEmail').value = email;
+  }
+}
+
+/* ════════════════════════════════
+   PROFILE TABS
+════════════════════════════════ */
+function switchProfileTab(tab) {
+  document.querySelectorAll('.pnav-item').forEach(function(i) { i.classList.remove('active'); });
+  document.querySelectorAll('.profile-panel').forEach(function(p) { p.classList.remove('active'); });
+  var map = { overview: 0, orders: 1, 'wishlist-p': 2, addresses: 3, settings: 4 };
+  var items = document.querySelectorAll('.pnav-item');
+  if (map[tab] !== undefined) items[map[tab]].classList.add('active');
+  var panel = document.getElementById('panel-' + tab);
+  if (panel) panel.classList.add('active');
+  if (tab === 'wishlist-p') renderProfileWishlist();
+}
+
+/* ════════════════════════════════
+   CART  — LOGIN GATED
+════════════════════════════════ */
+function addToCartFromCard(card) {
+  addToCart(card.dataset.name, parseInt(card.dataset.price), card.dataset.img);
+}
+
+function addToCart(name, price, img) {
+  // ── GUARD: must be logged in ──
+  if (!requireLogin('Please sign in to add items to your cart.')) return;
+
+  var ex = cartItems.find(function(i) { return i.name === name; });
+  if (ex) { ex.qty++; } else { cartItems.push({ name: name, price: price, img: img, qty: 1 }); }
+  cartTotal += price;
+  updateCartUI();
+  showToast('✓ ' + name + ' added to cart');
+  openCart();
+}
+
+function removeFromCart(name, price) {
+  var idx = cartItems.findIndex(function(i) { return i.name === name; });
+  if (idx > -1) { cartTotal -= price * cartItems[idx].qty; cartItems.splice(idx, 1); updateCartUI(); }
+}
+
+function updateCartUI() {
+  var qty = cartItems.reduce(function(s, i) { return s + i.qty; }, 0);
+  document.getElementById('cartBadge').textContent = qty;
+  document.getElementById('cartCountLabel').textContent = '(' + qty + ')';
+  document.getElementById('cartTotalAmt').textContent = '$' + cartTotal.toLocaleString();
+  var empty = cartItems.length === 0;
+  document.getElementById('cartEmpty').style.display = empty ? 'flex' : 'none';
+  document.getElementById('cartItemsList').style.display = empty ? 'none' : 'block';
+  document.getElementById('cartFooter').style.display = empty ? 'none' : 'block';
+  document.getElementById('cartItemsList').innerHTML = cartItems.map(function(item) {
+    return '<div class="cart-item">' +
+      '<div class="ci-img"><img src="' + item.img + '" alt="' + item.name + '"/></div>' +
+      '<div class="ci-info"><div class="ci-name">' + item.name + (item.qty > 1 ? ' ×' + item.qty : '') + '</div>' +
+      '<div class="ci-price">$' + (item.price * item.qty).toLocaleString() + '</div></div>' +
+      '<button class="ci-rm" onclick="removeFromCart(\'' + item.name + '\',' + item.price + ')">✕</button></div>';
   }).join('');
 }
 
-/* ── WISHLIST ── */
-function addToWishlist(name,price,img){
-  if(wishItems.find(function(i){return i.name===name})){showToast(name+' already in wishlist');return}
-  wishItems.push({name:name,price:price,img:img});updateWishUI();showToast('♡ Saved: '+name);
+/* ════════════════════════════════
+   CHECKOUT GUARD
+════════════════════════════════ */
+function goToCheckout() {
+  if (!requireLogin('Please sign in to proceed to checkout.')) {
+    closeAllDrawers();
+    return;
+  }
+  if (cartItems.length === 0) {
+    showToast('Your cart is empty. Add some items first!', 'error');
+    closeAllDrawers();
+    showPage('shop');
+    setNavActive('shop');
+    return;
+  }
+  closeAllDrawers();
+  showPage('checkout');
 }
-function removeFromWishlist(name){wishItems=wishItems.filter(function(i){return i.name!==name});updateWishUI();renderProfileWishlist()}
-function moveWishToCart(name){var item=wishItems.find(function(i){return i.name===name});if(item){addToCart(item.name,item.price,item.img);removeFromWishlist(name)}}
-function updateWishUI(){
-  var qty=wishItems.length;
-  var badge=document.getElementById('wishBadge');badge.textContent=qty;badge.style.display=qty>0?'flex':'none';
-  document.getElementById('wishCountLabel').textContent='('+qty+')';
-  var empty=wishItems.length===0;
-  document.getElementById('wishEmpty').style.display=empty?'flex':'none';
-  document.getElementById('wishItemsList').style.display=empty?'none':'block';
-  document.getElementById('wishCountProfile').textContent=qty;
-  document.getElementById('wishItemsList').innerHTML=wishItems.map(function(item){
-    return '<div class="wish-item"><div class="wi-img"><img src="'+item.img+'" alt="'+item.name+'"/></div>'+
-      '<div class="wi-info"><div class="wi-name">'+item.name+'</div><div class="wi-price">$'+item.price.toLocaleString()+'</div></div>'+
-      '<div class="wi-acts"><button class="wi-add" onclick="moveWishToCart(\''+item.name+'\')">Add to Cart</button>'+
-      '<button class="wi-rm" onclick="removeFromWishlist(\''+item.name+'\')">✕ Remove</button></div></div>';
+
+/* ════════════════════════════════
+   WISHLIST
+════════════════════════════════ */
+function addToWishlist(name, price, img) {
+  if (wishItems.find(function(i) { return i.name === name; })) {
+    showToast(name + ' is already in your wishlist');
+    return;
+  }
+  wishItems.push({ name: name, price: price, img: img });
+  updateWishUI();
+  showToast('♡ Saved: ' + name);
+}
+function removeFromWishlist(name) {
+  wishItems = wishItems.filter(function(i) { return i.name !== name; });
+  updateWishUI();
+  renderProfileWishlist();
+}
+function moveWishToCart(name) {
+  var item = wishItems.find(function(i) { return i.name === name; });
+  if (item) { addToCart(item.name, item.price, item.img); removeFromWishlist(name); }
+}
+function updateWishUI() {
+  var qty = wishItems.length;
+  var badge = document.getElementById('wishBadge');
+  badge.textContent = qty;
+  badge.style.display = qty > 0 ? 'flex' : 'none';
+  document.getElementById('wishCountLabel').textContent = '(' + qty + ')';
+  var empty = wishItems.length === 0;
+  document.getElementById('wishEmpty').style.display = empty ? 'flex' : 'none';
+  document.getElementById('wishItemsList').style.display = empty ? 'none' : 'block';
+  document.getElementById('wishCountProfile').textContent = qty;
+  document.getElementById('wishItemsList').innerHTML = wishItems.map(function(item) {
+    return '<div class="wish-item">' +
+      '<div class="wi-img"><img src="' + item.img + '" alt="' + item.name + '"/></div>' +
+      '<div class="wi-info"><div class="wi-name">' + item.name + '</div><div class="wi-price">$' + item.price.toLocaleString() + '</div></div>' +
+      '<div class="wi-acts"><button class="wi-add" onclick="moveWishToCart(\'' + item.name + '\')">Add to Cart</button>' +
+      '<button class="wi-rm" onclick="removeFromWishlist(\'' + item.name + '\')">✕ Remove</button></div></div>';
   }).join('');
 }
-function renderProfileWishlist(){
-  var c=document.getElementById('profileWishlistContent');if(!c)return;
-  if(wishItems.length===0){c.innerHTML='<p style="color:var(--fog)">Wishlist empty. Click ♡ on any product.</p>';return}
-  c.innerHTML=wishItems.map(function(item){
-    return '<div class="wish-item" style="background:var(--card);border:1px solid var(--rim);border-radius:10px;padding:1rem;margin-bottom:.6rem">'+
-      '<div class="wi-img"><img src="'+item.img+'" alt="'+item.name+'"/></div>'+
-      '<div class="wi-info"><div class="wi-name">'+item.name+'</div><div class="wi-price">$'+item.price.toLocaleString()+'</div></div>'+
-      '<div class="wi-acts"><button class="wi-add" onclick="moveWishToCart(\''+item.name+'\')">Cart</button>'+
-      '<button class="wi-rm" onclick="removeFromWishlist(\''+item.name+'\');renderProfileWishlist()">✕</button></div></div>';
+function renderProfileWishlist() {
+  var c = document.getElementById('profileWishlistContent');
+  if (!c) return;
+  if (wishItems.length === 0) {
+    c.innerHTML = '<p style="color:var(--fog)">Wishlist empty. Click ♡ on any product.</p>';
+    return;
+  }
+  c.innerHTML = wishItems.map(function(item) {
+    return '<div class="wish-item" style="background:var(--card);border:1px solid var(--rim);border-radius:10px;padding:1rem;margin-bottom:.6rem">' +
+      '<div class="wi-img"><img src="' + item.img + '" alt="' + item.name + '"/></div>' +
+      '<div class="wi-info"><div class="wi-name">' + item.name + '</div><div class="wi-price">$' + item.price.toLocaleString() + '</div></div>' +
+      '<div class="wi-acts"><button class="wi-add" onclick="moveWishToCart(\'' + item.name + '\')">Cart</button>' +
+      '<button class="wi-rm" onclick="removeFromWishlist(\'' + item.name + '\');renderProfileWishlist()">✕</button></div></div>';
   }).join('');
 }
 
-/* ── QUICK VIEW ── */
-function quickView(card){
-  document.getElementById('qvName').textContent=card.dataset.name;
-  document.getElementById('qvCat').textContent=card.dataset.category;
-  document.getElementById('qvPrice').textContent='$'+parseInt(card.dataset.price).toLocaleString();
-  document.getElementById('qvImg').src=card.dataset.img;
-  document.getElementById('qvDesc').textContent=card.dataset.desc;
-  document.getElementById('qvAddBtn').onclick=function(){addToCart(card.dataset.name,parseInt(card.dataset.price),card.dataset.img);closeModal('quickViewModal')};
-  document.getElementById('qvViewBtn').onclick=function(){closeModal('quickViewModal');openDetailPage(card)};
+/* ════════════════════════════════
+   QUICK VIEW
+════════════════════════════════ */
+function quickView(card) {
+  document.getElementById('qvName').textContent = card.dataset.name;
+  document.getElementById('qvCat').textContent = card.dataset.category;
+  document.getElementById('qvPrice').textContent = '$' + parseInt(card.dataset.price).toLocaleString();
+  document.getElementById('qvImg').src = card.dataset.img;
+  document.getElementById('qvDesc').textContent = card.dataset.desc;
+  document.getElementById('qvAddBtn').onclick = function() {
+    addToCart(card.dataset.name, parseInt(card.dataset.price), card.dataset.img);
+    closeModal('quickViewModal');
+  };
+  document.getElementById('qvViewBtn').onclick = function() {
+    closeModal('quickViewModal');
+    openDetailPage(card);
+  };
   openModal('quickViewModal');
 }
 
-/* ── DETAIL PAGE ── */
-function openDetailPage(card){
-  currentDetailProduct={name:card.dataset.name,cat:card.dataset.category,price:parseInt(card.dataset.price),img:card.dataset.img,desc:card.dataset.desc,id:card.dataset.id};
-  document.getElementById('detailBreadcrumb').textContent=currentDetailProduct.name;
-  document.getElementById('detailCat').textContent=currentDetailProduct.cat;
-  document.getElementById('detailName').textContent=currentDetailProduct.name;
-  document.getElementById('detailPriceNow').textContent='$'+currentDetailProduct.price.toLocaleString();
-  document.getElementById('detailDesc').textContent=currentDetailProduct.desc;
-  document.getElementById('detailMainImg').src=currentDetailProduct.img;
-  document.getElementById('detailReviews').textContent='('+(Math.floor(Math.random()*900)+50)+' reviews)';
-  document.getElementById('detailPriceWas').textContent='';
-  document.getElementById('detailQty').value=1;
-  document.getElementById('detailAddBtn').onclick=function(){
-    var qty=parseInt(document.getElementById('detailQty').value);
-    for(var i=0;i<qty;i++)addToCart(currentDetailProduct.name,currentDetailProduct.price,currentDetailProduct.img);
+/* ════════════════════════════════
+   DETAIL PAGE
+════════════════════════════════ */
+function openDetailPage(card) {
+  currentDetailProduct = {
+    name: card.dataset.name, cat: card.dataset.category,
+    price: parseInt(card.dataset.price), img: card.dataset.img,
+    desc: card.dataset.desc, id: card.dataset.id
   };
-  document.getElementById('detailThumbs').innerHTML=[1,2,3,4].map(function(i){
-    return '<div class="d-thumb '+(i===1?'active':'')+'" onclick="setDetailThumb(this,\''+currentDetailProduct.img+'\')"><img src="'+currentDetailProduct.img+'" alt="View '+i+'"/></div>';
+  document.getElementById('detailBreadcrumb').textContent = currentDetailProduct.name;
+  document.getElementById('detailCat').textContent = currentDetailProduct.cat;
+  document.getElementById('detailName').textContent = currentDetailProduct.name;
+  document.getElementById('detailPriceNow').textContent = '$' + currentDetailProduct.price.toLocaleString();
+  document.getElementById('detailDesc').textContent = currentDetailProduct.desc;
+  document.getElementById('detailMainImg').src = currentDetailProduct.img;
+  document.getElementById('detailReviews').textContent = '(' + (Math.floor(Math.random() * 900) + 50) + ' reviews)';
+  document.getElementById('detailPriceWas').textContent = '';
+  document.getElementById('detailQty').value = 1;
+  document.getElementById('detailAddBtn').onclick = function() {
+    var qty = parseInt(document.getElementById('detailQty').value);
+    for (var i = 0; i < qty; i++) addToCart(currentDetailProduct.name, currentDetailProduct.price, currentDetailProduct.img);
+  };
+  document.getElementById('detailThumbs').innerHTML = [1, 2, 3, 4].map(function(i) {
+    return '<div class="d-thumb ' + (i === 1 ? 'active' : '') + '" onclick="setDetailThumb(this,\'' + currentDetailProduct.img + '\')">' +
+      '<img src="' + currentDetailProduct.img + '" alt="View ' + i + '"/></div>';
   }).join('');
   showPage('detail');
 }
-function injectCartItems(){
-  document.getElementById('cartItemsInput').value=cartItems.map(function(i){return i.name+' ×'+i.qty}).join(', ');
-  document.getElementById('cartAmountInput').value=cartItems.reduce(function(s,i){return s+(i.price*i.qty)},0);
+function injectCartItems() {
+  document.getElementById('cartItemsInput').value = cartItems.map(function(i) { return i.name + ' ×' + i.qty; }).join(', ');
+  document.getElementById('cartAmountInput').value = cartItems.reduce(function(s, i) { return s + (i.price * i.qty); }, 0);
 }
-function addToWishlistFromDetail(){if(!currentDetailProduct)return;addToWishlist(currentDetailProduct.name,currentDetailProduct.price,currentDetailProduct.img)}
-function setDetailThumb(el,url){document.querySelectorAll('.d-thumb').forEach(function(t){t.classList.remove('active')});el.classList.add('active');document.getElementById('detailMainImg').src=url}
-function changeQty(d){var inp=document.getElementById('detailQty');inp.value=Math.max(1,Math.min(10,parseInt(inp.value)+d))}
-function selectColor(dot){document.querySelectorAll('.c-dot').forEach(function(d){d.classList.remove('active')});dot.classList.add('active')}
-function selectSize(btn){document.querySelectorAll('.sz-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active')}
+function addToWishlistFromDetail() {
+  if (!currentDetailProduct) return;
+  addToWishlist(currentDetailProduct.name, currentDetailProduct.price, currentDetailProduct.img);
+}
+function setDetailThumb(el, url) {
+  document.querySelectorAll('.d-thumb').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+  document.getElementById('detailMainImg').src = url;
+}
+function changeQty(d) {
+  var inp = document.getElementById('detailQty');
+  inp.value = Math.max(1, Math.min(10, parseInt(inp.value) + d));
+}
+function selectColor(dot) {
+  document.querySelectorAll('.c-dot').forEach(function(d) { d.classList.remove('active'); });
+  dot.classList.add('active');
+}
+function selectSize(btn) {
+  document.querySelectorAll('.sz-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
 
-/* ── SHOP FILTER & SORT ── */
-function filterByCat(cat,el){
-  currentCat=cat;
-  document.querySelectorAll('.cat-filter-btn').forEach(function(b){b.classList.remove('active')});
-  if(el){el.classList.add('active')}else{
-    var btn=document.getElementById('cfb-'+cat);
-    if(btn)btn.classList.add('active');
+/* ════════════════════════════════
+   SHOP FILTER & SORT
+════════════════════════════════ */
+function filterByCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (el) { el.classList.add('active'); } else {
+    var btn = document.getElementById('cfb-' + cat);
+    if (btn) btn.classList.add('active');
   }
-  var tag=document.getElementById('activeFilterTag');
-  if(tag)tag.textContent='◆ '+(cat==='all'?'All Products':cat);
+  var tag = document.getElementById('activeFilterTag');
+  if (tag) tag.textContent = '◆ ' + (cat === 'all' ? 'All Products' : cat);
   applySortAndFilter();
 }
-
-function applySortAndFilter(){
-  var cards=Array.from(document.querySelectorAll('#shopGrid .product-card'));
-  var sort=document.getElementById('shopSort')?document.getElementById('shopSort').value:'default';
-  currentSort=sort;
-  var visible=[];
-  cards.forEach(function(c){
-    var match=currentCat==='all'||c.dataset.category===currentCat;
-    c.classList.toggle('hidden',!match);
-    if(match)visible.push(c);
+function applySortAndFilter() {
+  var cards = Array.from(document.querySelectorAll('#shopGrid .product-card'));
+  var sort = document.getElementById('shopSort') ? document.getElementById('shopSort').value : 'default';
+  currentSort = sort;
+  var visible = [];
+  cards.forEach(function(c) {
+    var match = currentCat === 'all' || c.dataset.category === currentCat;
+    c.classList.toggle('hidden', !match);
+    if (match) visible.push(c);
   });
-  var container=document.getElementById('shopGrid');
-  if(sort!=='default'){
-    visible.sort(function(a,b){
-      if(sort==='price-asc')return parseFloat(a.dataset.price)-parseFloat(b.dataset.price);
-      if(sort==='price-desc')return parseFloat(b.dataset.price)-parseFloat(a.dataset.price);
-      if(sort==='name')return a.dataset.name.localeCompare(b.dataset.name);
+  var container = document.getElementById('shopGrid');
+  if (sort !== 'default') {
+    visible.sort(function(a, b) {
+      if (sort === 'price-asc') return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      if (sort === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+      if (sort === 'name') return a.dataset.name.localeCompare(b.dataset.name);
       return 0;
     });
-    visible.forEach(function(c){container.appendChild(c)});
+    visible.forEach(function(c) { container.appendChild(c); });
   }
-  var nr=document.getElementById('noResults');
-  if(nr)nr.style.display=visible.length===0?'block':'none';
-  var vc=document.getElementById('visibleCount');
-  if(vc)vc.textContent=visible.length;
+  var nr = document.getElementById('noResults');
+  if (nr) nr.style.display = visible.length === 0 ? 'block' : 'none';
+  var vc = document.getElementById('visibleCount');
+  if (vc) vc.textContent = visible.length;
 }
-
-function filterProducts(q){
-  var cards=document.querySelectorAll('#shopGrid .product-card');
-  var lower=q.toLowerCase().trim();var visible=0;
-  cards.forEach(function(c){
-    var match=!lower||c.dataset.name.toLowerCase().includes(lower)||c.dataset.category.toLowerCase().includes(lower);
-    c.classList.toggle('hidden',!match);if(match)visible++;
+function filterProducts(q) {
+  var cards = document.querySelectorAll('#shopGrid .product-card');
+  var lower = q.toLowerCase().trim();
+  var visible = 0;
+  cards.forEach(function(c) {
+    var match = !lower || c.dataset.name.toLowerCase().includes(lower) || c.dataset.category.toLowerCase().includes(lower);
+    c.classList.toggle('hidden', !match);
+    if (match) visible++;
   });
-  var nr=document.getElementById('noResults');
-  if(nr)nr.style.display=visible===0&&lower?'block':'none';
-  var vc=document.getElementById('visibleCount');
-  if(vc)vc.textContent=visible;
-  if(lower){showPage('shop');setNavActive('shop')}
+  var nr = document.getElementById('noResults');
+  if (nr) nr.style.display = visible === 0 && lower ? 'block' : 'none';
+  var vc = document.getElementById('visibleCount');
+  if (vc) vc.textContent = visible;
+  if (lower) { showPage('shop'); setNavActive('shop'); }
+}
+function setView(v) {
+  currentView = v;
+  var grid = document.getElementById('shopGrid');
+  document.getElementById('vsGrid').classList.toggle('active', v === 'grid');
+  document.getElementById('vsList').classList.toggle('active', v === 'list');
+  if (v === 'list') { grid.classList.add('list-view'); } else { grid.classList.remove('list-view'); }
 }
 
-function setView(v){
-  currentView=v;
-  var grid=document.getElementById('shopGrid');
-  document.getElementById('vsGrid').classList.toggle('active',v==='grid');
-  document.getElementById('vsList').classList.toggle('active',v==='list');
-  if(v==='list'){grid.classList.add('list-view')}else{grid.classList.remove('list-view')}
+/* ════════════════════════════════
+   CHECKOUT
+════════════════════════════════ */
+function renderCheckoutSummary() {
+  var sub = cartItems.reduce(function(s, i) { return s + i.price * i.qty; }, 0);
+  var shipping = sub >= 100 ? 0 : 15;
+  var tax = Math.round(sub * 0.08);
+  var total = sub + shipping + tax;
+  document.getElementById('checkoutItems').innerHTML = cartItems.length === 0
+    ? '<p style="color:var(--fog);font-size:.85rem">No items. <span style="color:var(--amber);cursor:pointer" onclick="showPage(\'shop\')">Shop →</span></p>'
+    : cartItems.map(function(item) {
+        return '<div class="sum-item"><div class="sum-item-img"><img src="' + item.img + '" alt="' + item.name + '"/></div>' +
+          '<div class="sum-item-info">' + item.name + (item.qty > 1 ? ' ×' + item.qty : '') + '</div>' +
+          '<div class="sum-item-price">$' + (item.price * item.qty).toLocaleString() + '</div></div>';
+      }).join('');
+  document.getElementById('checkoutTotals').innerHTML =
+    '<div class="sum-row"><span class="lbl">Subtotal</span><span>$' + sub.toLocaleString() + '</span></div>' +
+    '<div class="sum-row"><span class="lbl">Shipping</span><span>' + (shipping === 0 ? '<span style="color:var(--teal)">Free</span>' : '$' + shipping) + '</span></div>' +
+    '<div class="sum-row"><span class="lbl">Tax (8%)</span><span>$' + tax + '</span></div>' +
+    '<div class="sum-row total"><span class="lbl">Total</span><span class="val">$' + total.toLocaleString() + '</span></div>';
+}
+function selectPayment(el) {
+  document.querySelectorAll('.pay-opt').forEach(function(o) { o.classList.remove('selected'); o.querySelector('input').checked = false; });
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
 }
 
-/* ── CHECKOUT ── */
-function renderCheckoutSummary(){
-  var sub=cartItems.reduce(function(s,i){return s+i.price*i.qty},0);
-  var shipping=sub>=100?0:15;var tax=Math.round(sub*0.08);var total=sub+shipping+tax;
-  document.getElementById('checkoutItems').innerHTML=cartItems.length===0
-    ?'<p style="color:var(--fog);font-size:.85rem">No items. <span style="color:var(--amber);cursor:pointer" onclick="showPage(\'shop\')">Shop →</span></p>'
-    :cartItems.map(function(item){return'<div class="sum-item"><div class="sum-item-img"><img src="'+item.img+'" alt="'+item.name+'"/></div><div class="sum-item-info">'+item.name+(item.qty>1?' ×'+item.qty:'')+'</div><div class="sum-item-price">$'+(item.price*item.qty).toLocaleString()+'</div></div>'}).join('');
-  document.getElementById('checkoutTotals').innerHTML=
-    '<div class="sum-row"><span class="lbl">Subtotal</span><span>$'+sub.toLocaleString()+'</span></div>'+
-    '<div class="sum-row"><span class="lbl">Shipping</span><span>'+(shipping===0?'<span style="color:var(--teal)">Free</span>':'$'+shipping)+'</span></div>'+
-    '<div class="sum-row"><span class="lbl">Tax (8%)</span><span>$'+tax+'</span></div>'+
-    '<div class="sum-row total"><span class="lbl">Total</span><span class="val">$'+total.toLocaleString()+'</span></div>';
-}
-function selectPayment(el){document.querySelectorAll('.pay-opt').forEach(function(o){o.classList.remove('selected');o.querySelector('input').checked=false});el.classList.add('selected');el.querySelector('input').checked=true}
-
-/* ── NEWSLETTER ── */
-function subscribeNewsletter(e){e.preventDefault();e.target.querySelector('input').value='';showToast('✓ Welcome to the inner circle!')}
-
-/* ── CONTACT FORM ── */
-function submitContactForm(e){
+/* ════════════════════════════════
+   NEWSLETTER
+════════════════════════════════ */
+function subscribeNewsletter(e) {
   e.preventDefault();
-  var first=document.getElementById('cfFirst').value.trim();
-  var email=document.getElementById('cfEmail').value.trim();
-  var msg=document.getElementById('cfMessage').value.trim();
-  if(!first||!email||!msg){showToast('Please fill in all required fields','error');return}
-  document.getElementById('cfFirst').value='';
-  document.getElementById('cfLast').value='';
-  document.getElementById('cfEmail').value='';
-  document.getElementById('cfSubject').value='';
-  document.getElementById('cfMessage').value='';
+  e.target.querySelector('input').value = '';
+  showToast('✓ Welcome to the inner circle!');
+}
+
+/* ════════════════════════════════
+   CONTACT FORM
+════════════════════════════════ */
+function submitContactForm(e) {
+  e.preventDefault();
+  var first = document.getElementById('cfFirst').value.trim();
+  var email = document.getElementById('cfEmail').value.trim();
+  var msg = document.getElementById('cfMessage').value.trim();
+  if (!first || !email || !msg) { showToast('Please fill in all required fields', 'error'); return; }
+  document.getElementById('cfFirst').value = '';
+  document.getElementById('cfLast').value = '';
+  document.getElementById('cfEmail').value = '';
+  document.getElementById('cfSubject').value = '';
+  document.getElementById('cfMessage').value = '';
   showToast('✓ Message sent! We\'ll reply within 24 hours.');
 }
 
-/* ── TOAST ── */
-function showToast(msg,type){
-  var wrap=document.getElementById('toastWrap');
-  var t=document.createElement('div');
-  t.className='toast'+(type==='error'?' error':'');
-  t.innerHTML='<span class="toast-msg">'+msg+'</span>';
+/* ════════════════════════════════
+   TOAST
+════════════════════════════════ */
+function showToast(msg, type) {
+  var wrap = document.getElementById('toastWrap');
+  var t = document.createElement('div');
+  t.className = 'toast' + (type === 'error' ? ' error' : '');
+  t.innerHTML = '<span class="toast-msg">' + msg + '</span>';
   wrap.appendChild(t);
-  setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(30px)';t.style.transition='all .3s ease';setTimeout(function(){t.remove()},300)},2800);
+  setTimeout(function() {
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(30px)';
+    t.style.transition = 'all .3s ease';
+    setTimeout(function() { t.remove(); }, 300);
+  }, 2800);
 }
 
-/* ── KEYBOARD ── */
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){closeAllDrawers();closeMobileNav();document.querySelectorAll('.modal-wrap').forEach(function(m){m.classList.remove('open')})}
+/* ════════════════════════════════
+   KEYBOARD SHORTCUTS
+════════════════════════════════ */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeAllDrawers();
+    closeMobileNav();
+    document.querySelectorAll('.modal-wrap').forEach(function(m) { m.classList.remove('open'); });
+  }
 });
-// Show login success / error from PHP redirect
-(function() {
-    var params = new URLSearchParams(window.location.search);
-    if (params.get('login') === 'success') {
-        var name = '<?php echo isset($_SESSION["fullname"]) ? addslashes($_SESSION["fullname"]) : "" ?>';
-        if (name) {
-            currentUser = {
-                name: name,
-                email: '<?php echo isset($_SESSION["email"]) ? addslashes($_SESSION["email"]) : "" ?>'
-            };
-            updateProfileUI();
-            showToast('Welcome back, ' + name + '!');
-        }
-    }
-    if (params.get('error')) {
-        showToast(decodeURIComponent(params.get('error')), 'error');
-        openModal('authModal');
-    }
+
+/* ════════════════════════════════
+   INIT — run on page load
+════════════════════════════════ */
+(function init() {
+  // Update UI to reflect PHP session state
+  updateProfileUI();
+  updateShopBanner();
+
+  // Handle PHP login redirect params
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('login') === 'success') {
+    <?php if (!empty($_SESSION['fullname'])): ?>
+    currentUser = {
+      name: '<?= addslashes($_SESSION['fullname']) ?>',
+      email: '<?= addslashes($_SESSION['email'] ?? '') ?>'
+    };
+    <?php endif; ?>
+    updateProfileUI();
+    updateShopBanner();
+    if (currentUser) showToast('Welcome back, ' + currentUser.name + '!');
+  }
+  if (params.get('error')) {
+    showToast(decodeURIComponent(params.get('error')), 'error');
+    openModal('authModal');
+  }
 })();
 </script>
 </body>

@@ -13,7 +13,7 @@ $orders_data = [];
 $result = $conn->query("SELECT * FROM orders ORDER BY id DESC");
 
 if ($result && $result->num_rows > 0) {
-    $orders_data = $result->fetch_all(MYSQLI_ASSOC);
+    $orders_data = $result->fetch_all(MYSQLI_ASSOC);//ekaixoti sabai rows linxa
 }
 
 $users_result    = mysqli_query($conn, "SELECT * FROM user_authentication");
