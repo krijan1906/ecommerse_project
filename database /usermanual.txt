@@ -1,0 +1,3 @@
+for managing the database
+->first need to first create database of name ecommerse_side
+->import database file through phpmyadmin
